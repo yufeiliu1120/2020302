@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bq4v8q8j820sv"]
+
+[ext_resource type="Script" uid="uid://c68e4ctglalay" path="res://scene/UI/build_menu.gd" id="1_3r37k"]
+[ext_resource type="Texture2D" uid="uid://dvmh3k2id1rjw" path="res://assets/UI parts/craft_menu_borad.png" id="2_0vmif"]
+[ext_resource type="PackedScene" uid="uid://daw3mfbrexpb" path="res://scene/UI/build_slot.tscn" id="3_3tgoh"]
+[ext_resource type="PackedScene" uid="uid://dl7rgpxnmq3fe" path="res://scene/tile/road tile/Road.tscn" id="4_0vmif"]
+[ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="4_ly7qt"]
+[ext_resource type="Texture2D" uid="uid://jxoifke0500p" path="res://assets/UI parts/craft_board_part.png" id="6_3tgoh"]
+
+[node name="Build_Menu" type="Control" unique_id=1002417904]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3r37k")
+metadata/_edit_vertical_guides_ = [1145.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=712654052]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelAnimator" type="Node" parent="." unique_id=1305960519]
+script = ExtResource("4_ly7qt")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=81987081]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -602.0
+offset_top = -403.0
+offset_right = 602.0
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0vmif")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1478699485]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 47.0
+offset_right = 1163.0
+offset_bottom = 219.0
+size_flags_horizontal = 3
+
+[node name="road" parent="TextureRect/VBoxContainer" unique_id=2015086672 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+size_flags_horizontal = 1
+tile_scene = ExtResource("4_0vmif")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=2117182696]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="mill" parent="TextureRect/VBoxContainer" unique_id=1182053883 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1801138930]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")

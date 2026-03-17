@@ -1,0 +1,13 @@
+﻿地块名称,需要道路,需要领地,建造成本,常规产出,食物产出,食物维护费,加成目标,提供加成,来源路径
+Test,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,Forest,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/tile.tscn
+Road,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/road tile/Road.tscn
+Grassland,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/grassland tile/grassland.tscn
+LoggingCamp,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,Forest,"explorer:0,food:0,stone:0,wood:1",res://scene/tile/logging_camp/logging_camp.tscn
+Lighthouse,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/lighthouse tile/light_house.tscn
+HQ,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/HQ tile/HQ.tscn
+WheatField,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/wheat field/wheat field.tscn
+Mill,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,WheatField,"explorer:0,food:1,stone:0,wood:0",res://scene/tile/mill tile/mill tile.tscn
+Test,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:5,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/stone pit tile/area_2d.tscn
+Forest,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/forest tile/area_2d.tscn
+Coast,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/coast tile/area_2d.tscn
+Mountain,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/moutain_tile/moutain_tile.tscn

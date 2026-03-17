@@ -1,0 +1,344 @@
+[gd_scene format=3 uid="uid://d08ufqbsy3hm7"]
+
+[ext_resource type="Script" uid="uid://b47h7xfs82smm" path="res://scene/UI/CostPreviewLabel.gd" id="6_fcd7w"]
+[ext_resource type="Script" uid="uid://blnnikwnypuc1" path="res://scene/UI/tile_context_menu.gd" id="7_ld5ky"]
+[ext_resource type="Script" uid="uid://d3a052b6g15mx" path="res://scene/UI/TurnButton.gd" id="9_53r50"]
+[ext_resource type="Texture2D" uid="uid://7javk3jwiw2r" path="res://assets/UI parts/ui outline.png" id="18_52dkx"]
+[ext_resource type="Texture2D" uid="uid://buuvwnfl12ous" path="res://assets/UI parts/resource_panel.png" id="19_trrlq"]
+[ext_resource type="Texture2D" uid="uid://exlll8jfqm0a" path="res://assets/UI parts/resource label.png" id="20_trrlq"]
+[ext_resource type="Script" uid="uid://dibugy4hrasq5" path="res://scene/UI/resource_ui.gd" id="20_uolrd"]
+[ext_resource type="Texture2D" uid="uid://6mdppdmnea6w" path="res://assets/UI parts/resource icon food.png" id="21_0oh35"]
+[ext_resource type="Script" uid="uid://duitrmlxjw4bv" path="res://scene/UI/resource_slot.gd" id="22_7seuq"]
+[ext_resource type="Texture2D" uid="uid://coegobth6xsbu" path="res://assets/UI parts/resource icon wood.png" id="22_44fhd"]
+[ext_resource type="Texture2D" uid="uid://eptv0p3qe6a5" path="res://assets/UI parts/resource icon stone.png" id="23_uolrd"]
+[ext_resource type="Texture2D" uid="uid://1lw3bokc4ib" path="res://assets/UI parts/resource icon metal.png" id="24_7seuq"]
+[ext_resource type="Texture2D" uid="uid://ch6ev71n5bc5b" path="res://assets/UI parts/resource icon exploror.png" id="25_8vufc"]
+[ext_resource type="Script" uid="uid://vu1rghqto4gc" path="res://scene/UI/minimap.gd" id="28_7seuq"]
+[ext_resource type="Texture2D" uid="uid://cl68f08ydmw18" path="res://assets/UI parts/minimap clip.png" id="28_8vufc"]
+[ext_resource type="Texture2D" uid="uid://cb46lbu67g86y" path="res://assets/UI parts/minimap panel.png" id="30_joqae"]
+[ext_resource type="Texture2D" uid="uid://cuvffnpm2c77h" path="res://assets/UI parts/bottom_ui_borad.png" id="30_ugqw2"]
+[ext_resource type="Texture2D" uid="uid://bjg3fk0d8s2vc" path="res://assets/UI parts/craft button normal.png" id="31_oeakf"]
+[ext_resource type="Texture2D" uid="uid://boqbc6erdxgag" path="res://assets/UI parts/craft button pressed.png" id="32_woeyn"]
+[ext_resource type="Texture2D" uid="uid://ccps7mrpnqhsj" path="res://assets/UI parts/craft button hover.png" id="33_wnmig"]
+[ext_resource type="Texture2D" uid="uid://bv20nysr1y1lx" path="res://assets/UI parts/trade button nomal.png" id="34_ii3jf"]
+[ext_resource type="Texture2D" uid="uid://vxpkit4d3fr8" path="res://assets/UI parts/trade button hover.png" id="35_bu3gg"]
+[ext_resource type="PackedScene" uid="uid://caqsigq8vcd8e" path="res://scene/UI/trade_menu.tscn" id="35_oeakf"]
+[ext_resource type="Texture2D" uid="uid://dfukvt6q7wqds" path="res://assets/UI parts/trade button pressed.png" id="35_uheck"]
+[ext_resource type="Texture2D" uid="uid://dc5kkl7bhsecr" path="res://assets/UI parts/scout button normal.png" id="37_uheck"]
+[ext_resource type="Texture2D" uid="uid://bkgi3jh0b8mpw" path="res://assets/UI parts/scout button pressed.png" id="38_iyy75"]
+[ext_resource type="Texture2D" uid="uid://du32wx0hino3g" path="res://assets/UI parts/scout button hover.png" id="39_iyy75"]
+[ext_resource type="Texture2D" uid="uid://dbvunmccct6ul" path="res://assets/UI parts/menu button normal.png" id="39_ug7lc"]
+[ext_resource type="Texture2D" uid="uid://cu7ffn6naxupy" path="res://assets/UI parts/menu button pressed.png" id="40_nw0ko"]
+[ext_resource type="Texture2D" uid="uid://do2ux30120owu" path="res://assets/UI parts/menu button hover.png" id="41_c60pd"]
+[ext_resource type="Texture2D" uid="uid://c7lxqau0kiruj" path="res://assets/UI parts/turn_button_normal.png" id="42_iyy75"]
+[ext_resource type="Texture2D" uid="uid://bq46bg8umqhd8" path="res://assets/UI parts/turn_button_pressed.png" id="43_ug7lc"]
+[ext_resource type="Texture2D" uid="uid://wrle4xe500wd" path="res://assets/UI parts/turn_button_hover.png" id="44_nw0ko"]
+[ext_resource type="PackedScene" uid="uid://crvy715xurg1l" path="res://scene/UI/draft_panel.tscn" id="46_ug7lc"]
+[ext_resource type="PackedScene" uid="uid://bq4v8q8j820sv" path="res://scene/UI/build_menu.tscn" id="47_nw0ko"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_joqae"]
+texture = ExtResource("28_8vufc")
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
+metadata/_edit_vertical_guides_ = [12.0, 1779.0, 720.0]
+metadata/_edit_horizontal_guides_ = [150.0]
+
+[node name="Control" type="Control" parent="." unique_id=289617592]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TileContextMenu" type="PanelContainer" parent="Control" unique_id=1217658987]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_ld5ky")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TileContextMenu" unique_id=193323253]
+layout_mode = 2
+
+[node name="BtnUpgrade" type="Button" parent="Control/TileContextMenu/VBoxContainer" unique_id=661608504]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "改造"
+
+[node name="BtnDemolish" type="Button" parent="Control/TileContextMenu/VBoxContainer" unique_id=2111771806]
+layout_mode = 2
+text = "拆除"
+
+[node name="CostPreviewLabel" type="Label" parent="." unique_id=1555869641]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_fcd7w")
+
+[node name="outline" type="NinePatchRect" parent="." unique_id=2078484270]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_52dkx")
+
+[node name="top UI" type="TextureRect" parent="outline" unique_id=1633716572]
+z_index = -1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 142.0
+grow_horizontal = 2
+texture = ExtResource("19_trrlq")
+
+[node name="resource_ui" type="MarginContainer" parent="outline/top UI" unique_id=243486951]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -12.0
+offset_top = -44.0
+offset_right = -12.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 10
+script = ExtResource("20_uolrd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="outline/top UI/resource_ui" unique_id=1260216200]
+layout_mode = 2
+
+[node name="food" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=1691413448]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_trrlq")
+script = ExtResource("22_7seuq")
+
+[node name="icon" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer/food" unique_id=1665780702]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 77.0
+offset_bottom = 61.0
+texture = ExtResource("21_0oh35")
+
+[node name="number" type="RichTextLabel" parent="outline/top UI/resource_ui/HBoxContainer/food" unique_id=1462752214]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 18.0
+offset_right = 229.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wood" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=1608309850]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_trrlq")
+script = ExtResource("22_7seuq")
+
+[node name="icon" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer/wood" unique_id=528690680]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 77.0
+offset_bottom = 61.0
+texture = ExtResource("22_44fhd")
+
+[node name="number" type="RichTextLabel" parent="outline/top UI/resource_ui/HBoxContainer/wood" unique_id=86245913]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 18.0
+offset_right = 229.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="stone" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=120768861]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_trrlq")
+script = ExtResource("22_7seuq")
+
+[node name="icon" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer/stone" unique_id=467461540]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 77.0
+offset_bottom = 61.0
+texture = ExtResource("23_uolrd")
+
+[node name="number" type="RichTextLabel" parent="outline/top UI/resource_ui/HBoxContainer/stone" unique_id=2059851397]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 18.0
+offset_right = 229.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="metal" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=876057983]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_trrlq")
+script = ExtResource("22_7seuq")
+
+[node name="icon" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer/metal" unique_id=238427627]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 77.0
+offset_bottom = 61.0
+texture = ExtResource("24_7seuq")
+
+[node name="number" type="RichTextLabel" parent="outline/top UI/resource_ui/HBoxContainer/metal" unique_id=1043476766]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 18.0
+offset_right = 229.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="exploror" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=1334787904]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_trrlq")
+script = ExtResource("22_7seuq")
+
+[node name="icon" type="TextureRect" parent="outline/top UI/resource_ui/HBoxContainer/exploror" unique_id=1309306210]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 77.0
+offset_bottom = 61.0
+texture = ExtResource("25_8vufc")
+
+[node name="number" type="RichTextLabel" parent="outline/top UI/resource_ui/HBoxContainer/exploror" unique_id=2109307422]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 18.0
+offset_right = 229.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="placeholder1" type="Control" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=1752422237]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="placeholder2" type="Control" parent="outline/top UI/resource_ui/HBoxContainer" unique_id=1346562424]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="minimap" type="PanelContainer" parent="outline/top UI" unique_id=206247265]
+clip_children = 1
+layout_mode = 0
+offset_left = 1458.086
+offset_top = 9.265
+offset_right = 1740.0
+offset_bottom = 291.17896
+theme_override_styles/panel = SubResource("StyleBoxTexture_joqae")
+
+[node name="minimap" type="SubViewportContainer" parent="outline/top UI/minimap" unique_id=111139490]
+layout_mode = 2
+stretch = true
+script = ExtResource("28_7seuq")
+
+[node name="SubViewport" type="SubViewport" parent="outline/top UI/minimap/minimap" unique_id=557558677]
+handle_input_locally = false
+size = Vector2i(281, 281)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="outline/top UI/minimap/minimap/SubViewport" unique_id=1256436356]
+zoom = Vector2(0.2, 0.2)
+
+[node name="panel" type="TextureRect" parent="outline/top UI/minimap" unique_id=143430768]
+layout_mode = 2
+texture = ExtResource("30_joqae")
+
+[node name="bottom UI" type="TextureRect" parent="outline" unique_id=256508497]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -333.0
+offset_top = -163.0
+offset_right = 334.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("30_ugqw2")
+
+[node name="MarginContainer" type="MarginContainer" parent="outline/bottom UI" unique_id=1794607770]
+layout_mode = 0
+offset_left = 3.855
+offset_top = 5.13
+offset_right = 662.855
+offset_bottom = 193.82
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="buttons" type="HBoxContainer" parent="outline/bottom UI/MarginContainer" unique_id=280719783]
+layout_mode = 2
+
+[node name="craft" type="TextureButton" parent="outline/bottom UI/MarginContainer/buttons" unique_id=187261705]
+layout_mode = 2
+texture_normal = ExtResource("31_oeakf")
+texture_pressed = ExtResource("32_woeyn")
+texture_hover = ExtResource("33_wnmig")
+
+[node name="trade" type="TextureButton" parent="outline/bottom UI/MarginContainer/buttons" unique_id=1048396447]
+layout_mode = 2
+texture_normal = ExtResource("34_ii3jf")
+texture_pressed = ExtResource("35_uheck")
+texture_hover = ExtResource("35_bu3gg")
+
+[node name="scout" type="TextureButton" parent="outline/bottom UI/MarginContainer/buttons" unique_id=2095042339]
+layout_mode = 2
+texture_normal = ExtResource("37_uheck")
+texture_pressed = ExtResource("38_iyy75")
+texture_hover = ExtResource("39_iyy75")
+
+[node name="menu" type="TextureButton" parent="outline/bottom UI/MarginContainer/buttons" unique_id=990520916]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("39_ug7lc")
+texture_pressed = ExtResource("40_nw0ko")
+texture_hover = ExtResource("41_c60pd")
+
+[node name="next turn" type="TextureButton" parent="outline/bottom UI/MarginContainer/buttons" unique_id=2082637439]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("42_iyy75")
+texture_pressed = ExtResource("43_ug7lc")
+texture_hover = ExtResource("44_nw0ko")
+script = ExtResource("9_53r50")
+
+[node name="DraftPanel" parent="." unique_id=198612456 instance=ExtResource("46_ug7lc")]
+
+[node name="Build_Menu" parent="." unique_id=1002417904 instance=ExtResource("47_nw0ko")]
+
+[node name="TradeMenu" parent="." unique_id=735364414 instance=ExtResource("35_oeakf")]
+
+[connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/craft" to="Build_Menu" method="open_menu"]
+[connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/trade" to="TradeMenu" method="open_menu"]
+[connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/scout" to="DraftPanel" method="open_draft"]

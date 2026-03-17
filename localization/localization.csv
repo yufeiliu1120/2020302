@@ -1,0 +1,23 @@
+keys,zh,en
+UI_COST_FREE,无额外花费,No Extra Cost
+UI_COST_ADD,+ %d 石头,+ %d Stone
+UI_WARNING_NO_FUNDS,补给运费不足,Insufficient Funds
+UI_WARNING_INVALID_POS,无法放置,Cannot Place
+TILE_NAME_FOREST,森林,Forest
+TILE_DESC_FOREST,茂密的树木，能使周围的伐木场获得木头收入，可改造为伐木场,Dense trees can increase the wood income of surrounding logging camps, and can be converted into logging camps.
+TILE_NAME_GRASS,草地,Grassland
+TILE_DESC_GRASS,广袤的平原,A vast plains.
+
+TILE_NAME_MOUTAIN,山脉,Mountain.
+TILE_DESC_MOUTAIN,一片山脉,A mountain range.
+
+TILE_NAME_MILL,磨坊,Mill
+TILE_DESC_MILL,周围每有一个麦田地块，食物产量+{adj_food},Grants +{adj_food} Food for each adjacent Wheat.
+
+TILE_NAME_ROAD,道路,Road
+TILE_DESC_ROAD,道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关,Road.
+
+wood,木材,Wood
+stone,石头,Stone
+food,食物,Food
+trade_points_left,剩余交易点数: {tp},Trade Points: {tp}

@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://c0c2vf13o00vw"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_sljf4"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="2_08nfs"]
+[ext_resource type="Texture2D" uid="uid://blfj67n80bm6s" path="res://assets/tiles/grass tile/mill_icon.png" id="2_cr2fx"]
+[ext_resource type="Texture2D" uid="uid://d7rfsomblrdf" path="res://assets/tiles/grass tile/wheat field.png" id="3_cr2fx"]
+[ext_resource type="Texture2D" uid="uid://cbde5tg10y36b" path="res://assets/tiles/grass tile/mill.png" id="4_l1ywp"]
+[ext_resource type="Texture2D" uid="uid://cnti4jloj3q3p" path="res://assets/tiles/grass tile/windwill.png" id="5_kyqmc"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="6_gihjq"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="7_4du1f"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="8_wnlgc"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="9_xejsh"]
+[ext_resource type="Script" uid="uid://bfogvfdv5x5jq" path="res://scene/tile/mill tile/mill_animation_player.gd" id="10_08nfs"]
+
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_08nfs")
+tile_name = "TILE_NAME_MILL"
+icon = ExtResource("2_cr2fx")
+description = "TILE_DESC_MILL"
+food_maintenance = 1
+base_cost = {
+"food": 1,
+"stone": 1,
+"wood": 0
+}
+requires_hq_adjacency = true
+adjacency_bonus_tile = "WheatField"
+adjacency_bonus_amount = {
+"explorer": 0,
+"food": 1,
+"stone": 0,
+"wood": 0
+}
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g8cxr"]
+load_path = "res://.godot/imported/base.png-2027f40bfcec18fb01a08650940cd7ce.ctex"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="Animation" id="Animation_015kr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/mill/winemill:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_03l5n"]
+resource_name = "windmill rotate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/mill/winemill:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.265732014659643]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4eblq"]
+_data = {
+&"RESET": SubResource("Animation_015kr"),
+&"windmill rotate": SubResource("Animation_03l5n")
+}
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_sljf4")
+data = SubResource("Resource_doujx")
+metadata/_edit_horizontal_guides_ = [15.0, -12.0]
+metadata/_edit_vertical_guides_ = [-21.0, 20.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_g8cxr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("3_cr2fx")
+
+[node name="mill" type="Sprite2D" parent="Sprite2D" unique_id=1604244893]
+z_index = 1
+position = Vector2(0, -6)
+texture = ExtResource("4_l1ywp")
+
+[node name="winemill" type="Sprite2D" parent="Sprite2D/mill" unique_id=1928191366]
+position = Vector2(-4.7683716e-07, -11)
+texture = ExtResource("5_kyqmc")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_gihjq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("7_4du1f")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("8_wnlgc")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("9_xejsh")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=994407416]
+libraries/ = SubResource("AnimationLibrary_4eblq")
+script = ExtResource("10_08nfs")

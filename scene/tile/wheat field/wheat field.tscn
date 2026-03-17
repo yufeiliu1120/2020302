@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://ccg4rnbfb2ieo"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_htqm2"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="2_l48yd"]
+[ext_resource type="Texture2D" uid="uid://d7rfsomblrdf" path="res://assets/tiles/grass tile/wheat field.png" id="3_l8mxm"]
+[ext_resource type="Shader" uid="uid://ejajyppql1k0" path="res://shader/tree_shader.gdshader" id="5_sihw8"]
+[ext_resource type="Texture2D" uid="uid://lxxteci7pca6" path="res://assets/tiles/grass tile/wheat.png" id="6_trsc3"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="7_jv178"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="8_tlm64"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="9_h7t28"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="10_37w7f"]
+
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_l48yd")
+tile_name = "WheatField"
+requires_road = false
+requires_hq_adjacency = true
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g8cxr"]
+load_path = "res://.godot/imported/base.png-2027f40bfcec18fb01a08650940cd7ce.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhqgy"]
+shader = ExtResource("5_sihw8")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.15
+shader_parameter/interval = 3.5
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_htqm2")
+data = SubResource("Resource_doujx")
+metadata/_edit_horizontal_guides_ = [15.0, -12.0]
+metadata/_edit_vertical_guides_ = [-21.0, 20.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_g8cxr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("3_l8mxm")
+
+[node name="decoration" type="Node2D" parent="Sprite2D" unique_id=1975523022]
+y_sort_enabled = true
+position = Vector2(0, -3)
+scale = Vector2(0.25, 0.25)
+
+[node name="grass" type="Node2D" parent="Sprite2D/decoration" unique_id=1728209761]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_bhqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=1478523794]
+z_index = 1
+use_parent_material = true
+position = Vector2(0, 12)
+scale = Vector2(4, 4)
+texture = ExtResource("6_trsc3")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_jv178")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("8_tlm64")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("9_h7t28")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("10_37w7f")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")

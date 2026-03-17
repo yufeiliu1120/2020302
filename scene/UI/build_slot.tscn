@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://daw3mfbrexpb"]
+
+[ext_resource type="Script" uid="uid://cqhs6pg5rrikp" path="res://scene/UI/build_slot.gd" id="1_3iy5v"]
+[ext_resource type="PackedScene" uid="uid://c0c2vf13o00vw" path="res://scene/tile/mill tile/mill tile.tscn" id="2_vk0fk"]
+[ext_resource type="Texture2D" uid="uid://bjg3fk0d8s2vc" path="res://assets/UI parts/craft button normal.png" id="3_t2tiq"]
+[ext_resource type="Texture2D" uid="uid://boqbc6erdxgag" path="res://assets/UI parts/craft button pressed.png" id="4_3jq0o"]
+[ext_resource type="Texture2D" uid="uid://ccps7mrpnqhsj" path="res://assets/UI parts/craft button hover.png" id="5_hka0c"]
+
+[node name="build_slot" type="HBoxContainer" unique_id=177615012]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.067
+offset_right = -878.0
+offset_bottom = 70.64
+size_flags_horizontal = 3
+script = ExtResource("1_3iy5v")
+tile_scene = ExtResource("2_vk0fk")
+metadata/_edit_vertical_guides_ = [1283.0, 1045.0]
+
+[node name="Control2" type="Control" parent="." unique_id=576129573]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="." unique_id=309534315]
+layout_mode = 2
+
+[node name="InfoBox" type="VBoxContainer" parent="." unique_id=933415064]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Namelabel" type="Label" parent="InfoBox" unique_id=1990683430]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="Desclabel" type="Label" parent="InfoBox" unique_id=1089094425]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Costslabel" type="RichTextLabel" parent="." unique_id=1096724560]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+
+[node name="BuyButton" type="TextureButton" parent="." unique_id=1175653198]
+layout_mode = 2
+texture_normal = ExtResource("3_t2tiq")
+texture_pressed = ExtResource("4_3jq0o")
+texture_hover = ExtResource("5_hka0c")
+
+[node name="Control" type="Control" parent="." unique_id=1632405923]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2

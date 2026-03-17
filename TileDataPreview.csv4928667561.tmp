@@ -1,0 +1,17 @@
+﻿地块名称,需要道路,需要领地,建造成本,常规产出,食物产出,食物维护费,加成目标,提供加成,来源路径
+LoggingCamp,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,Forest,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/tile.tscn
+Lighthouse,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/light_house.tscn
+Test,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/grassland tile/grassland.tscn
+Road,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/Road.tscn
+LoggingCamp,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,Forest,"explorer:0,food:0,stone:0,wood:1",res://scene/tile/logging_camp/logging_camp.tscn
+Coast,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/coast.tscn
+Camp,是,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:5",0,2,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/logging_camp.tscn
+HQ,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/HQ tile/HQ.tscn
+Test,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/HQ tile/HQ tile.tscn
+Forest,否,否,"food:0,stone:5,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/forest.tscn
+WheatField,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/wheat field/wheat field.tscn
+Mill,是,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,WheatField,"explorer:0,food:1,stone:0,wood:0",res://scene/tile/mill tile/mill tile.tscn
+Test,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:5,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/stone pit tile/area_2d.tscn
+Forest,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/forest tile/area_2d.tscn
+Test,否,否,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/coast tile/area_2d.tscn
+Test,否,是,"food:0,stone:0,wood:0","explorer:0,iron:0,stone:0,wood:0",0,0,-,"explorer:0,food:0,stone:0,wood:0",res://scene/tile/moutain_tile/moutain_tile.tscn

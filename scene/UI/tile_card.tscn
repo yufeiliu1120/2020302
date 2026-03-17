@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://chseg0himu50u"]
+
+[ext_resource type="Texture2D" uid="uid://geeksck1tcjp" path="res://assets/UI parts/card_base.png" id="1_cegps"]
+[ext_resource type="Script" uid="uid://t6ob6wari70k" path="res://scene/UI/Tile_card.gd" id="2_wayab"]
+
+[node name="TextureButton" type="TextureButton" unique_id=580084923]
+offset_right = 36.0
+offset_bottom = 48.0
+texture_normal = ExtResource("1_cegps")
+texture_pressed = ExtResource("1_cegps")
+texture_hover = ExtResource("1_cegps")
+script = ExtResource("2_wayab")
+metadata/_edit_vertical_guides_ = [227.0]
+
+[node name="TileIcon" type="TextureRect" parent="." unique_id=1265568654]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083000004
+anchor_top = 0.104
+anchor_right = 0.91700006
+anchor_bottom = 0.333
+offset_left = 0.071998596
+offset_top = 0.048000336
+offset_right = -0.072006226
+offset_bottom = 0.09600067
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1347303496]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.273
+anchor_top = 0.39900002
+anchor_right = 0.731
+anchor_bottom = 0.92
+offset_left = 0.03199768
+offset_top = 20.087997
+offset_right = 0.104003906
+offset_bottom = -15.959991
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileName" type="Label" parent="VBoxContainer" unique_id=991938079]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Tile"
+horizontal_alignment = 1
+
+[node name="TileDescription" type="Label" parent="VBoxContainer" unique_id=457265500]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
+text = "this is a test card"
+horizontal_alignment = 1
+autowrap_mode = 2

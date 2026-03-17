@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://djlfxieu3dxmp"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_5engr"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="2_0oq10"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/tiles/test tile.png" id="3_mwqha"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="4_bjdwb"]
+[ext_resource type="Texture2D" uid="uid://bbm36x1r01oc8" path="res://assets/tiles/coast tile/lighthouse base.png" id="4_mwqha"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="5_1vfuy"]
+[ext_resource type="Texture2D" uid="uid://b2pct53mepr5v" path="res://assets/tiles/coast tile/lighthouse.png" id="5_bjdwb"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="6_mtxqb"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="7_he5k7"]
+
+[sub_resource type="Resource" id="Resource_y6euo"]
+script = ExtResource("2_0oq10")
+tile_name = "Lighthouse"
+requires_road = false
+requires_adjacency = false
+can_be_demolished = false
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_5engr")
+data = SubResource("Resource_y6euo")
+metadata/_edit_horizontal_guides_ = [3.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = ExtResource("3_mwqha")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("4_mwqha")
+
+[node name="light house" type="Sprite2D" parent="Sprite2D" unique_id=1671795214]
+z_index = 1
+position = Vector2(0, -29.125002)
+scale = Vector2(1.25, 1.3453946)
+texture = ExtResource("5_bjdwb")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_bjdwb")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("5_1vfuy")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("6_mtxqb")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("7_he5k7")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")

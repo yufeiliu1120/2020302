@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dxc6a3fju7lsc"]
+
+[ext_resource type="Texture2D" uid="uid://exlll8jfqm0a" path="res://assets/UI parts/resource label.png" id="1_y1v7q"]
+[ext_resource type="Texture2D" uid="uid://ia6qcn026ijd" path="res://assets/UI parts/Trading arrow icon.png" id="2_vqus3"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=757689578]
+anchors_preset = -1
+anchor_right = 0.39400002
+anchor_bottom = 0.037
+offset_right = 0.5199585
+offset_bottom = 0.040000916
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1917045368]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_y1v7q")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=779633817]
+layout_mode = 2
+texture = ExtResource("2_vqus3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=260768780]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_y1v7q")
+stretch_mode = 5

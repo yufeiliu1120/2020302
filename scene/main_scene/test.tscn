@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://o1ohkgwopq4m"]
+
+[ext_resource type="Script" uid="uid://b4wr4g0d8ipmo" path="res://scene/main_scene/tree_root.gd" id="1_k2aei"]
+[ext_resource type="Script" uid="uid://decjdhr7w7vc2" path="res://scene/main_scene/Camera.gd" id="2_xpqml"]
+[ext_resource type="Script" uid="uid://cctiv72w3tnui" path="res://scene/main_scene/map_generator.gd" id="3_07tw0"]
+[ext_resource type="PackedScene" uid="uid://djgyun6ro6wiq" path="res://scene/tile/coast tile/area_2d.tscn" id="4_f5c4r"]
+[ext_resource type="PackedScene" uid="uid://djlfxieu3dxmp" path="res://scene/tile/lighthouse tile/light_house.tscn" id="5_yge8g"]
+[ext_resource type="PackedScene" uid="uid://jepyxmi2bx6l" path="res://scene/tile/HQ tile/HQ.tscn" id="6_wo0cv"]
+[ext_resource type="Script" uid="uid://dbomplbqk4axh" path="res://scene/main_scene/VictoryManager.gd" id="7_jlqfm"]
+[ext_resource type="Texture2D" uid="uid://bb3tsysle1uvt" path="res://assets/main_scene/floor.png" id="8_lbyok"]
+[ext_resource type="Script" uid="uid://dous0sh4ur037" path="res://data/classes/VictoryConditions/LighthouseVictory.gd" id="8_xpqml"]
+[ext_resource type="Script" uid="uid://b1h66gfyd6o38" path="res://scene/main_scene/nature_generator.gd" id="9_07tw0"]
+[ext_resource type="Texture2D" uid="uid://bybv754qu01b3" path="res://assets/main_scene/table.png" id="9_nnvpe"]
+[ext_resource type="Texture2D" uid="uid://ipt72vxnuga4" path="res://assets/main_scene/table2.png" id="10_6dpdr"]
+[ext_resource type="PackedScene" uid="uid://bxt1hcfuuw5m8" path="res://scene/tile/forest tile/area_2d.tscn" id="10_wo0cv"]
+[ext_resource type="PackedScene" uid="uid://d08ufqbsy3hm7" path="res://scene/UI/canvas_layer.tscn" id="11_f2t8r"]
+[ext_resource type="PackedScene" uid="uid://08qkcsu52se5" path="res://scene/tile/grassland tile/grassland.tscn" id="11_jlqfm"]
+[ext_resource type="Shader" uid="uid://cb4ohot7hvnfq" path="res://shader/cloud_shader.gdshader" id="12_l0c0i"]
+[ext_resource type="PackedScene" uid="uid://c07od86xmqau2" path="res://scene/tile/moutain_tile/moutain_tile.tscn" id="12_lbyok"]
+[ext_resource type="Texture2D" uid="uid://baqlkvpgxqxao" path="res://assets/main_scene/decoration1.png" id="13_cban0"]
+[ext_resource type="Texture2D" uid="uid://cmay51y7dlqhh" path="res://assets/main_scene/lantern.png" id="14_da8kd"]
+[ext_resource type="Texture2D" uid="uid://cancpsmqdi6uc" path="res://assets/main_scene/decoration3.png" id="15_6kwks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u11y"]
+size = Vector2(1071, 865)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ivktd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_npe5v"]
+noise = SubResource("FastNoiseLite_ivktd")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npe5v"]
+shader = ExtResource("12_l0c0i")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_npe5v")
+shader_parameter/cloud_color = Color(0.9019608, 0.8509804, 0.8, 0.3529412)
+shader_parameter/scroll_speed = Vector2(0.02, 0.015)
+shader_parameter/cloud_density = 0.5
+
+[node name="Node2D" type="Node2D" unique_id=253995382 groups=["ControlNode"]]
+y_sort_enabled = true
+script = ExtResource("1_k2aei")
+metadata/_edit_vertical_guides_ = [1483.0]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=229839734 node_paths=PackedStringArray("boundary_node") groups=["Camera"]]
+position = Vector2(480, 45)
+scale = Vector2(9.362999, 8.046999)
+zoom = Vector2(4, 4)
+script = ExtResource("2_xpqml")
+min_zoom = 0.7
+max_zoom = 10.0
+zoom_step = 0.1
+boundary_node = NodePath("../ReferenceRect")
+detail_threshold_percent = 0.3
+
+[node name="MapGenerator" type="Node" parent="." unique_id=1975245542]
+script = ExtResource("3_07tw0")
+coast_scene = ExtResource("4_f5c4r")
+lighthouse_scene = ExtResource("5_yge8g")
+hq_scene = ExtResource("6_wo0cv")
+map_center = Vector2i(7, 1)
+map_radius = 9
+
+[node name="VictoryManager" type="Node" parent="." unique_id=765677060]
+script = ExtResource("7_jlqfm")
+
+[node name="LighthouseVictory" type="Node" parent="VictoryManager" unique_id=777200436]
+script = ExtResource("8_xpqml")
+
+[node name="NatureGenerator" type="Node" parent="." unique_id=2125309370 node_paths=PackedStringArray("tile_storage") groups=["NatureGeneratorGroup"]]
+script = ExtResource("9_07tw0")
+natural_tile_pool = Array[PackedScene]([ExtResource("10_wo0cv"), ExtResource("11_jlqfm"), ExtResource("12_lbyok")])
+tile_storage = NodePath("../tiles")
+
+[node name="BuildZone" type="Area2D" parent="." unique_id=958235382 groups=["BuildZone"]]
+z_index = -3
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone" unique_id=1857989890]
+z_index = 4
+position = Vector2(486.78, 34.5)
+shape = SubResource("RectangleShape2D_5u11y")
+
+[node name="background" type="Sprite2D" parent="." unique_id=1637748102]
+z_index = -12
+position = Vector2(523.4999, 364.00003)
+scale = Vector2(21.865002, 15)
+texture = ExtResource("8_lbyok")
+
+[node name="table" type="Sprite2D" parent="." unique_id=996950934]
+z_index = -10
+position = Vector2(420, 446)
+scale = Vector2(15, 15)
+texture = ExtResource("9_nnvpe")
+
+[node name="chessboard" type="Sprite2D" parent="." unique_id=706952562]
+z_index = -6
+position = Vector2(480, 86)
+scale = Vector2(9.46072, 8.298309)
+texture = ExtResource("10_6dpdr")
+
+[node name="tiles" type="Node2D" parent="." unique_id=1375518260 groups=["TileStorage"]]
+
+[node name="CanvasLayer" parent="." unique_id=1726276156 instance=ExtResource("11_f2t8r")]
+layer = 6
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=899216371]
+modulate = Color(1, 1, 1, 0.5647059)
+self_modulate = Color(0, 0, 0, 1)
+z_index = -7
+position = Vector2(508.99997, 139.99998)
+scale = Vector2(9.362999, 8.046999)
+texture = ExtResource("10_6dpdr")
+
+[node name="cloud" type="ColorRect" parent="." unique_id=1929869021]
+material = SubResource("ShaderMaterial_npe5v")
+offset_left = -1658.0
+offset_top = -1131.0
+offset_right = 2695.0
+offset_bottom = 1854.0
+mouse_filter = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=387503782]
+offset_left = -1011.0
+offset_top = -1065.0
+offset_right = 1960.0
+offset_bottom = 1342.0
+mouse_filter = 2
+
+[node name="decoration1" type="Sprite2D" parent="." unique_id=411781121]
+position = Vector2(1187.9999, 485.99997)
+scale = Vector2(1.4549179, 1.4549179)
+texture = ExtResource("13_cban0")
+
+[node name="lantern" type="Sprite2D" parent="." unique_id=949480284]
+position = Vector2(-365, -331.00003)
+scale = Vector2(14.492174, 14.492174)
+texture = ExtResource("14_da8kd")
+
+[node name="lantern2" type="Sprite2D" parent="." unique_id=1281721535]
+position = Vector2(1220, -331)
+scale = Vector2(14.492174, 14.492174)
+texture = ExtResource("14_da8kd")
+
+[node name="mug" type="Sprite2D" parent="." unique_id=1617693915]
+position = Vector2(-334.00003, 413.00003)
+scale = Vector2(8.203487, 8.203487)
+texture = ExtResource("15_6kwks")

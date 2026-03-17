@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://crvy715xurg1l"]
+
+[ext_resource type="Script" uid="uid://c3ehl5pxmbh4t" path="res://scene/UI/draft_panel.gd" id="1_07mf5"]
+[ext_resource type="Texture2D" uid="uid://dkip2y8lxh4ge" path="res://assets/UI parts/explore.png" id="1_imwbf"]
+[ext_resource type="PackedScene" uid="uid://bxt1hcfuuw5m8" path="res://scene/tile/forest tile/area_2d.tscn" id="2_n8umf"]
+[ext_resource type="PackedScene" uid="uid://08qkcsu52se5" path="res://scene/tile/grassland tile/grassland.tscn" id="3_ta3sk"]
+[ext_resource type="PackedScene" uid="uid://c07od86xmqau2" path="res://scene/tile/moutain_tile/moutain_tile.tscn" id="4_30h5e"]
+[ext_resource type="PackedScene" uid="uid://chseg0himu50u" path="res://scene/UI/tile_card.tscn" id="6_07mf5"]
+[ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="7_n8umf"]
+
+[node name="DraftPanel" type="Control" unique_id=198612456]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_07mf5")
+tile_pool = Array[PackedScene]([ExtResource("2_n8umf"), ExtResource("3_ta3sk"), ExtResource("4_30h5e")])
+metadata/_edit_vertical_guides_ = [960.0]
+metadata/_edit_horizontal_guides_ = [540.0]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1811415971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PanelContainer" unique_id=1610160297]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1684474104]
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 200
+
+[node name="background" type="TextureRect" parent="PanelContainer/MarginContainer" unique_id=439876703]
+layout_mode = 2
+texture = ExtResource("1_imwbf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/background" unique_id=381049051]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 95.0
+offset_right = 1156.0
+offset_bottom = 283.0
+
+[node name="card1" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=580084923 instance=ExtResource("6_07mf5")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="card2" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=879276245 instance=ExtResource("6_07mf5")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="card3" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=1295842998 instance=ExtResource("6_07mf5")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="PanelAnimator" type="Node" parent="." unique_id=1497105647]
+script = ExtResource("7_n8umf")

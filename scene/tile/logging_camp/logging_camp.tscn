@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://d3wrukmmswhcr"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_d32yk"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="2_fkd5q"]
+[ext_resource type="Texture2D" uid="uid://cmaccmeum5wby" path="res://assets/tiles/forest tile/base.png" id="3_h5ile"]
+[ext_resource type="Shader" uid="uid://by65f8ucdav3p" path="res://shader/grass_shader.gdshader" id="4_74qik"]
+[ext_resource type="Texture2D" uid="uid://tm4tio4f6h4b" path="res://assets/tiles/forest tile/grass1.png" id="5_bahpt"]
+[ext_resource type="Shader" uid="uid://ejajyppql1k0" path="res://shader/tree_shader.gdshader" id="6_72jyh"]
+[ext_resource type="Texture2D" uid="uid://dj7runvy45q83" path="res://assets/tiles/forest tile/tree2.png" id="7_xi2qi"]
+[ext_resource type="Texture2D" uid="uid://dld8jgh1kgdbe" path="res://assets/tiles/forest tile/tree5.png" id="8_uwnou"]
+[ext_resource type="Texture2D" uid="uid://5dfkfbni40mt" path="res://assets/tiles/forest tile/tree3.png" id="9_hot48"]
+[ext_resource type="Texture2D" uid="uid://x0w805be0br6" path="res://assets/tiles/forest tile/tree1.png" id="10_o2on5"]
+[ext_resource type="Texture2D" uid="uid://ces6bkbv8o4i7" path="res://assets/tiles/forest tile/tree6.png" id="11_13a06"]
+[ext_resource type="Texture2D" uid="uid://nt2y0gyi6v4w" path="res://assets/tiles/forest tile/logging camp.png" id="12_1bvhd"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="13_hykiu"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="14_e2dvy"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="15_3q8sh"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="16_xcjgk"]
+
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_fkd5q")
+tile_name = "LoggingCamp"
+can_be_upgraded = true
+requires_hq_adjacency = true
+adjacency_bonus_tile = "TILE_NAME_FOREST"
+adjacency_bonus_amount = {
+"explorer": 0,
+"food": 0,
+"stone": 0,
+"wood": 1
+}
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_85pf6"]
+load_path = "res://.godot/imported/test tile.png-852953bb5193aa0ddb4cd04b1c0e61c7.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhhdy"]
+shader = ExtResource("4_74qik")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.2
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8jl4"]
+shader = ExtResource("6_72jyh")
+shader_parameter/speed = 1.5490000735775
+shader_parameter/min_strength = 0.06
+shader_parameter/max_strength = 0.1
+shader_parameter/interval = 3.5
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_d32yk")
+data = SubResource("Resource_doujx")
+metadata/_edit_horizontal_guides_ = [3.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_85pf6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("3_h5ile")
+
+[node name="decoration" type="Node2D" parent="Sprite2D" unique_id=104739268]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -3)
+
+[node name="grass" type="Node2D" parent="Sprite2D/decoration" unique_id=1521610396]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_uhhdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=300422423]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-2, -8)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=1052995617]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-11, 17)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=16649661]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(18, -16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=608995128]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(3, 20)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=552784643]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(21, 12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=1019636268]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(0, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=901841424]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-5, -20)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_bahpt")
+
+[node name="tree" type="Node2D" parent="Sprite2D/decoration" unique_id=39389815]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_i8jl4")
+
+[node name="tree1" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=332079890]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(20, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_xi2qi")
+
+[node name="tree2" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=1796452233]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(10, 13)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_uwnou")
+
+[node name="tree3" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=5971972]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-16, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_hot48")
+
+[node name="tree4" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=1096247214]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-2, 17)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_o2on5")
+
+[node name="tree5" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=1219789501]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-24, -14)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_13a06")
+
+[node name="tree6" type="Sprite2D" parent="Sprite2D/decoration/tree" unique_id=2113014814]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(1, -25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_xi2qi")
+
+[node name="camp" type="Sprite2D" parent="Sprite2D/decoration" unique_id=1845502757]
+y_sort_enabled = true
+position = Vector2(1, 3)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_1bvhd")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("13_hykiu")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("14_e2dvy")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("15_3q8sh")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("16_xcjgk")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
