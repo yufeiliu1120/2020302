@@ -63,23 +63,27 @@ func trigger_random_events():
 	if animator and animator.has_method("open_panel"):
 		animator.open_panel() 
 	else:
-		show()
+		push_error("动画节点函数名称错误")
 
 func _on_event_selected(event_data: EventResourceData):
 	print("玩家选择了事件: ", tr(event_data.event_name))
 	
+	# 1. 关闭选择菜单
 	if animator and animator.has_method("close_panel"):
 		animator.close_panel() 
 	else:
-		hide()
+		push_error("动画节点函数名称错误")
 		
-	if event_data.effect_script:
-		var effect_instance = event_data.effect_script.new() 
-		if effect_instance.has_method("execution_event"):
-			effect_instance.execution_event()
-		else:
-			push_warning("【警告】事件脚本缺少 'execution_event' 函数！无法执行惩罚。事件ID: " + event_data.event_id)
+	# ==========================================
+	# 【核心修改】：停顿 1.0 秒，营造危机降临的压迫感
+	# ==========================================
+	await get_tree().create_timer(1.0).timeout
+	
+	# ==========================================
+	# 【核心修改】：寻找并呼出详情面板，移交数据！
+	# ==========================================
+	var detail_menu = get_tree().get_first_node_in_group("event_detail")
+	if detail_menu and detail_menu.has_method("show_event_details"):
+		detail_menu.show_event_details(event_data)
 	else:
-		push_warning("【警告】该事件没有配置效果脚本！直接关闭菜单。事件ID: " + event_data.event_id)
-
-# (测试用的 F7 快捷键可以删掉了，因为现在全自动了！)
+		push_error("找不到 event_detail 组的节点，或者该节点没有 show_event_details 方法！")

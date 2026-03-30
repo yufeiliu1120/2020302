@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dfukvt6q7wqds" path="res://assets/UI parts/trade button pressed.png" id="35_uheck"]
 [ext_resource type="Texture2D" uid="uid://dc5kkl7bhsecr" path="res://assets/UI parts/scout button normal.png" id="37_uheck"]
 [ext_resource type="Texture2D" uid="uid://bkgi3jh0b8mpw" path="res://assets/UI parts/scout button pressed.png" id="38_iyy75"]
+[ext_resource type="PackedScene" uid="uid://bkgytgl7uycxg" path="res://scene/UI/event_details.tscn" id="38_ooc70"]
 [ext_resource type="Texture2D" uid="uid://du32wx0hino3g" path="res://assets/UI parts/scout button hover.png" id="39_iyy75"]
 [ext_resource type="Texture2D" uid="uid://dbvunmccct6ul" path="res://assets/UI parts/menu button normal.png" id="39_ug7lc"]
 [ext_resource type="Texture2D" uid="uid://cu7ffn6naxupy" path="res://assets/UI parts/menu button pressed.png" id="40_nw0ko"]
@@ -351,6 +352,8 @@ script = ExtResource("9_53r50")
 [node name="TradeMenu" parent="." unique_id=735364414 instance=ExtResource("35_oeakf")]
 
 [node name="EventCoiceMenu" parent="." unique_id=1271814061 instance=ExtResource("34_wnmig")]
+
+[node name="EventDetail" parent="." unique_id=1606457514 instance=ExtResource("38_ooc70")]
 
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/craft" to="Build_Menu" method="open_menu"]
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/trade" to="TradeMenu" method="open_menu"]

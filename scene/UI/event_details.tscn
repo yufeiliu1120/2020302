@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bkgytgl7uycxg"]
+
+[ext_resource type="Texture2D" uid="uid://w8tsgx45fo7k" path="res://assets/events/outline_under.png" id="1_ii3yv"]
+[ext_resource type="Script" uid="uid://177xoxbo4jtc" path="res://scene/UI/event_details.gd" id="1_pkrda"]
+[ext_resource type="Texture2D" uid="uid://ip12iq0x7n3f" path="res://assets/events/sea storm.png" id="2_i0ocw"]
+[ext_resource type="PackedScene" uid="uid://c04spbwrfxo61" path="res://scene/UI/event_detail_choosing_button.tscn" id="2_omyb6"]
+[ext_resource type="Texture2D" uid="uid://taxsqpjwxvu5" path="res://assets/events/railling.png" id="3_pkrda"]
+[ext_resource type="Texture2D" uid="uid://b7b0pmkuvj4jy" path="res://assets/events/outline.png" id="4_omyb6"]
+[ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="5_i0ocw"]
+
+[node name="Control" type="Control" unique_id=1606457514 groups=["event_detail"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pkrda")
+button_scene = ExtResource("2_omyb6")
+metadata/_edit_vertical_guides_ = [467.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=1266221432]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="bottom" type="TextureRect" parent="." unique_id=357746150]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 192.0
+offset_right = 1523.0
+offset_bottom = 905.0
+mouse_filter = 2
+texture = ExtResource("1_ii3yv")
+
+[node name="content" type="VBoxContainer" parent="." unique_id=2140030554]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -269.0
+offset_right = 507.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="image" type="TextureRect" parent="content" unique_id=1032390208]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("2_i0ocw")
+
+[node name="Decorative railing" type="TextureRect" parent="content" unique_id=1292629181]
+custom_minimum_size = Vector2(5, 15)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_pkrda")
+
+[node name="Interactive menu" type="MarginContainer" parent="content" unique_id=2131172277]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="content/Interactive menu" unique_id=694166129]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="content/Interactive menu/VBoxContainer" unique_id=878390205]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="description" type="RichTextLabel" parent="content/Interactive menu/VBoxContainer/ScrollContainer" unique_id=1231305082]
+custom_minimum_size = Vector2(200, 90)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 20
+text = "test test Test test test test Test test test test Test test test test Test test test test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test testtest test Test test test test Test test test test Test test test test Test test"
+
+[node name="buttons" type="HBoxContainer" parent="content/Interactive menu/VBoxContainer" unique_id=1924078777]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="outline" type="TextureRect" parent="." unique_id=1329240082]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -547.0
+offset_top = -309.0
+offset_right = 554.0
+offset_bottom = 353.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_omyb6")
+
+[node name="PanelAnimator" type="Node" parent="." unique_id=704966786]
+script = ExtResource("5_i0ocw")
+metadata/_custom_type_script = "uid://b240qpgrii8jc"

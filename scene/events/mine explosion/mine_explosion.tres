@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://cohso8d0oum0a"]
+
+[ext_resource type="Texture2D" uid="uid://sf22eqt0bps" path="res://assets/events/mine explosion.png" id="1_84t6u"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="1_wn1ri"]
+[ext_resource type="Texture2D" uid="uid://kd5iu44p13ov" path="res://assets/events/mine explosion preview.png" id="2_vqreo"]
+
+[sub_resource type="GDScript" id="GDScript_6ybpj"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("1_wn1ri")
+event_id = "mine_explosion"
+event_name = "EVENT_NAME_MINE_EXPLOSION"
+event_description = "EVENT_DESC_MINE_EXPLOSION"
+preview_image = ExtResource("2_vqreo")
+full_image = ExtResource("1_84t6u")
+effect_script = SubResource("GDScript_6ybpj")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

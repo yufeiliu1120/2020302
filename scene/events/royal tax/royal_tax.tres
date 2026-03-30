@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://0amyxf46hk21"]
+
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="1_11wur"]
+[ext_resource type="Texture2D" uid="uid://badsq1o0lwrfm" path="res://assets/events/royal tax.png" id="1_f5jkp"]
+[ext_resource type="Texture2D" uid="uid://br6evkxlnagjv" path="res://assets/events/royal tax preview.png" id="2_jat3m"]
+
+[sub_resource type="GDScript" id="GDScript_jki38"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("1_11wur")
+event_id = "royal_tax"
+event_name = "EVENT_NAME_ROYAL_TAX"
+event_description = "EVENT_DESC_ROYAL_TAX"
+preview_image = ExtResource("2_jat3m")
+full_image = ExtResource("1_f5jkp")
+effect_script = SubResource("GDScript_jki38")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

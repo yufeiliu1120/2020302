@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c04spbwrfxo61"]
+
+[ext_resource type="Script" uid="uid://4xy6an81pa68" path="res://scene/UI/event_detail_choosing_button.gd" id="1_5pduk"]
+[ext_resource type="Texture2D" uid="uid://decn0xmekc2fw" path="res://assets/events/choosing_button_normal.png" id="1_pw7v7"]
+[ext_resource type="Texture2D" uid="uid://b2wimanctppyv" path="res://assets/events/choosing_button_pressed.png" id="2_5pduk"]
+[ext_resource type="Texture2D" uid="uid://bo5carcg5c5oa" path="res://assets/events/choosing_button_hover.png" id="3_3s68x"]
+
+[node name="VBoxContainer" type="VBoxContainer" unique_id=125746133]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5pduk")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=694336625]
+layout_mode = 2
+texture_normal = ExtResource("1_pw7v7")
+texture_pressed = ExtResource("2_5pduk")
+texture_hover = ExtResource("3_3s68x")
+
+[node name="text" type="Label" parent="." unique_id=870782965]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Test Text"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

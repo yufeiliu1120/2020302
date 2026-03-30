@@ -29,6 +29,14 @@ TILE_DESC_MARKET,一座市场，会根据周围海岸地块的数量增加交易
 TILE_NAME_FURNACE,熔炉,Furnace
 TILE_DESC_FURNACE,一座精炼炉，通过消耗石头和木头生产金属,Metal is produced by consuming stone and wood.
 
+EVENT_NAME_BANDITS,强盗,Bandits
+EVENT_NAME_BLIGHT,枯萎病,Blight
+EVENT_NAME_FAMINE,饥荒,Famine
+EVENT_NAME_FOREST_AWAKENING,森林觉醒,Forest Awakening
+EVENT_NAME_MINE_EXPLOSION,矿坑爆炸,Mine Explosion
+EVENT_NAME_ROYAL_TAX,皇家税收,Royal Tax
+EVENT_NAME_SEA_STORM,海上风暴,Sea Storm
+
 
 wood,木材,Wood
 stone,石头,Stone
@@ -48,3 +56,4 @@ turn,回合,Turn
 
 DESC_RESOURCE_MAINTENANCE,\n 消耗: -{amount} {res}/回合,\n Uses: -{amount} {res}/Turn
 status_lacking_res,原料不足,Lacking Resources
+btn_accept,接受,Accept

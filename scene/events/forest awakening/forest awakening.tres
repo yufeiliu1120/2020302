@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://bpal183sbt87k"]
+
+[ext_resource type="Texture2D" uid="uid://dv2veuerc1cte" path="res://assets/events/forest awakening.png" id="1_k32pg"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="1_qpn3f"]
+[ext_resource type="Texture2D" uid="uid://cblnmf8srn4fc" path="res://assets/events/forest awakening preview.png" id="2_3dvf1"]
+
+[sub_resource type="GDScript" id="GDScript_n6tp8"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("1_qpn3f")
+event_id = "forest_awakening"
+event_name = "EVENT_NAME_FOREST_AWAKENING"
+event_description = "EVENT_DESC_FOREST_AWAKENING"
+preview_image = ExtResource("2_3dvf1")
+full_image = ExtResource("1_k32pg")
+effect_script = SubResource("GDScript_n6tp8")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

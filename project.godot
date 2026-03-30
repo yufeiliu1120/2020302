@@ -36,6 +36,7 @@ ControlNode=""
 TileStorage=""
 Camera=""
 NatureGeneratorGroup=""
+event_detail=""
 
 [input]
 

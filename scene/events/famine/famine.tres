@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://che0jvaceaw4t"]
+
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="1_4uxmp"]
+[ext_resource type="Texture2D" uid="uid://de828twoxn868" path="res://assets/events/Famine.png" id="1_iyrbk"]
+[ext_resource type="Texture2D" uid="uid://djtp7lnvck3cy" path="res://assets/events/famine preview.png" id="2_3wequ"]
+
+[sub_resource type="GDScript" id="GDScript_iyrbk"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("1_4uxmp")
+event_id = "famine"
+event_name = "EVENT_NAME_FAMINE"
+event_description = "EVENT_DESC_FAMINE"
+preview_image = ExtResource("2_3wequ")
+full_image = ExtResource("1_iyrbk")
+effect_script = SubResource("GDScript_iyrbk")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

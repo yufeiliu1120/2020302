@@ -15,7 +15,10 @@ func open_panel():
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(target, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(target, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
+	# 禁用摄像头控制
+	var camera = get_tree().get_first_node_in_group("Camera")
+	camera.process_mode = Node.PROCESS_MODE_DISABLED
+	
 # --- 封装的关闭动画 ---
 # Callable 是一个非常强大的类型，代表“一个函数”。
 # 这样我们可以告诉动画：“关完之后，顺便帮我执行这个操作。”
@@ -30,3 +33,6 @@ func close_panel(on_finished: Callable = Callable()):
 		if on_finished.is_valid():
 			on_finished.call()
 	)
+	# 重新启用摄像头控制
+	var camera = get_tree().get_first_node_in_group("Camera")
+	camera.process_mode = Node.PROCESS_MODE_INHERIT
