@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://cohso8d0oum0a" path="res://scene/events/mine explosion/mine_explosion.tres" id="8_dkeq5"]
 [ext_resource type="Resource" uid="uid://0amyxf46hk21" path="res://scene/events/royal tax/royal_tax.tres" id="9_pyrao"]
 
-[node name="Control" type="Control" unique_id=1548095986]
+[node name="Control" type="Control" unique_id=1548095986 groups=["event_choice_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

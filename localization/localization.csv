@@ -53,6 +53,8 @@ menu_upgrade_cost,改造花费,Upgrade Cost
 btn_upgrade,改造地块,Upgrade
 btn_demolish,拆除地块,Demolish
 turn,回合,Turn
+event_left,距离下一事件,event coming in
+event_coming,事件来袭,event is coming
 
 DESC_RESOURCE_MAINTENANCE,\n 消耗: -{amount} {res}/回合,\n Uses: -{amount} {res}/Turn
 status_lacking_res,原料不足,Lacking Resources

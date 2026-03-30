@@ -37,6 +37,7 @@ TileStorage=""
 Camera=""
 NatureGeneratorGroup=""
 event_detail=""
+event_choice_menu=""
 
 [input]
 
@@ -79,7 +80,7 @@ ESC={
 [internationalization]
 
 locale/translations=PackedStringArray("res://localization/localization.en.translation", "res://localization/localization.zh.translation")
-locale/test="zh"
+locale/test="en"
 locale/locale_filter_mode=0
 
 [physics]
