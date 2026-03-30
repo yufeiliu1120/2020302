@@ -23,6 +23,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="." unique_id=309534315]
 layout_mode = 2
+stretch_mode = 4
 
 [node name="InfoBox" type="VBoxContainer" parent="." unique_id=933415064]
 layout_mode = 2

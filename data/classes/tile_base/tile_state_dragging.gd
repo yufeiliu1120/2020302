@@ -221,12 +221,16 @@ func _play_dust_effect() -> void:
 func _cancel_dragging() -> void:
 	SignalBusAutoload.update_cost_preview.emit(0, {}, false)
 	get_tree().get_first_node_in_group("ControlNode").set_mouse_is_dragging(false)
-	
-	# 【核心修复】：在销毁地块本身之前，先把它的虚影清理掉！
+	# 在销毁地块本身之前，先把它的虚影清理掉！
 	_cleanup_ghost()
-	
-	# 如果以后想做退还基础费用，可以在这里加逻辑
+	# ==========================================
+	# 取消建造，全额退还买卡时扣除的基础花费！
+	# ==========================================
+	if actor.data and actor.data.base_cost:
+		GameResourceManager.add_resources(actor.data.base_cost)
+		print("已取消建造，退还资源: ", actor.data.base_cost)
 	actor.queue_free()
+
 
 func _cleanup_ghost() -> void:
 	if is_instance_valid(ghost_sprite):
@@ -236,4 +240,6 @@ func _cleanup_ghost() -> void:
 func _is_mouse_over_ui() -> bool:
 	var hovered_control = get_viewport().gui_get_hovered_control()
 	return hovered_control != null
+	
+
 		

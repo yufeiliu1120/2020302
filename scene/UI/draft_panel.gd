@@ -96,5 +96,5 @@ func draft_panel_tile_selected(chosen_scene: PackedScene):
 	new_tile.Statemachine.current_state.state_finished.emit("Dragging")
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ESC"):
+	if event.is_action_pressed("ESC") or event.is_action_pressed("mouse_right"):
 		animator.close_panel()

@@ -10,10 +10,13 @@ class_name TileResourceData
 @export_group("Economics")
 ## 每回合产出的资源
 @export var production: Dictionary = {
-	"wood": 0, "stone": 0, "explorer": 0, "iron": 0
+	"wood": 0, "stone": 0, "explorer": 0, "metal": 0
 }
 @export var food_production: int = 0
 @export var food_maintenance: int = 0
+@export var resource_maintenance: Dictionary = {
+	"wood": 0, "stone": 0
+}
 @export var upgrade_cost: Dictionary = {
 	"wood": 0, "stone": 0, "food": 0
 }

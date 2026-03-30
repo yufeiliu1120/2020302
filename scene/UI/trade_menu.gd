@@ -81,6 +81,7 @@ func _on_popup_item_selected(id: int):
 func _update_trade_ui():
 	give_button_icon.texture = res_icons[current_give]
 	get_button_icon.texture = res_icons[current_get]
+	
 	# 如果左右两边选了同一个资源，禁止交易
 	if current_give == current_get:
 		give_button_label.text = "无效"
@@ -88,13 +89,24 @@ func _update_trade_ui():
 		arrow_btn.disabled = true
 		return
 		
-	# 获取动态汇率（左侧固定为 1）
+	# 【核心修改】：计算本次实际能拿出的交易量（最多为 5，不够则全拿）
+	var player_has = GameResourceManager.stocks.get(current_give, 0)
+	var trade_amount = mini(5, player_has) 
+	
+	# 获取基础汇率
 	current_rate = _calculate_rate(current_give, current_get)
-	give_button_label.text = "1"
-	get_button_label.text = "1"
-	arrow_btn.disabled = false
+	
+	# 如果玩家这个资源穷得连 1 个都没有
+	if trade_amount == 0:
+		give_button_label.text = "0"
+		get_button_label.text = "0"
+		arrow_btn.disabled = true # 没钱就禁用箭头
+	else:
+		# 动态显示：比如你只有 3 个木头，左边显示 3，右边显示 3 * 汇率
+		give_button_label.text = str(trade_amount)
+		get_button_label.text = str(trade_amount * current_rate)
+		arrow_btn.disabled = false
 
-# ----------------------------------------------------
 # 🌟 动态汇率计算器
 func _calculate_rate(give: String, get: String) -> int:
 	# 默认 1换1。
@@ -105,25 +117,34 @@ func _calculate_rate(give: String, get: String) -> int:
 
 # 玩家点击了中间的箭头！
 func _on_trade_pressed():
-	# 根据你的设计：“以左侧为 1”。
-	# 这意味着：消耗 1 个 左侧资源 + 1个交易点，获得 X 个 右侧资源。
+	# 再次确认玩家当前有多少库存，防止打开菜单期间资源变动
+	var player_has = GameResourceManager.stocks.get(current_give, 0)
+	var trade_amount = mini(5, player_has)
+	
+	if trade_amount <= 0:
+		return
+		
+	# 组装这笔批量交易的“账单”：
 	var cost = {
-		current_give: 1,
-		"trade_point": 1
+		current_give: trade_amount,  # 扣除 1~5 个左侧资源
+		"trade_point": 1             # 依然只扣 1 点交易手续费
 	}
 	
 	if GameResourceManager.can_afford(cost):
 		GameResourceManager.consume_resources(cost)
-		GameResourceManager.add_resources({current_get: current_rate})
+		
+		# 给玩家发货：实际交易量 * 汇率
+		GameResourceManager.add_resources({current_get: trade_amount * current_rate})
 		
 		_update_tp_label()
-		print("交易成功！")
+		# 【重要】：交易完后，立刻刷新一次 UI 数字。
+		# 比如你原本有 8 个木头，换了 5 个，这里会立刻刷新显示为 "3 ➡ 3"
+		_update_trade_ui() 
 		
-		# (可选) 在这里加个播放金币音效或者绿色飘字的视觉效果
+		print("批量交易成功！消耗: ", trade_amount, " ", current_give, "，获得: ", trade_amount * current_rate, " ", current_get)
 	else:
 		print("资源或交易点数不足！")
 		GameResourceManager.purchase_failed.emit(cost)
-		
 # ==========================================
 # 🌟 万能 UI 动效注入器
 # ==========================================
@@ -169,5 +190,5 @@ func _center_pivot(btn: Control):
 	btn.pivot_offset = btn.size / 2.0
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ESC"):
+	if event.is_action_pressed("ESC") or event.is_action_pressed("mouse_right"):
 		animator.close_panel()

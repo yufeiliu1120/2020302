@@ -20,7 +20,13 @@
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_fkd5q")
 tile_name = "LoggingCamp"
-can_be_upgraded = true
+production = {
+"explorer": 0,
+"iron": 0,
+"stone": 0,
+"wood": 3
+}
+food_maintenance = 1
 requires_hq_adjacency = true
 adjacency_bonus_tile = "TILE_NAME_FOREST"
 adjacency_bonus_amount = {

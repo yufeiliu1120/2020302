@@ -15,9 +15,10 @@ tile_name = "StonePit"
 production = {
 "explorer": 0,
 "iron": 0,
-"stone": 5,
+"stone": 4,
 "wood": 0
 }
+food_maintenance = 2
 requires_hq_adjacency = true
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 

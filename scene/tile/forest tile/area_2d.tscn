@@ -28,6 +28,11 @@ script = ExtResource("2_3kb0n")
 tile_name = "TILE_NAME_FOREST"
 icon = ExtResource("2_8wrn8")
 description = "TILE_DESC_FOREST"
+upgrade_cost = {
+"food": 5,
+"stone": 0,
+"wood": 0
+}
 can_be_upgraded = true
 upgrade_scene = ExtResource("3_v0r5p")
 requires_road = false

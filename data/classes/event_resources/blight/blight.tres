@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://cayye2gciv3kr"]
+
+[ext_resource type="Texture2D" uid="uid://cuhc5hbxbwg42" path="res://assets/events/blight.png" id="1_g61mb"]
+[ext_resource type="Texture2D" uid="uid://dvavbqbowr075" path="res://assets/events/blight preview.png" id="2_nl6h3"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="3_bld3c"]
+
+[sub_resource type="GDScript" id="GDScript_6bi88"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("3_bld3c")
+event_name = "EVENT_NAME_BLIGHT"
+event_description = "EVENT_DESC_BLIGHT"
+preview_image = ExtResource("2_nl6h3")
+full_image = ExtResource("1_g61mb")
+effect_script = SubResource("GDScript_6bi88")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

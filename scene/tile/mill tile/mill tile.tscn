@@ -17,11 +17,11 @@ script = ExtResource("2_08nfs")
 tile_name = "TILE_NAME_MILL"
 icon = ExtResource("2_cr2fx")
 description = "TILE_DESC_MILL"
-food_maintenance = 1
+food_production = 3
 base_cost = {
-"food": 1,
-"stone": 1,
-"wood": 0
+"food": 0,
+"stone": 0,
+"wood": 10
 }
 requires_hq_adjacency = true
 adjacency_bonus_tile = "WheatField"

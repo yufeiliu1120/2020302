@@ -79,6 +79,13 @@ func update_connectivity():
 				var n_tile = active_tiles[n_pos]
 				if not is_instance_valid(n_tile) or n_tile.is_queued_for_deletion(): continue
 				
+				# ==========================================
+				# 🚨【事件钩子】：无视被强盗占领的道路！
+				# ==========================================
+				if n_tile.get("is_blocked"):
+					continue # 强行截断，这块地以及它后面的所有地块都不会被点亮！
+				# ==========================================
+				
 				if not visited.has(n_pos):
 					# 只要挨着路，就被点亮并算入运费距离
 					n_tile.is_connected = true

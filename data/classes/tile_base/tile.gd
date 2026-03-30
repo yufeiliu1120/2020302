@@ -29,8 +29,13 @@ var grid_coordinate: Vector2i = Vector2i(-999, -999)
 var connected_tiles: Array[Node] = []
 
 # --- 核心逻辑 ---
+var is_suppressed: bool = false # 被怪物巢穴或枯萎病压制，无法工作
+var is_blocked: bool = false    # 被强盗占领（如果是道路，将失去连通功能）
 
 func _ready():
+	# 如果被压制或占领，直接视为停工！
+	if is_suppressed or is_blocked:
+		return false
 	if get_parent():
 		get_parent().y_sort_enabled = true
 	snap_to_nearest_grid()
@@ -38,7 +43,12 @@ func _ready():
 	# 连接输入信号
 	input_pickable = true
 	input_event.connect(_on_tile_input_event)
-
+	if GameResourceManager.has_signal("resources_changed"):
+		GameResourceManager.resources_changed.connect(_on_resources_changed)
+		
+	# 初始化时先检查一下自己会不会被饿死
+	_check_visual_status()
+	
 func snap_to_nearest_grid():
 	# 如果是刚生成的坐标（通常初始默认值是 0,0 或者一个极端的负数）
 	# 才去尝试对齐，如果是改造继承过来的，坚决不要重新算！
@@ -124,3 +134,25 @@ func get_current_production() -> Dictionary:
 					total_prod[res_key] = bonus_amount[res_key] * bonus_count
 					
 	return total_prod
+	
+func _on_resources_changed(_new_stocks: Dictionary):
+	_check_visual_status()
+
+# 动态改变地块的外观颜色
+func _check_visual_status():
+	if not data: return
+	
+	# 如果这个建筑根本不需要工业原料，就不管它
+	if not data.get("resource_maintenance") or data.resource_maintenance.is_empty():
+		return
+		
+	var sprite = get_node_or_null("Sprite2D") # 请确保这里是你地块贴图的真实节点名
+	if not sprite: return
+	
+	# 判断能否付得起原料费
+	if GameResourceManager.can_afford(data.resource_maintenance):
+		# 原料充足，恢复原本的颜色
+		sprite.modulate = Color(1, 1, 1, 1) 
+	else:
+		# 原料不足，让贴图变暗发红，表示停机
+		sprite.modulate = Color(0.6, 0.4, 0.4, 1)

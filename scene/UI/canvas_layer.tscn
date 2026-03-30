@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d08ufqbsy3hm7"]
 
+[ext_resource type="Script" uid="uid://cntgb56bs6ea4" path="res://scene/UI/canvas_layer.gd" id="1_woeyn"]
 [ext_resource type="Script" uid="uid://b47h7xfs82smm" path="res://scene/UI/CostPreviewLabel.gd" id="6_fcd7w"]
 [ext_resource type="Script" uid="uid://blnnikwnypuc1" path="res://scene/UI/tile_context_menu.gd" id="7_ld5ky"]
 [ext_resource type="Script" uid="uid://d3a052b6g15mx" path="res://scene/UI/TurnButton.gd" id="9_53r50"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://boqbc6erdxgag" path="res://assets/UI parts/craft button pressed.png" id="32_woeyn"]
 [ext_resource type="Texture2D" uid="uid://ccps7mrpnqhsj" path="res://assets/UI parts/craft button hover.png" id="33_wnmig"]
 [ext_resource type="Texture2D" uid="uid://bv20nysr1y1lx" path="res://assets/UI parts/trade button nomal.png" id="34_ii3jf"]
+[ext_resource type="PackedScene" uid="uid://cu8e0fghksagd" path="res://scene/UI/event_choice_menu.tscn" id="34_wnmig"]
 [ext_resource type="Texture2D" uid="uid://vxpkit4d3fr8" path="res://assets/UI parts/trade button hover.png" id="35_bu3gg"]
 [ext_resource type="PackedScene" uid="uid://caqsigq8vcd8e" path="res://scene/UI/trade_menu.tscn" id="35_oeakf"]
 [ext_resource type="Texture2D" uid="uid://dfukvt6q7wqds" path="res://assets/UI parts/trade button pressed.png" id="35_uheck"]
@@ -40,6 +42,7 @@
 texture = ExtResource("28_8vufc")
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
+script = ExtResource("1_woeyn")
 metadata/_edit_vertical_guides_ = [12.0, 1779.0, 720.0]
 metadata/_edit_horizontal_guides_ = [150.0]
 
@@ -58,12 +61,20 @@ script = ExtResource("7_ld5ky")
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/TileContextMenu" unique_id=193323253]
 layout_mode = 2
 
-[node name="BtnUpgrade" type="Button" parent="Control/TileContextMenu/VBoxContainer" unique_id=661608504]
+[node name="InfoLabel" type="RichTextLabel" parent="Control/TileContextMenu/VBoxContainer" unique_id=1746095181]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TileContextMenu/VBoxContainer" unique_id=43001519]
+layout_mode = 2
+
+[node name="BtnUpgrade" type="Button" parent="Control/TileContextMenu/VBoxContainer/HBoxContainer" unique_id=661608504]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "改造"
 
-[node name="BtnDemolish" type="Button" parent="Control/TileContextMenu/VBoxContainer" unique_id=2111771806]
+[node name="BtnDemolish" type="Button" parent="Control/TileContextMenu/VBoxContainer/HBoxContainer" unique_id=2111771806]
 layout_mode = 2
 text = "拆除"
 
@@ -338,6 +349,8 @@ script = ExtResource("9_53r50")
 [node name="Build_Menu" parent="." unique_id=1002417904 instance=ExtResource("47_nw0ko")]
 
 [node name="TradeMenu" parent="." unique_id=735364414 instance=ExtResource("35_oeakf")]
+
+[node name="EventCoiceMenu" parent="." unique_id=1271814061 instance=ExtResource("34_wnmig")]
 
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/craft" to="Build_Menu" method="open_menu"]
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/trade" to="TradeMenu" method="open_menu"]

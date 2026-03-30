@@ -69,11 +69,14 @@ func grow_nature():
 	var new_tile = random_scene.instantiate()
 	
 	# 5. 坐标转换与加入场景树
-	# 注意：这里的 grid_to_pixel 是假设你将网格转像素的函数名。如果你之前叫 hex_to_pixel，请自行替换！
 	if GridAutoload.has_method("grid_to_pixel"):
 		new_tile.global_position = GridAutoload.grid_to_pixel(target_coord)
 	elif GridAutoload.has_method("hex_to_pixel"):
 		new_tile.global_position = GridAutoload.hex_to_pixel(target_coord)
+		
+	# 【核心新增】：确保大自然生出来的地块知道自己的网格坐标！
+	if "grid_coordinate" in new_tile:
+		new_tile.grid_coordinate = target_coord
 		
 	tile_storage.add_child(new_tile)
 	

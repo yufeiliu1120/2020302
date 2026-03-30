@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3uetjhyl5c52" path="res://scene/UI/trade_menu.gd" id="1_j1mu7"]
 [ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="1_ldjoc"]
-[ext_resource type="Texture2D" uid="uid://dvmh3k2id1rjw" path="res://assets/UI parts/craft_menu_borad.png" id="2_oweaj"]
+[ext_resource type="Texture2D" uid="uid://beudngewkftvg" path="res://assets/UI parts/trading_menu_board.png" id="3_j1mu7"]
 [ext_resource type="Texture2D" uid="uid://djmvjy70q73r4" path="res://assets/UI parts/trading_label.png" id="4_vgllh"]
 [ext_resource type="Texture2D" uid="uid://ia6qcn026ijd" path="res://assets/UI parts/Trading arrow icon.png" id="5_l1y82"]
 
@@ -41,7 +41,7 @@ offset_right = 0.16003418
 offset_bottom = 0.079956055
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_oweaj")
+texture = ExtResource("3_j1mu7")
 
 [node name="Trade_point_left" type="Label" parent="." unique_id=480901848]
 layout_mode = 1
@@ -50,10 +50,10 @@ anchor_left = 0.5
 anchor_top = 0.34
 anchor_right = 0.5
 anchor_bottom = 0.34
-offset_left = -510.0
-offset_top = -134.20001
-offset_right = 516.0
-offset_bottom = -51.200012
+offset_left = -514.0
+offset_top = 238.79999
+offset_right = 512.0
+offset_bottom = 321.8
 theme_override_font_sizes/font_size = 50
 text = "交易点数: 1"
 horizontal_alignment = 1
@@ -67,9 +67,9 @@ anchor_top = 0.43300003
 anchor_right = 0.748
 anchor_bottom = 0.574
 offset_left = -0.83999634
-offset_top = 0.35995483
+offset_top = -126.255035
 offset_right = 0.8399658
-offset_bottom = 0.08001709
+offset_bottom = -126.53497
 grow_horizontal = 2
 grow_vertical = 2
 

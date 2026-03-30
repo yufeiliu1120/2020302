@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://cejmqr2l4b1jp"]
+
+[ext_resource type="Texture2D" uid="uid://2i2y0w3rkmjw" path="res://assets/events/bandits.png" id="1_xt1xo"]
+[ext_resource type="Texture2D" uid="uid://ciivhlsn7fioe" path="res://assets/events/bandits preview.png" id="2_o1gro"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="3_wx0bl"]
+
+[sub_resource type="GDScript" id="GDScript_5jtp6"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("3_wx0bl")
+event_id = "bandits"
+event_name = "EVENT_NAME_BANDITS"
+event_description = "EVENT_DESC_BANDITS"
+preview_image = ExtResource("2_o1gro")
+full_image = ExtResource("1_xt1xo")
+effect_script = SubResource("GDScript_5jtp6")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

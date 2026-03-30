@@ -17,7 +17,34 @@ TILE_DESC_MILL,周围每有一个麦田地块，食物产量+{adj_food},Grants +
 TILE_NAME_ROAD,道路,Road
 TILE_DESC_ROAD,道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关,Road.
 
+TILE_NAME_OUTPOST,探险家前哨站,Explorers outpost
+TILE_DESC_OUTPOST,每回合自动产生探险家，可用于抽取自然地块,Explorers are automatically generated each round and can be used to extract natural tiles.
+
+TILE_NAME_COAST,海岸,Coast
+TILE_DESC_COAST,一片海岸,A coast range.
+
+TILE_NAME_MARKET,市场,Market
+TILE_DESC_MARKET,一座市场，会根据周围海岸地块的数量增加交易点数,A market will increase the number of trading points based on the number of surrounding coast tile.
+
+TILE_NAME_FURNACE,熔炉,Furnace
+TILE_DESC_FURNACE,一座精炼炉，通过消耗石头和木头生产金属,Metal is produced by consuming stone and wood.
+
+
 wood,木材,Wood
 stone,石头,Stone
 food,食物,Food
+metal,金属,Metal
 trade_points_left,剩余交易点数: {tp},Trade Points: {tp}
+
+desc_maintenance,\n 维护: -{amount} {res}/回合,\n Upkeep: -{amount} {res}/Turn
+desc_requires_road,\n规则: 必须与道路相连,\nRule: Must connect to a road
+
+status_working,正常工作,Working
+status_stopped,已停工 (需道路),Stopped (Needs Road)
+menu_upgrade_cost,改造花费,Upgrade Cost
+btn_upgrade,改造地块,Upgrade
+btn_demolish,拆除地块,Demolish
+turn,回合,Turn
+
+DESC_RESOURCE_MAINTENANCE,\n 消耗: -{amount} {res}/回合,\n Uses: -{amount} {res}/Turn
+status_lacking_res,原料不足,Lacking Resources

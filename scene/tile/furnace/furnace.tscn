@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://b7lsy7p0us15v"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_orc73"]
+[ext_resource type="Texture2D" uid="uid://b4elacd0pk8vp" path="res://assets/tiles/furnace tile/furnace icon.png" id="2_orc73"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="3_imf1g"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/tiles/test tile.png" id="4_8kc5v"]
+[ext_resource type="Texture2D" uid="uid://cau5gsc2hqoht" path="res://assets/tiles/furnace tile/furnace.png" id="5_lc08i"]
+[ext_resource type="Texture2D" uid="uid://bhfxjk4srvwca" path="res://assets/tiles/grass tile/base.png" id="5_orc73"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="6_320q6"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="7_hr4ef"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="8_gw4l3"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="9_cylwp"]
+[ext_resource type="Texture2D" uid="uid://bep2lo2f87sc0" path="res://assets/vfx/smoke_particle.png" id="11_3omdd"]
+
+[sub_resource type="Resource" id="Resource_l3i72"]
+script = ExtResource("3_imf1g")
+tile_name = "TILE_NAME_FURNACE"
+icon = ExtResource("2_orc73")
+description = "TILE_DESC_FURNACE"
+production = {
+"explorer": 0,
+"metal": 1,
+"stone": 0,
+"wood": 0
+}
+food_maintenance = 2
+resource_maintenance = {
+"stone": 1,
+"wood": 1
+}
+base_cost = {
+"food": 5,
+"stone": 0,
+"wood": 10
+}
+requires_hq_adjacency = true
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="Gradient" id="Gradient_qdsek"]
+offsets = PackedFloat32Array(0, 0.3852459, 0.52459013, 0.6557377, 1)
+colors = PackedColorArray(0.20511743, 0.20511743, 0.20511743, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sswgd"]
+gradient = SubResource("Gradient_qdsek")
+
+[sub_resource type="Curve" id="Curve_2a4tx"]
+_data = [Vector2(0, 0.34831464), 0.0, 0.0, 0, 0, Vector2(0.5, 0.8876405), 0.0, 0.0, 0, 0, Vector2(1, 0.43820232), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1ais"]
+curve = SubResource("Curve_2a4tx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f35hu"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(3.875, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 19.588
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -3.0000021
+linear_accel_max = -3.0000021
+scale_min = 0.19999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_i1ais")
+color_ramp = SubResource("GradientTexture1D_sswgd")
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_orc73")
+data = SubResource("Resource_l3i72")
+metadata/_edit_horizontal_guides_ = [3.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = ExtResource("4_8kc5v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+texture = ExtResource("5_orc73")
+
+[node name="furnace" type="Sprite2D" parent="Sprite2D" unique_id=99634560]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_lc08i")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_320q6")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("7_hr4ef")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("8_gw4l3")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("9_cylwp")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1773059417]
+z_index = 1
+position = Vector2(-17, -10)
+amount = 30
+texture = ExtResource("11_3omdd")
+lifetime = 4.12
+process_material = SubResource("ParticleProcessMaterial_f35hu")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=775752454]
+z_index = 1
+position = Vector2(16, -11)
+amount = 30
+texture = ExtResource("11_3omdd")
+lifetime = 4.12
+process_material = SubResource("ParticleProcessMaterial_f35hu")

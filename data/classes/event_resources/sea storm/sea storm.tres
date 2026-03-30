@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://bls1alts68dss"]
+
+[ext_resource type="Texture2D" uid="uid://cntnu3jmoufvb" path="res://assets/events/sea storm preview.png" id="1_pevet"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="2_xlcv0"]
+
+[sub_resource type="GDScript" id="GDScript_et5b1"]
+script/source = "extends RefCounted
+
+func execution_event():
+	print(\"测试事件已触发！准备接受惩罚吧！\")
+"
+
+[resource]
+script = ExtResource("2_xlcv0")
+event_name = "EVENT_NAME_SEA_STORM"
+event_description = "EVENT_DESC_SEA_STORM"
+preview_image = ExtResource("1_pevet")
+effect_script = SubResource("GDScript_et5b1")
+metadata/_custom_type_script = "uid://tkdj15opnn57"

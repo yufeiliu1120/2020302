@@ -28,6 +28,11 @@ script = ExtResource("2_kts2b")
 tile_name = "TILE_NAME_GRASS"
 icon = ExtResource("2_gvdo1")
 description = "TILE_DESC_GRASS"
+upgrade_cost = {
+"food": 0,
+"stone": 0,
+"wood": 2
+}
 can_be_upgraded = true
 upgrade_scene = ExtResource("3_gvdo1")
 requires_road = false

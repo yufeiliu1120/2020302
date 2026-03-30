@@ -17,6 +17,11 @@ script = ExtResource("2_er38u")
 tile_name = "TILE_NAME_MOUTAIN"
 icon = ExtResource("2_jgnqh")
 description = "TILE_DESC_MOUTAIN"
+upgrade_cost = {
+"food": 5,
+"stone": 0,
+"wood": 10
+}
 can_be_upgraded = true
 upgrade_scene = ExtResource("3_er38u")
 requires_road = false

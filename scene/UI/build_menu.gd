@@ -1,7 +1,7 @@
 extends Control
 
 @onready var animator = $PanelAnimator
-@onready var slots_container = $TextureRect/VBoxContainer # 替换成你的容器路径
+@onready var slots_container = $TextureRect/ScrollContainer/VBoxContainer # 替换成你的容器路径
 
 func _ready():
 	hide()
@@ -15,7 +15,7 @@ func open_menu():
 	animator.open_panel()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ESC"):
+	if event.is_action_pressed("ESC") or event.is_action_pressed("mouse_right"):
 		animator.close_panel()
 # 接收商品发来的购买请求
 func _on_slot_try_buy(scene: PackedScene, cost: Dictionary):

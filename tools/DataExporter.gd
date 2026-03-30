@@ -7,7 +7,7 @@ func _run():
 	print("开始扫描并生成 CSV 表格...")
 	var tscn_files = _get_all_tscn_files(SEARCH_DIR)
 	
-	var save_path = "res://TileDataPreview.csv"
+	var save_path = "res://tools/TileDataPreview.csv"
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	
 	if file:

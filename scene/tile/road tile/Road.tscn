@@ -20,7 +20,7 @@ distance_penalty = {
 }
 base_cost = {
 "food": 0,
-"stone": 1,
+"stone": 2,
 "wood": 0
 }
 requires_hq_adjacency = true

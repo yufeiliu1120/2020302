@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dl7rgpxnmq3fe" path="res://scene/tile/road tile/Road.tscn" id="4_0vmif"]
 [ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="4_ly7qt"]
 [ext_resource type="Texture2D" uid="uid://jxoifke0500p" path="res://assets/UI parts/craft_board_part.png" id="6_3tgoh"]
+[ext_resource type="PackedScene" uid="uid://cud68ul2bnopo" path="res://scene/tile/outpost tile/out_post.tscn" id="7_ly7qt"]
+[ext_resource type="PackedScene" uid="uid://5fhv3mluy2sr" path="res://scene/tile/market tile/market_tile.tscn" id="8_r0htu"]
+[ext_resource type="PackedScene" uid="uid://b7lsy7p0us15v" path="res://scene/tile/furnace/furnace.tscn" id="9_6scs5"]
 
 [node name="Build_Menu" type="Control" unique_id=1002417904]
 layout_mode = 3
@@ -44,29 +47,64 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_0vmif")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1478699485]
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect" unique_id=926671333]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 47.0
-offset_right = 1163.0
-offset_bottom = 219.0
+offset_left = 42.0
+offset_top = 98.0
+offset_right = 1161.0
+offset_bottom = 711.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/ScrollContainer" unique_id=1478699485]
+layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="road" parent="TextureRect/VBoxContainer" unique_id=2015086672 instance=ExtResource("3_3tgoh")]
-layout_mode = 2
-size_flags_horizontal = 1
-tile_scene = ExtResource("4_0vmif")
-
-[node name="TextureRect" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=2117182696]
+[node name="Decorative railings6" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=958019077]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 texture = ExtResource("6_3tgoh")
 
-[node name="mill" parent="TextureRect/VBoxContainer" unique_id=1182053883 instance=ExtResource("3_3tgoh")]
+[node name="road" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=2015086672 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+size_flags_horizontal = 1
+tile_scene = ExtResource("4_0vmif")
+
+[node name="Decorative railings1" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=2117182696]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="mill" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1182053883 instance=ExtResource("3_3tgoh")]
 layout_mode = 2
 size_flags_horizontal = 1
 
-[node name="TextureRect2" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1801138930]
+[node name="Decorative railings2" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1801138930]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="outpost" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=177615012 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+tile_scene = ExtResource("7_ly7qt")
+
+[node name="Decorative railings3" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1379194965]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="market" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=857223775 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+tile_scene = ExtResource("8_r0htu")
+
+[node name="Decorative railings4" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1794294652]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="furnace" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1136629621 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+tile_scene = ExtResource("9_6scs5")
+
+[node name="Decorative railings5" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=2016535220]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 texture = ExtResource("6_3tgoh")

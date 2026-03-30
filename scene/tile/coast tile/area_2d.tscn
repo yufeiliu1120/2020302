@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_pj2sr")
-tile_name = "Coast"
+tile_name = "TILE_NAME_COAST"
 requires_road = false
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 

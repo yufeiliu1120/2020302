@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cu8e0fghksagd"]
+
+[ext_resource type="Script" uid="uid://dr5t52jpbsq65" path="res://scene/UI/event_choice_menu.gd" id="1_b0f3a"]
+[ext_resource type="Texture2D" uid="uid://bw5pjgsqqx1yk" path="res://assets/events/borad.png" id="1_ry2h1"]
+[ext_resource type="Texture2D" uid="uid://taxsqpjwxvu5" path="res://assets/events/railling.png" id="2_iw25d"]
+[ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="2_r1ciw"]
+[ext_resource type="Resource" uid="uid://cayye2gciv3kr" path="res://data/classes/event_resources/blight/blight.tres" id="3_18ij5"]
+[ext_resource type="PackedScene" uid="uid://c0kxhvnfw4ajd" path="res://scene/UI/event_choice_slot.tscn" id="3_b0f3a"]
+[ext_resource type="Resource" uid="uid://bls1alts68dss" path="res://data/classes/event_resources/sea storm/sea storm.tres" id="4_18ij5"]
+[ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="4_iw25d"]
+[ext_resource type="Resource" uid="uid://cejmqr2l4b1jp" path="res://data/classes/event_resources/bandits/bandits.tres" id="4_plfrc"]
+
+[node name="Control" type="Control" unique_id=1548095986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b0f3a")
+event_interval = 2
+all_events = Array[ExtResource("2_r1ciw")]([ExtResource("3_18ij5"), ExtResource("4_plfrc"), ExtResource("4_18ij5")])
+
+[node name="Panel" type="Panel" parent="." unique_id=2014672267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1872101712]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -528.0
+offset_top = -303.0
+offset_right = 528.0
+offset_bottom = 303.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ry2h1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1211377064]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 59.0
+offset_right = 1010.0
+offset_bottom = 544.0
+theme_override_constants/separation = 0
+
+[node name="Decorative railing1" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=940751961]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_iw25d")
+
+[node name="Event_slot1" parent="TextureRect/VBoxContainer" unique_id=519708386 instance=ExtResource("3_b0f3a")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Decorative railing2" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1981502369]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_iw25d")
+
+[node name="Event_slot2" parent="TextureRect/VBoxContainer" unique_id=2057310147 instance=ExtResource("3_b0f3a")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Decorative railing3" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1759430220]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_iw25d")
+
+[node name="Event_slot3" parent="TextureRect/VBoxContainer" unique_id=1346533628 instance=ExtResource("3_b0f3a")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Decorative railing4" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=322117141]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("2_iw25d")
+
+[node name="PanelAnimator" type="Node" parent="." unique_id=2062034176]
+script = ExtResource("4_iw25d")

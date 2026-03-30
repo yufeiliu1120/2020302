@@ -37,8 +37,39 @@ func _setup_ui():
 	var raw_desc = tile_data.description
 	if raw_desc == "": raw_desc = "UNKNOWN_DESC"
 	
-	# 【修改】：直接把生肉和数据丢进全局绞肉机！
-	desc_label.text = TextManager.format_tile_desc(raw_desc, tile_data)
+	# 获取基础风味文本
+	var final_desc = TextManager.format_tile_desc(raw_desc, tile_data)
+	
+	# ==========================================
+	# 【核心新增】：在描述下方追加硬核属性提示
+	# ==========================================
+	final_desc += "\n" # 加一个空行，把故事描述和硬核属性隔开
+	
+	# 检查并追加食物维护费
+	final_desc += "\n" # 加一个空行，把故事描述和硬核属性隔开
+	
+	# 检查并追加食物维护费
+	if tile_data.food_maintenance > 0:
+		# 使用 format 动态塞入数字和翻译后的 "food" (也就是“食物”)
+		final_desc += tr("desc_maintenance").format({
+			"amount": tile_data.food_maintenance,
+			"res": tr("food") 
+		})
+		
+	# 检查并追加道路需求
+	if tile_data.requires_road:
+		final_desc += tr("desc_requires_road")
+		
+	if "resource_maintenance" in tile_data:
+		for res in tile_data.resource_maintenance:
+			var amount = tile_data.resource_maintenance[res]
+			if amount > 0:
+				final_desc += tr("DESC_RESOURCE_MAINTENANCE").format({
+					"amount": amount,
+					"res": tr(res) 
+				})	
+	# 将最终拼接好的完整文本交给 UI 显示
+	desc_label.text = final_desc
 	
 	# 3. 设置价格文本 (使用 BBCode 排版)
 	var cost_text = "[center]"

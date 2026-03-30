@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://baqlkvpgxqxao" path="res://assets/main_scene/decoration1.png" id="13_cban0"]
 [ext_resource type="Texture2D" uid="uid://cmay51y7dlqhh" path="res://assets/main_scene/lantern.png" id="14_da8kd"]
 [ext_resource type="Texture2D" uid="uid://cancpsmqdi6uc" path="res://assets/main_scene/decoration3.png" id="15_6kwks"]
+[ext_resource type="Script" uid="uid://cw0mi0hungx3u" path="res://scene/main_scene/20_turn_alert.gd" id="21_jlqfm"]
+[ext_resource type="Script" uid="uid://dmrhars6eb1uq" path="res://scene/main_scene/dev_cheats.gd" id="22_lbyok"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5u11y"]
 size = Vector2(1071, 865)
@@ -146,3 +148,9 @@ texture = ExtResource("14_da8kd")
 position = Vector2(-334.00003, 413.00003)
 scale = Vector2(8.203487, 8.203487)
 texture = ExtResource("15_6kwks")
+
+[node name="20_turn_alert" type="Node" parent="." unique_id=1925380825]
+script = ExtResource("21_jlqfm")
+
+[node name="DevCheats" type="Node" parent="." unique_id=1254133655]
+script = ExtResource("22_lbyok")

@@ -7,4 +7,4 @@ func _ready():
 
 func _on_pressed():
 	# 调用资源管理器执行结算
-	GameResourceManager.process_turn()
+	GameResourceManager.end_turn()

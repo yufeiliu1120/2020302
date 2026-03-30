@@ -12,6 +12,8 @@ class_name MapGenerator
 @export var auto_place_hq: bool = true # 【新增】是否在地图中心自动放置 HQ
 signal game_start
 
+
+
 # --- 核心动画与放置逻辑 ---
 func place_tile_at(grid_pos: Vector2i, tile_scene: PackedScene) -> Node2D:
 	if GridAutoload.is_position_occupied(grid_pos): return null
