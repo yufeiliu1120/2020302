@@ -24,7 +24,7 @@ base_cost = {
 "wood": 10
 }
 requires_hq_adjacency = true
-adjacency_bonus_tile = "WheatField"
+adjacency_bonus_tile = "TILE_NAME_WHEAT_FIELD"
 adjacency_bonus_amount = {
 "explorer": 0,
 "food": 1,

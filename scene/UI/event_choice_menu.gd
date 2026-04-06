@@ -77,7 +77,7 @@ func _on_event_selected(event_data: EventResourceData):
 	# ==========================================
 	# 【核心修改】：停顿 1.0 秒，营造危机降临的压迫感
 	# ==========================================
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	# ==========================================
 	# 【核心修改】：寻找并呼出详情面板，移交数据！

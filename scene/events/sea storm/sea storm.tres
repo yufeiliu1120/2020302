@@ -1,13 +1,59 @@
 [gd_resource type="Resource" script_class="EventResourceData" format=3 uid="uid://bls1alts68dss"]
 
+[ext_resource type="Texture2D" uid="uid://ip12iq0x7n3f" path="res://assets/events/sea storm.png" id="1_j5fja"]
 [ext_resource type="Texture2D" uid="uid://cntnu3jmoufvb" path="res://assets/events/sea storm preview.png" id="1_pevet"]
 [ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="2_xlcv0"]
 
 [sub_resource type="GDScript" id="GDScript_et5b1"]
-script/source = "extends RefCounted
+script/source = "extends BaseDurationEvent
 
-func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+# 预加载风暴的侧边栏 UI
+var ui_scene = preload(\"res://scene/events/sea storm/sea_storm.tscn\") 
+var ui_instance: Control = null
+
+func _init():
+	remaining_turns = 3 
+	effect_type = \"trade_block\" 
+
+# ==========================================
+# ⚡ 填空 1：风暴开始时
+# ==========================================
+func _on_event_start():
+	GameResourceManager.is_trade_disabled = true
+	
+	# 挂载侧边栏 UI
+	ui_instance = ui_scene.instantiate()
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	if container:
+		container.add_child(ui_instance)
+
+# ==========================================
+# 💀 填空 2：风暴结束时
+# ==========================================
+func _on_event_end():
+	GameResourceManager.is_trade_disabled = false
+	
+	# 销毁侧边栏 UI
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+
+# ==========================================
+# 🔄 填空 3：风暴需要刷新什么 UI？
+# ==========================================
+func _update_ui():
+	# 1. 刷新侧边栏倒计时 (请替换 \"Text_Label\" 为你实际的文本节点名)
+	if is_instance_valid(ui_instance):
+		var label = ui_instance.get_node(\"Text_Label\")
+		var title = tr(\"EVENT_NAME_SEA_STORM\") # CSV里的风暴名称
+		# 同样的清爽翻译写法，你可以把这整句放到 CSV 里，这里先用硬编码演示
+		label.text = tr(\"event_menu_time_left\") % [title, remaining_turns]
+
+	# 2. 保留原有的逻辑：刷新交易面板的变红和禁用状态
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	for menu in tree.get_nodes_in_group(\"trade_menu\"):
+		if menu.has_method(\"_update_trade_ui\"):
+			menu._update_trade_ui()
 "
 
 [resource]
@@ -15,5 +61,6 @@ script = ExtResource("2_xlcv0")
 event_name = "EVENT_NAME_SEA_STORM"
 event_description = "EVENT_DESC_SEA_STORM"
 preview_image = ExtResource("1_pevet")
+full_image = ExtResource("1_j5fja")
 effect_script = SubResource("GDScript_et5b1")
 metadata/_custom_type_script = "uid://tkdj15opnn57"

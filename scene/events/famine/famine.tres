@@ -5,10 +5,82 @@
 [ext_resource type="Texture2D" uid="uid://djtp7lnvck3cy" path="res://assets/events/famine preview.png" id="2_3wequ"]
 
 [sub_resource type="GDScript" id="GDScript_iyrbk"]
-script/source = "extends RefCounted
+script/source = "extends BaseDurationEvent
 
-func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+var food_cost: int = 50 
+
+# 预加载饥荒的侧边栏 UI
+var ui_scene = preload(\"res://scene/events/famine/famine.tscn\") 
+var ui_instance: Control = null
+
+func _init():
+	remaining_turns = 2
+	effect_type = \"production_frozen\"
+
+# ==========================================
+# 🧩 选项逻辑 (保持原样)
+# ==========================================
+func get_choices() -> Array:
+	var can_afford = GameResourceManager.stocks[\"food\"] >= food_cost 
+	return [
+		{
+			\"label\": tr(\"pay_food_to_avert\") + \": \" + str(food_cost),
+			\"action\": \"pay\",
+			\"disabled\": !can_afford 
+		},
+		{
+			\"label\": tr(\"suffer_famine\"), 
+			\"action\": \"suffer\",
+			\"disabled\": false 
+		}
+	]
+
+func execute_choice(action: String):
+	if action == \"pay\":
+		GameResourceManager.stocks[\"food\"] -= food_cost 
+		_update_ui()
+	elif action == \"suffer\":
+		# 选择了硬抗，才会真正启动下方的 _on_event_start 流程！
+		execution_event() 
+
+# ==========================================
+# ⚡ 填空 1：硬抗开始时
+# ==========================================
+func _on_event_start():
+	GameResourceManager.is_production_frozen = true
+	
+	# 挂载侧边栏 UI
+	ui_instance = ui_scene.instantiate()
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	if container:
+		container.add_child(ui_instance)
+
+# ==========================================
+# 💀 填空 2：硬抗结束时
+# ==========================================
+func _on_event_end():
+	GameResourceManager.is_production_frozen = false
+	
+	# 销毁侧边栏 UI
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+
+# ==========================================
+# 🔄 填空 3：需要刷新什么 UI？
+# ==========================================
+func _update_ui():
+	# 1. 刷新侧边栏倒计时
+	if is_instance_valid(ui_instance):
+		var label = ui_instance.get_node(\"Text_Label\")
+		var title = tr(\"EVENT_NAME_FAMINE\") 
+		label.text = tr(\"event_menu_time_left\") % [title, remaining_turns]
+
+	# 2. 保留原有的逻辑：刷新顶部资源栏让产量飙红
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	for ui in tree.get_nodes_in_group(\"resource_ui\"): 
+		if ui.has_method(\"_update_all_slots\"):
+			ui._update_all_slots()
 "
 
 [resource]

@@ -7,8 +7,163 @@
 [sub_resource type="GDScript" id="GDScript_6bi88"]
 script/source = "extends RefCounted
 
+var effect_type: String = \"blight_spread\"
+var infected_tiles: Array[Node] = []
+
+var ui_scene = preload(\"res://scene/events/blight/blight.tscn\") 
+var ui_instance: Control = null
+
+# ==========================================
+# ⚡ 疫情爆发
+# ==========================================
 func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+	print(\"【枯萎病】寻找目标麦田...\")
+	
+	# 获取全图所有麦田
+	var all_wheat = GridAutoload.find_tiles_by_id(\"TILE_NAME_WHEAT_FIELD\") 
+	
+	if all_wheat.is_empty():
+		print(\"【枯萎病】岛上没有任何麦田，枯萎病无法爆发，事件失效！\")
+		return
+
+	# ==========================================
+	# 🔍 【核心新增】：查重逻辑，寻找是否已经有枯萎病在蔓延
+	# ==========================================
+	var existing_blight = null
+	for effect in GameResourceManager.active_event_effects:
+		if effect.get(\"effect_type\") == \"blight_spread\" and effect != self:
+			existing_blight = effect
+			break
+			
+	# 如果找到了已经在肆虐的枯萎病前辈
+	if existing_blight:
+		print(\"【事件叠加】枯萎病再次爆发！寻找新的感染源...\")
+		
+		# 1. 过滤出目前【绝对健康】的麦田
+		var uninfected_wheat = []
+		for wheat in all_wheat:
+			if not wheat in existing_blight.infected_tiles:
+				uninfected_wheat.append(wheat)
+				
+		# 2. 如果还有健康麦田，随机挑一个倒霉蛋
+		if uninfected_wheat.is_empty():
+			print(\"【枯萎病叠加失效】全岛的麦田都已经感染了，无法再空投新的病原体！\")
+		else:
+			var new_patient = uninfected_wheat.pick_random()
+			# 3. 极其关键：使唤“前辈”去感染这个地块，把数据记在前辈的数组里！
+			existing_blight._infect_tile(new_patient)
+			existing_blight._update_ui() # 刷新前辈的侧边栏 UI，让数字跳动
+			
+		# 4. 任务完成，深藏功与名，直接 return 让自己被内存回收！
+		return 
+
+
+	# ==========================================
+	# 🌱 如果没有找到前辈，说明这是全岛的第一次爆发，走正常流程
+	# ==========================================
+	var patient_zero = all_wheat.pick_random()
+	_infect_tile(patient_zero)
+	
+	ui_instance = ui_scene.instantiate()
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	if container:
+		container.add_child(ui_instance)
+		
+	_update_ui()
+	
+	GameResourceManager.active_event_effects.append(self)
+	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.connect(_on_turn_started)
+
+# ==========================================
+# 💉 感染操作
+# ==========================================
+func _infect_tile(tile: Node):
+	if not tile in infected_tiles:
+		infected_tiles.append(tile)
+		tile.modulate = Color(0.4, 0.4, 0.4, 1.0)
+		tile.is_suppressed = true
+		var tree = Engine.get_main_loop().current_scene.get_tree()
+		for ui in tree.get_nodes_in_group(\"resource_ui\"): 
+			if ui.has_method(\"_update_all_slots\"):
+				ui._update_all_slots()
+		# 【修改】：反向查出被感染者的坐标
+		var pos = GridAutoload.active_tiles.find_key(tile)
+		if pos != null:
+			print(\"【枯萎病】坐标 %s 的地块已被感染！\" % str(pos))
+
+# ==========================================
+# 🔄 回合推进：蔓延与结算
+# ==========================================
+func _on_turn_started(_current_turn: int):
+	# ----------------------------------------------------
+	# 步骤 1：清理失效数据 (利用 find_key 验证)
+	# ----------------------------------------------------
+	var valid_infected: Array[Node] = []
+	for tile in infected_tiles:
+		if is_instance_valid(tile) and not tile.is_queued_for_deletion():
+			# 【核心修改】：通过字典反查，如果还能查出坐标，说明它还没被玩家拆掉！
+			if GridAutoload.active_tiles.find_key(tile) != null:
+				valid_infected.append(tile)
+				
+	infected_tiles = valid_infected
+	
+	# ----------------------------------------------------
+	# 步骤 2：胜利判定
+	# ----------------------------------------------------
+	if infected_tiles.is_empty():
+		print(\"【枯萎病】所有感染的麦田均已被拆除，疫情彻底结束！\")
+		_end_event()
+		return
+		
+	# ----------------------------------------------------
+	# 步骤 3：指数蔓延
+	# ----------------------------------------------------
+	var newly_infected: Array[Node] = []
+	
+	for tile in infected_tiles:
+		# 【核心修改】：先拿到当前病原体的坐标，再去查它的邻居！
+		var tile_pos = GridAutoload.active_tiles.find_key(tile)
+		
+		if tile_pos != null:
+			var neighbors_pos = GridAutoload.get_neighbors(tile_pos)
+			
+			for n_pos in neighbors_pos:
+				if GridAutoload.active_tiles.has(n_pos):
+					var n_tile = GridAutoload.active_tiles[n_pos]
+					
+					if is_instance_valid(n_tile) and n_tile.get(\"data\"):
+						var current_id = n_tile.data.get(\"tile_name\") 
+						
+						if current_id == \"TILE_NAME_WHEAT_FIELD\" and not n_tile in infected_tiles and not n_tile in newly_infected:
+							newly_infected.append(n_tile)
+						
+	for tile in newly_infected:
+		_infect_tile(tile)
+		
+	_update_ui()
+
+# ==========================================
+# 📊 UI 更新
+# ==========================================
+func _update_ui():
+	if is_instance_valid(ui_instance):
+		var label = ui_instance.get_node(\"Text_Label\")
+		var title = tr(\"EVENT_NAME_BLIGHT\") 
+		label.text = tr(\"event_menu_blight\") % [title, infected_tiles.size()]
+
+# ==========================================
+# 💀 疫情终结
+# ==========================================
+func _end_event():
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+		
+	if GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.disconnect(_on_turn_started)
+		
+	GameResourceManager.active_event_effects.erase(self)
 "
 
 [resource]

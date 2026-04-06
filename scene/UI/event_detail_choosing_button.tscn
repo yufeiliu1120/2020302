@@ -5,21 +5,32 @@
 [ext_resource type="Texture2D" uid="uid://b2wimanctppyv" path="res://assets/events/choosing_button_pressed.png" id="2_5pduk"]
 [ext_resource type="Texture2D" uid="uid://bo5carcg5c5oa" path="res://assets/events/choosing_button_hover.png" id="3_3s68x"]
 
-[node name="VBoxContainer" type="VBoxContainer" unique_id=125746133]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" unique_id=2102627888]
 script = ExtResource("1_5pduk")
 
-[node name="TextureButton" type="TextureButton" parent="." unique_id=694336625]
+[node name="Control" type="Control" parent="." unique_id=408055287]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1485602161]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer" unique_id=1669172626]
 layout_mode = 2
 texture_normal = ExtResource("1_pw7v7")
 texture_pressed = ExtResource("2_5pduk")
 texture_hover = ExtResource("3_3s68x")
 
-[node name="text" type="Label" parent="." unique_id=870782965]
+[node name="text" type="Label" parent="VBoxContainer" unique_id=1538579261]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Test Text"
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[node name="Control2" type="Control" parent="." unique_id=1637835230]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

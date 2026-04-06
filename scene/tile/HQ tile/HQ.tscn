@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://data/classes/tile_base/tile.gd" id="1_rnfvq"]
 [ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://data/resources/TileResourceData.gd" id="2_nsfyl"]
 [ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/tiles/test tile.png" id="3_qk2pw"]
-[ext_resource type="Texture2D" uid="uid://nuusjm88wloa" path="res://assets/tiles/HQ tile/caslte.png" id="4_nsfyl"]
 [ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://data/classes/tile_base/state_machine.gd" id="5_kdqge"]
 [ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="6_f6s2e"]
 [ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="7_apafv"]
@@ -71,8 +70,8 @@ polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13,
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
 y_sort_enabled = true
-position = Vector2(0, 3)
-texture = ExtResource("4_nsfyl")
+position = Vector2(0, -12)
+texture = ExtResource("9_qk2pw")
 
 [node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_kdqge")
@@ -92,8 +91,3 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_617pd")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2067816869]
-z_index = 1
-position = Vector2(0, -12)
-texture = ExtResource("9_qk2pw")

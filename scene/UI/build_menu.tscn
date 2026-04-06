@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cud68ul2bnopo" path="res://scene/tile/outpost tile/out_post.tscn" id="7_ly7qt"]
 [ext_resource type="PackedScene" uid="uid://5fhv3mluy2sr" path="res://scene/tile/market tile/market_tile.tscn" id="8_r0htu"]
 [ext_resource type="PackedScene" uid="uid://b7lsy7p0us15v" path="res://scene/tile/furnace/furnace.tscn" id="9_6scs5"]
+[ext_resource type="PackedScene" uid="uid://dkv7bhuw1mcsi" path="res://scene/tile/castle tile/castle tile.tscn" id="10_yajlu"]
 
 [node name="Build_Menu" type="Control" unique_id=1002417904]
 layout_mode = 3
@@ -105,6 +106,15 @@ layout_mode = 2
 tile_scene = ExtResource("9_6scs5")
 
 [node name="Decorative railings5" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=2016535220]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+texture = ExtResource("6_3tgoh")
+
+[node name="castle" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=635885423 instance=ExtResource("3_3tgoh")]
+layout_mode = 2
+tile_scene = ExtResource("10_yajlu")
+
+[node name="Decorative railings7" type="TextureRect" parent="TextureRect/ScrollContainer/VBoxContainer" unique_id=1284260316]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 texture = ExtResource("6_3tgoh")

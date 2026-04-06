@@ -7,8 +7,88 @@
 [sub_resource type="GDScript" id="GDScript_6ybpj"]
 script/source = "extends RefCounted
 
+var effect_type: String = \"mine_explosion\"
+
+# ==========================================
+# 📦 预加载相关的三个场景
+# ==========================================
+var ruin_scene = preload(\"res://scene/tile/stone pit tile/ruined_stone_pit.tscn\") # 废墟采石场
+var blocked_road_scene = preload(\"res://scene/tile/road tile/fake_road.tscn\") # 假路(被碎石堵住的路)
+var normal_road_scene = preload(\"res://scene/tile/road tile/Road.tscn\") # 正常的道路
+
+# 记录这次爆炸炸毁了哪些坐标的路，方便以后精准修复
+var broken_road_positions: Array[Vector2i] = []
+
 func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+	print(\"【矿难爆发】\")
+	
+	# 1. 扫描全图寻找正常工作的采石场 (❗️替换为你实际的采石场 ID)
+	var all_quarries = GridAutoload.find_tiles_by_id(\"TILE_NAME_STONE_PIT\") 
+	
+	if all_quarries.is_empty():
+		print(\"【矿难失效】岛上没有任何采石场，逃过一劫。\")
+		return
+
+	# 2. 随机锁定一个倒霉的采石场
+	var target = all_quarries.pick_random()
+	var target_pos = GridAutoload.active_tiles.find_key(target)
+	if target_pos == null: return
+
+	# 3. 🔍 核心：在爆炸前，先排查周围所有的【道路】
+	var neighbors = GridAutoload.get_neighbors(target_pos)
+	for n_pos in neighbors:
+		if GridAutoload.active_tiles.has(n_pos):
+			var n_tile = GridAutoload.active_tiles[n_pos]
+			if is_instance_valid(n_tile) and n_tile.get(\"data\"):
+				# ❗️替换为你实际的道路 ID
+				if n_tile.data.get(\"tile_name\") == \"TILE_NAME_ROAD\": 
+					broken_road_positions.append(n_pos)
+
+	# 4. 偷梁换柱：采石场变成废墟！
+	var ruin_instance = GridAutoload.replace_tile_scene(target_pos, ruin_scene)
+
+	# 5. 偷梁换柱：周围的真路全部变成假路！
+	for r_pos in broken_road_positions:
+		GridAutoload.replace_tile_scene(r_pos, blocked_road_scene)
+		print(\"【矿难蔓延】坐标 %s 的道路被碎石掩埋！\" % str(r_pos))
+
+	# 6. 🔗 极其优雅的监听：给废墟绑上“死亡遗言”！
+	if ruin_instance:
+		# 当玩家在菜单里点击“改造/修复”，或者直接“拆除”这个废墟时，
+		# 废墟节点会被 queue_free() 销毁，此时会瞬间触发这个信号！
+		ruin_instance.tree_exited.connect(_on_ruin_cleared)
+
+	# 断开路网后，强制刷新一次全局物流连接
+	if ConnectivityManager.has_method(\"update_connectivity\"):
+		ConnectivityManager.update_connectivity()
+
+	# 把自己加入大本营，防止这个脚本被内存回收（我们要活着等玩家修好矿难）
+	GameResourceManager.active_event_effects.append(self)
+
+
+# ==========================================
+# 🛠️ 危机解除：玩家清理了废墟，顺便疏通道路
+# ==========================================
+func _on_ruin_cleared():
+	print(\"【矿难解除】采石场废墟已被清理，施工队正在疏通周围道路...\")
+	
+	# 遍历当时记录的碎石路坐标
+	for r_pos in broken_road_positions:
+		# 安全检查：以防玩家在这期间手动把假路拆了建了别的东西
+		if GridAutoload.active_tiles.has(r_pos):
+			var current_tile = GridAutoload.active_tiles[r_pos]
+			if is_instance_valid(current_tile) and current_tile.get(\"data\"):
+				# 确认它依然是那条假路 (❗️替换为你实际的假路 ID)
+				if current_tile.data.get(\"tile_name\") == \"TILE_NAME_FAKE_ROAD\":
+					# 变回真路！
+					GridAutoload.replace_tile_scene(r_pos, normal_road_scene)
+					
+	# 道路恢复后，再次刷新全局物流连接
+	if ConnectivityManager.has_method(\"update_connectivity\"):
+		ConnectivityManager.update_connectivity()
+
+	# 任务彻底完成，将自己从大本营注销，自然销毁！
+	GameResourceManager.active_event_effects.erase(self)
 "
 
 [resource]

@@ -64,35 +64,44 @@ func update_connectivity():
 	# ==================================================
 	var logistics_queue = []
 	var visited = {}
-	for tile in active_tiles.values():
+	
+	# 【修复 1】：遍历 keys，把大本营真正的坐标抓出来，而不是问它自己！
+	for pos in active_tiles.keys():
+		var tile = active_tiles[pos]
 		if tile.data and tile.data.tile_name == "HQ":
 			logistics_queue.append(tile)
 			tile.is_connected = true
 			tile.distance_to_source = 0
-			visited[tile.grid_coordinate] = 0
+			visited[pos] = 0 # 记录真实的坐标键
 			
 	while logistics_queue.size() > 0:
 		var current = logistics_queue.pop_front()
-		var current_dist = visited[current.grid_coordinate]
-		for n_pos in GridAutoload.get_neighbors(current.grid_coordinate):
+		
+		# ==========================================
+		# 🚨 【核心修复】：反向查询绝对真实的坐标！
+		# 不要再写 visited[current.grid_coordinate] 了！
+		# ==========================================
+		var real_pos = GridAutoload.active_tiles.find_key(current)
+		if real_pos == null or not visited.has(real_pos):
+			continue
+			
+		var current_dist = visited[real_pos]
+		
+		# 使用真实的坐标去寻找周围的邻居
+		for n_pos in GridAutoload.get_neighbors(real_pos):
 			if active_tiles.has(n_pos):
 				var n_tile = active_tiles[n_pos]
 				if not is_instance_valid(n_tile) or n_tile.is_queued_for_deletion(): continue
 				
-				# ==========================================
-				# 🚨【事件钩子】：无视被强盗占领的道路！
-				# ==========================================
+				# 拦截被强盗占领的道路！
 				if n_tile.get("is_blocked"):
-					continue # 强行截断，这块地以及它后面的所有地块都不会被点亮！
-				# ==========================================
+					continue 
 				
 				if not visited.has(n_pos):
-					# 只要挨着路，就被点亮并算入运费距离
 					n_tile.is_connected = true
 					n_tile.distance_to_source = current_dist + 1
 					visited[n_pos] = current_dist + 1
 					
-					# 【核心】：只有正宗的“导电体（道路）”才能继续往下传！
 					if is_conductive(n_tile):
 						logistics_queue.append(n_tile)
 

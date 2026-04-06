@@ -15,3 +15,5 @@ signal map_state_changed()
 signal game_won(message: String)
 #开场动画结束时，触发这个信号
 signal game_start()
+
+signal game_over()

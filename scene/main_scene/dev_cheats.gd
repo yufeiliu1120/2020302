@@ -35,3 +35,6 @@ func _input(event):
 		elif event.keycode == KEY_F5:
 			GameResourceManager.end_turn()
 			print("【作弊开启】已强制跳过回合！")
+			
+		elif event.keycode == KEY_F6:
+			GameResourceManager.add_resources({"explorer": 5})

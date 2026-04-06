@@ -12,7 +12,7 @@
 
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_l48yd")
-tile_name = "WheatField"
+tile_name = "TILE_NAME_WHEAT_FIELD"
 requires_road = false
 requires_hq_adjacency = true
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
@@ -88,7 +88,6 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_bhqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D/decoration/grass" unique_id=1478523794]
-z_index = 1
 use_parent_material = true
 position = Vector2(0, 12)
 scale = Vector2(4, 4)

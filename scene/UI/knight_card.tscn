@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bixjdttj52gqh"]
+
+[ext_resource type="Texture2D" uid="uid://dwqkujvvjm5qm" path="res://assets/UI parts/knight card.png" id="1_82fbw"]
+[ext_resource type="Script" uid="uid://c43ab7n7wbuga" path="res://scene/UI/knight_card.gd" id="2_ebx3v"]
+
+[node name="TextureRect" type="TextureRect" unique_id=668784696]
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.148
+offset_right = -88.64
+offset_bottom = -119.84
+texture = ExtResource("1_82fbw")
+script = ExtResource("2_ebx3v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=230138671]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 83.0
+offset_right = -10.0
+offset_bottom = -9.0
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=151567390]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "KNIGHT_CARD"
+horizontal_alignment = 1

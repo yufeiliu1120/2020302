@@ -5,10 +5,135 @@
 [ext_resource type="Texture2D" uid="uid://cblnmf8srn4fc" path="res://assets/events/forest awakening preview.png" id="2_3dvf1"]
 
 [sub_resource type="GDScript" id="GDScript_n6tp8"]
-script/source = "extends RefCounted
+script/source = "
+extends RefCounted
 
+var effect_type: String = \"forest_awakening\"
+
+# 记录当前所有的怪物巢穴实例
+var active_nests: Array[Node] = []
+
+var nest_scene = preload(\"res://scene/tile/monster_nest tile/monster_nest.tscn\")
+# 预加载对应的 UI 面板 (没有按钮，只有文本)
+var ui_scene = preload(\"res://scene/events/forest awakening/forest_awakening.tscn\") 
+var ui_instance: Control = null
+
+# ==========================================
+# ⚡ 事件爆发 (包含查重逻辑)
+# ==========================================
 func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+	print(\"【森林觉醒】寻找目标森林...\")
+	
+	# ----------------------------------------------------
+	# 🔍 查重：寻找大本营里是否已经有森林觉醒事件在运行
+	# ----------------------------------------------------
+	var existing_event = null
+	for effect in GameResourceManager.active_event_effects:
+		if effect.get(\"effect_type\") == \"forest_awakening\" and effect != self:
+			existing_event = effect
+			break
+			
+	if existing_event:
+		print(\"【事件叠加】森林深处再次传来低吼！增加新的怪物巢穴。\")
+		# 让前辈去执行生成逻辑，并直接返回
+		existing_event._spawn_nest()
+		return
+
+	# ----------------------------------------------------
+	# 🌱 如果是第一次爆发，走正常初始化流程
+	# ----------------------------------------------------
+	var success = _spawn_nest()
+	
+	# 如果全岛都没有合法的森林，生成失败，直接中止事件
+	if not success:
+		return
+		
+	# 挂载 UI 面板
+	ui_instance = ui_scene.instantiate()
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	if container:
+		container.add_child(ui_instance)
+		
+	_update_ui()
+	
+	GameResourceManager.active_event_effects.append(self)
+	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.connect(_on_turn_started)
+
+# ==========================================
+# 🐲 核心动作：生成一个巢穴并加入名单
+# ==========================================
+func _spawn_nest() -> bool:
+	var all_forests = GridAutoload.find_tiles_by_id(\"TILE_NAME_FOREST\") 
+	
+	# 安全过滤：只找没有被压制的森林
+	var valid_forests = []
+	for forest in all_forests:
+		if not forest.is_suppressed:
+			valid_forests.append(forest)
+			
+	if valid_forests.is_empty():
+		print(\"【森林觉醒】岛上没有未被污染的森林了，事件失效！\")
+		return false
+		
+	var target_forest = valid_forests.pick_random()
+	var target_pos = GridAutoload.active_tiles.find_key(target_forest)
+	
+	if target_pos != null:
+		# 替换地块，并【接收返回的新巢穴节点】！
+		var new_nest = GridAutoload.replace_tile_scene(target_pos, nest_scene)
+		
+		if new_nest:
+			active_nests.append(new_nest) # 装入监控名单
+			print(\"【森林觉醒】坐标 %s 变成了怪物巢穴！\" % str(target_pos))
+			
+			_update_ui() # 刷新 UI 上的数量
+			return true
+			
+	return false
+
+# ==========================================
+# 🔄 回合推进：验证死活
+# ==========================================
+func _on_turn_started(_current_turn: int):
+	# 过滤清理失效的数据 (万一玩家用骑士把巢穴端了，或者手滑拆了)
+	var valid_nests: Array[Node] = []
+	for nest in active_nests:
+		if is_instance_valid(nest) and not nest.is_queued_for_deletion():
+			# 确保这个地块还在地图管辖下
+			if GridAutoload.active_tiles.find_key(nest) != null:
+				valid_nests.append(nest)
+				
+	active_nests = valid_nests
+	
+	# 如果所有的巢穴都被清理干净了，事件宣告终结！
+	if active_nests.is_empty():
+		print(\"【森林觉醒】岛上所有的怪物巢穴已被肃清！\")
+		_end_event()
+	else:
+		_update_ui()
+
+# ==========================================
+# 📊 UI 更新
+# ==========================================
+func _update_ui():
+	if is_instance_valid(ui_instance):
+		var label = ui_instance.get_node(\"Text_Label\")
+		var title = tr(\"EVENT_NAME_FOREST_AWAKENING\") # 记得在CSV里配置
+		label.text = tr(\"event_menu_forest_awakening\") % [title, active_nests.size()]
+
+# ==========================================
+# 🕊️ 彻底终结
+# ==========================================
+func _end_event():
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+		
+	if GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.disconnect(_on_turn_started)
+		
+	GameResourceManager.active_event_effects.erase(self)
 "
 
 [resource]

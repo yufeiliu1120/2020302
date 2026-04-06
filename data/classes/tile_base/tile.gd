@@ -33,9 +33,6 @@ var is_suppressed: bool = false # 被怪物巢穴或枯萎病压制，无法工�
 var is_blocked: bool = false    # 被强盗占领（如果是道路，将失去连通功能）
 
 func _ready():
-	# 如果被压制或占领，直接视为停工！
-	if is_suppressed or is_blocked:
-		return false
 	if get_parent():
 		get_parent().y_sort_enabled = true
 	snap_to_nearest_grid()
@@ -71,6 +68,7 @@ func is_working() -> bool:
 	if not data: return false
 	if not is_active: return false 
 	if data.requires_road and not is_connected: return false 
+	if is_suppressed or is_blocked:return false
 	return true
 
 func _update_visual_status():
@@ -122,7 +120,7 @@ func get_current_production() -> Dictionary:
 		for n_pos in neighbors:
 			if GridAutoload.active_tiles.has(n_pos):
 				var n_tile = GridAutoload.active_tiles[n_pos]
-				if n_tile.data and n_tile.data.tile_name == bonus_tile_name:
+				if n_tile.data and n_tile.data.tile_name == bonus_tile_name and n_tile.is_working():
 					bonus_count += 1
 					
 		# 结算额外加成

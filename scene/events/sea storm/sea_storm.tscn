@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ojwopuw2vti2"]
+
+[ext_resource type="Texture2D" uid="uid://byubk7k54dju4" path="res://assets/UI parts/event_list.png" id="1_llhxl"]
+
+[node name="TextureRect" type="TextureRect" unique_id=2087063460]
+anchors_preset = -1
+anchor_right = 0.12200001
+anchor_bottom = 0.045
+offset_right = 0.75997925
+offset_bottom = 48.399998
+mouse_filter = 2
+texture = ExtResource("1_llhxl")
+metadata/_edit_horizontal_guides_ = [238.0]
+
+[node name="Text_Label" type="RichTextLabel" parent="." unique_id=1032186921]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 18.0
+offset_right = -63.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Tax period:"

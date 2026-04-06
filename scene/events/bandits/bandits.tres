@@ -7,8 +7,180 @@
 [sub_resource type="GDScript" id="GDScript_5jtp6"]
 script/source = "extends RefCounted
 
+var effect_type: String = \"bandit_raid\"
+
+# 预加载场景
+var blocked_road_scene = preload(\"res://scene/tile/road tile/blocked road.tscn\") # 假路场景
+var normal_road_scene = preload(\"res://scene/tile/road tile/Road.tscn\") # 正常道路场景
+
+# 专属 UI (只显示距离大本营的步数)
+var ui_scene = preload(\"res://scene/events/bandits/bandits.tscn\") 
+var ui_instance: Control = null
+
+# 强盗的当前坐标与安全生成距离
+var current_bandit_pos: Vector2i = Vector2i(-999, -999)
+var min_spawn_distance: int = 4 # 至少距离大本营 4 步远
+
+# ==========================================
+# ⚡ 事件爆发：空降强盗
+# ==========================================
 func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+	print(\"【强盗入侵】发现强盗踪迹！\")
+	
+	# 1. 寻找合适的道路生成点
+	var valid_roads = []
+	for pos in GridAutoload.active_tiles.keys():
+		var tile = GridAutoload.active_tiles[pos]
+		if is_instance_valid(tile) and tile.get(\"data\"):
+			if tile.data.get(\"tile_name\") == \"TILE_NAME_ROAD\":
+				# 【核心修复】：分步获取并判空
+				if tile.get(\"is_connected\"):
+					var dist = tile.get(\"distance_to_source\")
+					if dist != null and dist >= min_spawn_distance:
+						valid_roads.append(pos)
+					
+	if valid_roads.is_empty():
+		print(\"【强盗入侵】岛上没有足够长的道路，强盗无法驻扎，事件失效！\")
+		return
+
+	# 2. 锁定生成点，偷梁换柱
+	current_bandit_pos = valid_roads.pick_random()
+	var bandit_tile = GridAutoload.replace_tile_scene(current_bandit_pos, blocked_road_scene)
+	
+	if bandit_tile:
+		bandit_tile.set_meta(\"is_bandit\", true)
+
+	if ConnectivityManager.has_method(\"update_connectivity\"):
+		ConnectivityManager.update_connectivity()
+
+	# 3. 挂载 UI 并监控
+	ui_instance = ui_scene.instantiate()
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	if container:
+		container.add_child(ui_instance)
+		
+	_update_ui()
+
+	GameResourceManager.active_event_effects.append(self)
+	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.connect(_on_turn_started)
+# ==========================================
+# 🔄 回合推进：强盗移动与结算
+# ==========================================
+func _on_turn_started(_current_turn: int):
+	# ----------------------------------------------------
+	# 1. 验证生死：玩家是否派骑士端掉了这个地块？
+	# ----------------------------------------------------
+	if not _is_bandit_alive():
+		print(\"【强盗入侵】强盗已被消灭！危机解除！\")
+		_end_event()
+		return
+
+	# ----------------------------------------------------
+	# 2. 寻路：向大本营逼近！
+	# ----------------------------------------------------
+	var next_pos = _find_next_step()
+	
+	if next_pos == Vector2i(-999, -999):
+		print(\"【强盗入侵】强盗前方的道路被截断，陷入迷茫，原地驻扎。\")
+		# （玩家可以通过拆除道路来战术性拖延强盗！）
+		return
+		
+	var next_tile = GridAutoload.active_tiles[next_pos]
+	
+	# ----------------------------------------------------
+	# 3. 终局判定：碰到了大本营！
+	# ----------------------------------------------------
+	if next_tile.data.get(\"tile_name\") == \"HQ\":
+		print(\"【强盗入侵】强盗冲进了大本营！防线崩溃！\")
+		if SignalBusAutoload.has_signal(\"game_over\"):
+			SignalBusAutoload.game_over.emit()
+		_end_event()
+		return
+
+	# ----------------------------------------------------
+	# 4. 执行移动 (把旧位置变好，新位置变坏)
+	# ----------------------------------------------------
+	GridAutoload.replace_tile_scene(current_bandit_pos, normal_road_scene)
+	
+	var new_bandit = GridAutoload.replace_tile_scene(next_pos, blocked_road_scene)
+	if new_bandit:
+		new_bandit.set_meta(\"is_bandit\", true)
+		
+	current_bandit_pos = next_pos
+	
+	if ConnectivityManager.has_method(\"update_connectivity\"):
+		ConnectivityManager.update_connectivity()
+		
+	_update_ui()
+
+# ==========================================
+# 🔍 辅助函数
+# ==========================================
+# 检查强盗是否还活着
+func _is_bandit_alive() -> bool:
+	if GridAutoload.active_tiles.has(current_bandit_pos):
+		var tile = GridAutoload.active_tiles[current_bandit_pos]
+		# 只有地块存在，并且拥有我们刚刚打的标签，才说明强盗还在
+		if is_instance_valid(tile) and tile.has_meta(\"is_bandit\"):
+			return true
+	return false
+
+# 寻找下一步最接近大本营的道路
+func _find_next_step() -> Vector2i:
+	var neighbors = GridAutoload.get_neighbors(current_bandit_pos)
+	var min_dist = 999
+	var best_pos = Vector2i(-999, -999)
+	
+	for n_pos in neighbors:
+		if GridAutoload.active_tiles.has(n_pos):
+			var n_tile = GridAutoload.active_tiles[n_pos]
+			if not is_instance_valid(n_tile) or not n_tile.get(\"data\"): continue
+			
+			var t_name = n_tile.data.get(\"tile_name\")
+			if t_name == \"TILE_NAME_ROAD\" or t_name == \"HQ\":
+				# 【核心修复】：判断如果不是 null，再去比大小
+				var dist = n_tile.get(\"distance_to_source\")
+				if dist != null and dist < min_dist:
+					min_dist = dist
+					best_pos = n_pos
+					
+	return best_pos
+
+# 更新侧边栏 UI
+func _update_ui():
+	if is_instance_valid(ui_instance):
+		var label = ui_instance.get_node_or_null(\"Text_Label\")
+		if label:
+			var steps = _calculate_steps_to_hq()
+			var title = tr(\"EVENT_NAME_BANDITS\")
+			
+			if steps == 999:
+				label.text = tr(\"event_menu_bandits_lost\") % title
+			else:
+				label.text = tr(\"event_menu_bandits\") % [title, steps]
+
+func _calculate_steps_to_hq() -> int:
+	var next_pos = _find_next_step()
+	if next_pos != Vector2i(-999, -999) and GridAutoload.active_tiles.has(next_pos):
+		var target = GridAutoload.active_tiles[next_pos]
+		if target.data.get(\"tile_name\") == \"HQ\": return 1
+		
+		# 【核心修复】：如果是路，安全获取距离
+		var dist = target.get(\"distance_to_source\")
+		if dist != null:
+			return dist + 1
+			
+	return 999
+
+# 清理现场
+func _end_event():
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+	if GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.disconnect(_on_turn_started)
+	GameResourceManager.active_event_effects.erase(self)
 "
 
 [resource]

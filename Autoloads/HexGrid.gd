@@ -113,3 +113,56 @@ func grid_to_pixel(grid_pos: Vector2i) -> Vector2:
 	var x = grid_pos.x * OFFSET_X + x_offset
 	var y = grid_pos.y * OFFSET_Y
 	return Vector2(x, y)
+	
+	
+# ==========================================
+# 全图雷达 (Map Scanner)
+# ==========================================
+func find_tiles_by_id(target_id: String) -> Array:
+	var results = []
+	for grid_pos in active_tiles:
+		var tile = active_tiles[grid_pos]
+		# 确保地块存在，且身上挂载了数据
+		if is_instance_valid(tile) and tile.get("data"):
+			# ❗️请注意：检查你的 TileResourceData 脚本，
+			# 把下面的 "tile_name" 替换为你实际用来存地块名字的变量！(比如 "id" 或 "resource_name")
+			var current_id = tile.data.get("tile_name") 
+			
+			if current_id == target_id:
+				results.append(tile)
+	return results
+	
+	
+# ==========================================
+# 🔄 核心模块 2：地块场景替换 (Tile Scene Replacer)
+# ==========================================
+func replace_tile_scene(grid_pos: Vector2i, new_scene: PackedScene) -> Node:
+	# 1. 检查坐标上有没有原本地块
+	if not active_tiles.has(grid_pos):
+		push_warning("无法替换：坐标 %s 处没有地块！" % str(grid_pos))
+		return null
+		
+	var old_tile = active_tiles[grid_pos]
+	if not is_instance_valid(old_tile):
+		return null
+		
+	# 2. 实例化全新的地块场景
+	var new_tile = new_scene.instantiate()
+	
+	# 3. 继承旧地块的物理坐标和网格坐标
+	new_tile.position = grid_to_pixel(grid_pos)
+	if "grid_coordinate" in new_tile:
+		new_tile.grid_coordinate = grid_pos
+		
+	# 4. 找到旧地块的父节点（比如专门用来装地块的 "Tiles" 节点），把新地块加进去
+	var parent_node = old_tile.get_parent()
+	parent_node.add_child(new_tile)
+	
+	# 5. 更新大本营的雷达记录：把这个坐标的控制权交给新地块
+	active_tiles[grid_pos] = new_tile 
+	
+	# 6. 无情地销毁旧地块
+	old_tile.queue_free()
+	
+	return new_tile # 返回新地块，方便后续操作（比如播个特效）
+	

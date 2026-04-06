@@ -29,6 +29,16 @@ TILE_DESC_MARKET,一座市场，会根据周围海岸地块的数量增加交易
 TILE_NAME_FURNACE,熔炉,Furnace
 TILE_DESC_FURNACE,一座精炼炉，通过消耗石头和木头生产金属,Metal is produced by consuming stone and wood.
 
+TILE_NAME_WHEAT_FIELD,麦田,Wheat Field
+
+TILE_NAME_STONE_PIT,采石场,quarry
+
+TILE_NAME_RUINED_STONE_PIT,采石场废墟,Ruined Quarry
+
+TILE_NAME_FAKE_ROAD,道路,Road
+
+TILE_NAME_BLOCKED_ROAD,道路,Road
+
 EVENT_NAME_BANDITS,强盗,Bandits
 EVENT_NAME_BLIGHT,枯萎病,Blight
 EVENT_NAME_FAMINE,饥荒,Famine
@@ -37,6 +47,13 @@ EVENT_NAME_MINE_EXPLOSION,矿坑爆炸,Mine Explosion
 EVENT_NAME_ROYAL_TAX,皇家税收,Royal Tax
 EVENT_NAME_SEA_STORM,海上风暴,Sea Storm
 
+EVENT_DESC_BANDITS,"总有些人会步入歧途，大人。这些强盗已经开始拦路劫掠了，而且他们正在向这里靠近，我们必须阻止他们","Some will always stray from the righteous path, My Lord. These bandits have begun pillaging our roads, and they are marching toward us. We must stop them."
+EVENT_DESC_BLIGHT,"最初只是一棵麦子开始变黑，但接下来整片麦田都开始枯萎了。我们不能让枯萎病继续扩散，必须摧毁感染的麦田，否则一切都完了","At first, it was just a single stalk of wheat turning black, but now entire fields are withering. We cannot let the blight spread. We must destroy the infected crops, or all is lost."
+EVENT_DESC_FAMINE,"饥饿的灾民开始聚集在附近了，大人。我无意责怪你，我们无法控制粮食的收成，但我们必须拿出储备粮食，否则饥荒会摧毁我们所有的生产","Starving refugees are gathering nearby, My Lord. I mean no disrespect,we cannot control the harvests,but we must dip into our reserves, or the famine will bring all our production to a halt."
+EVENT_DESC_FOREST_AWAKENING,"伐木工报告说林中的怪声越来越频繁了，最近开始有人失踪了，听说还有人发现了被撕碎的尸体。我们需要勇士去一探究竟","The woodcutters report that the strange noises in the woods are growing more frequent. People have gone missing recently, and rumor has it that mangled bodies were found. We need warriors to investigate."
+EVENT_DESC_MINE_EXPLOSION,"我收到报告，采石场爆炸了，我尊敬的领主大人。被抛向空中的巨石砸毁了附近的道路，我们必须做些什么","I have received reports that the quarry has exploded, my honorable Lord. Massive boulders hurled into the air have crushed the nearby roads. We must take action."
+EVENT_DESC__ROYAL_TAX,"王都那些人还以为我们挖到了金山。特使来了，大人，他带来了一份税务清单，我们必须按时上缴，否则国王可能会剥夺你的头衔","Those in the capital seem to think we've struck a mountain of gold. The royal envoy is here, My Lord, and he brings a tax manifest. We must pay it on time, or the King may strip you of your title."
+EVENT_DESC_SEA_STORM,"领主大人，我明白你对海上的风暴并不陌生，但我依然要提醒你，现在的风暴将把这里变成一座孤岛，这段时间将不会有航船靠近我们的海岸了","My Lord, I know you are no stranger to storms at sea, but I must remind you of the consequences. This raging tempest will turn us into an isolated island,no ships will be able to approach our shores for the time being."
 
 wood,木材,Wood
 stone,石头,Stone
@@ -48,14 +65,28 @@ desc_maintenance,\n 维护: -{amount} {res}/回合,\n Upkeep: -{amount} {res}/Tu
 desc_requires_road,\n规则: 必须与道路相连,\nRule: Must connect to a road
 
 status_working,正常工作,Working
-status_stopped,已停工 (需道路),Stopped (Needs Road)
+status_stopped,已停工,Stopped
 menu_upgrade_cost,改造花费,Upgrade Cost
 btn_upgrade,改造地块,Upgrade
 btn_demolish,拆除地块,Demolish
 turn,回合,Turn
 event_left,距离下一事件,event coming in
 event_coming,事件来袭,event is coming
+storm,风暴,Storm
+blocked,封锁,Blocked
+unable,无效,Unable
 
 DESC_RESOURCE_MAINTENANCE,\n 消耗: -{amount} {res}/回合,\n Uses: -{amount} {res}/Turn
 status_lacking_res,原料不足,Lacking Resources
 btn_accept,接受,Accept
+
+trade_menu_text,交换物资,trade your resource
+trade_menu_blocked_text,贸易被封锁 剩余回合:,trading blocked remain:
+pay_food_to_avert,用储备粮食安抚民众,pay food to avert
+suffer_famine,承受饥荒,suffer the famine
+royal_tax_desc,[center]%s\n剩余时间: [color=red]%d[/color] 回合\n缴纳: %d %s[/center],[center]%s\nTime Left: [color=red]%d[/color] turns\nPay: %d %s[/center]
+event_menu_time_left,[center]%s\n剩余时间: [color=red]%d[/color] 回合[/center],[center]%s\nTime Left: [color=red]%d[/color] turns[/center]
+event_menu_blight,[center]%s\n当前感染麦田: [color=red]%d[/color] 块\n[font_size=12](需拆除阻断传染)[/font_size][/center],[center]%s\nCurrent infected wheat fields: [color=red]%d[/color] \n[font_size=12](need to demolish)[/font_size][/center]
+event_menu_forest_awakening,[center]%s\n当前怪物巢穴: [color=red]%d[/color] 个\n[font_size=12](需派遣骑士驱逐)[/font_size][/center],[center]%s\nCurrent monster nests: [color=red]%d[/color] \n[font_size=12](need knights)[/font_size][/center]
+event_menu_bandits_lost,"[center]%s\n[color=yellow]强盗失去方向[/color][/center]" % title,"[center]%s\n[color=yellow]Bandits lost their way[/color][/center]" % title
+event_menu_bandits,"[center]%s\n距大本营: [color=red]%d[/color] 步\n[font_size=12](需派遣骑士拦截)[/font_size][/center]","[center]%s\ndistance to HQ: [color=red]%d[/color] step\n[font_size=12](need knights)[/font_size][/center]"

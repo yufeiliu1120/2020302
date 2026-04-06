@@ -5,10 +5,142 @@
 [ext_resource type="Texture2D" uid="uid://br6evkxlnagjv" path="res://assets/events/royal tax preview.png" id="2_jat3m"]
 
 [sub_resource type="GDScript" id="GDScript_jki38"]
-script/source = "extends RefCounted
+script/source = "extends BaseDurationEvent
 
+# ==========================================
+# 🎲 随机税收配置池 (键 = 资源名, 值 = 需要的数量)
+# ==========================================
+var possible_taxes: Dictionary = {
+	\"food\": 100,
+	\"wood\": 150,
+	\"stone\": 80,
+	\"metal\": 50
+}
+# 实例的当前税收目标 (不再写死，而是由下面随机生成)
+var tax_cost: int = 0
+var tax_resource: String = \"\"
+
+# 预加载专属 UI 场景
+var tax_ui_scene = preload(\"res://scene/events/royal tax/tax menu.tscn\")
+
+# 记录实例化出来的 UI 节点
+var ui_instance: Control = null
+
+func _init():
+	remaining_turns = 3 # 限时 3 回合
+	effect_type = \"royal_tax\"
+	# ==========================================
+	# 🎯 在脚本刚被实例化时，立刻抽签决定这次要收什么税！
+	# ==========================================
+	var keys = possible_taxes.keys() # 获取所有的资源名，变成一个数组 [\"food\", \"wood\", \"stone\", \"metal\"]
+	tax_resource = keys.pick_random() # Godot 4 神级函数，直接从数组里随机挑一个
+	tax_cost = possible_taxes[tax_resource] # 根据挑中的名字，去字典里把对应的数量取出来
+
+# ==========================================
+# 🚨 【核心魔法】：重写（Override）父类的执行逻辑！
+# 我们拦截了基类默认的“查重并延长回合”行为。
+# 现在每次触发，它都会强行把自己作为一个“全新且独立”的事件加入大本营！
+# ==========================================
 func execution_event():
-	print(\"测试事件已触发！准备接受惩罚吧！\")
+	print(\"【皇家赋税】收到新的催收账单！当前并存账单数将增加。\")
+	
+	# 1. 直接强行加入存活数组（无视是否有同类）
+	GameResourceManager.active_event_effects.append(self)
+	
+	# 2. 触发自身的 UI 生成
+	_on_event_start()
+	_update_ui()
+	
+	# 3. 独立监听回合流逝（父类的 _on_turn_started 会负责倒数各自的 remaining_turns）
+	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.connect(_on_turn_started)
+
+# ==========================================
+# ⚡ 事件开始 (生成 UI 与探针)
+# ==========================================
+func _on_event_start():
+	ui_instance = tax_ui_scene.instantiate()
+	
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	var container = tree.get_first_node_in_group(\"Event_list\")
+	
+	if container:
+		# VBoxContainer 会自动帮你把多张账单从上到下整齐排列好！
+		container.add_child(ui_instance)
+	else:
+		push_error(\"致命错误：场景中找不到属于 Event_list 组的挂点！\")
+		
+	var pay_btn = ui_instance.get_node(\"Button\") 
+	pay_btn.pressed.connect(_on_pay_tax)
+	
+	var checker_timer = Timer.new()
+	checker_timer.wait_time = 0.2
+	checker_timer.autostart = true
+	checker_timer.timeout.connect(_check_resource_status)
+	ui_instance.add_child(checker_timer)
+
+# ==========================================
+# 🔄 UI 刷新
+# ==========================================
+func _update_ui():
+	if not is_instance_valid(ui_instance): return
+	
+	var label = ui_instance.get_node(\"Text_Label\")
+	var title = tr(\"EVENT_NAME_ROYAL_TAX\") 
+	# ==========================================
+	# 🌐 极其清爽的本地化终极写法
+	# ==========================================
+	# 1. 先用 tr() 把整句带有占位符的模板取出来。
+	# 2. 然后用 % 将四个变量按顺序填入模板的坑位中。
+	label.text = tr(\"royal_tax_desc\") % [
+		title, 
+		remaining_turns, 
+		tax_cost, 
+		tr(tax_resource) # 资源名称也顺手翻译了
+	]
+	_check_resource_status()
+# ==============================
+# 🔍 资源探针
+# ==========================================
+func _check_resource_status():
+	if not is_instance_valid(ui_instance): return
+	var pay_btn = ui_instance.get_node(\"Button\")
+	var current_stock = GameResourceManager.stocks.get(tax_resource, 0)
+	pay_btn.disabled = current_stock < tax_cost
+
+# ==========================================
+# 💰 玩家提前化解危机 (交钱)
+# ==========================================
+func _on_pay_tax():
+	print(\"【皇家赋税】成功缴纳一份赋税！\")
+	
+	GameResourceManager.stocks[tax_resource] -= tax_cost
+	
+	var tree = Engine.get_main_loop().current_scene.get_tree()
+	for ui in tree.get_nodes_in_group(\"resource_ui\"):
+		if ui.has_method(\"_update_all_slots\"):
+			ui._update_all_slots()
+			
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+		
+	if GameResourceManager.turn_started.is_connected(_on_turn_started):
+		GameResourceManager.turn_started.disconnect(_on_turn_started)
+	GameResourceManager.active_event_effects.erase(self)
+
+# ==========================================
+# 💀 事件结束：倒计时归零，触发 Game Over
+# ==========================================
+func _on_event_end():
+	print(\"【皇家赋税】时间到！未能缴纳赋税，触发 Game Over！\")
+	
+	if is_instance_valid(ui_instance):
+		ui_instance.queue_free()
+		
+	if SignalBusAutoload.has_signal(\"game_over\"):
+		SignalBusAutoload.game_over.emit()
+	else:
+		push_error(\"【警告】SignalBus 中尚未定义 game_over 信号！\")
 "
 
 [resource]

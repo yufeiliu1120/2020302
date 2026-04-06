@@ -149,7 +149,7 @@ func _on_demolish_pressed():
 		current_tile.queue_free()
 		current_tile = null
 		ConnectivityManager.update_connectivity()
-		
+		GameResourceManager.current_demolish_points -= 1
 	hide()
 
 func _play_upgrade_effect(tile: Node2D):

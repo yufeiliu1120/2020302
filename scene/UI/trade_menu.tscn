@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djmvjy70q73r4" path="res://assets/UI parts/trading_label.png" id="4_vgllh"]
 [ext_resource type="Texture2D" uid="uid://ia6qcn026ijd" path="res://assets/UI parts/Trading arrow icon.png" id="5_l1y82"]
 
-[node name="TradeMenu" type="Control" unique_id=735364414]
+[node name="TradeMenu" type="Control" unique_id=735364414 groups=["trade_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,3 +133,14 @@ mouse_filter = 2
 [node name="PopupMenu" type="PopupMenu" parent="." unique_id=609688750]
 oversampling_override = 1.0
 visible = true
+
+[node name="title" type="RichTextLabel" parent="." unique_id=566363674]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 266.0
+offset_right = 1487.0
+offset_bottom = 335.0
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "aaaaaaaaaa"
+horizontal_alignment = 1

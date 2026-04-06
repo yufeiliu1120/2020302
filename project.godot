@@ -38,6 +38,9 @@ Camera=""
 NatureGeneratorGroup=""
 event_detail=""
 event_choice_menu=""
+trade_menu=""
+resource_ui=""
+Event_list=""
 
 [input]
 

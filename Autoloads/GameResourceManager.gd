@@ -28,9 +28,11 @@ var stocks = {
 var is_trade_disabled: bool = false      # 用于“海上风暴”：封锁市场
 var is_production_frozen: bool = false   # 用于“粮食欠收”：全局停产（但可能还要吃维护费）
 
-var max_demolish_points: int = 1         # 用于“枯萎病”：每回合最大拆除次数
-var current_demolish_points: int = 1     # 当前剩余拆除次数
+var max_demolish_points: int = 2         # 用于“枯萎病”：每回合最大拆除次数
+var current_demolish_points: int = 2     # 当前剩余拆除次数
 
+# 用来保持 RefCounted 事件脚本存活的“避难所”
+var active_event_effects: Array = []
 
 
 # ==========================================
@@ -207,7 +209,11 @@ func get_projected_income() -> Dictionary:
 						if cost > 0:
 							projection[res] = projection.get(res, 0) - cost
 				# ------------------------
-
+				if is_production_frozen:
+					# 依然会累加 food_maintenance (该吃的饭还得吃)，但跳过生产
+					turn_food_maintenance += data.food_maintenance
+					continue # 直接跳过当前地块的产出逻辑
+					
 				var current_prod = {}
 				if tile.has_method("get_current_production"):
 					current_prod = tile.get_current_production()

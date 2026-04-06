@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_255uc")
-tile_name = "StonePit"
+tile_name = "TILE_NAME_STONE_PIT"
 production = {
 "explorer": 0,
 "iron": 0,

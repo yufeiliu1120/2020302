@@ -10,7 +10,7 @@ extends Control
 @onready var get_button_label = $HBoxContainer/GetButton/Label
 @onready var give_button_icon = $HBoxContainer/GiveButton/icon
 @onready var get_button_icon = $HBoxContainer/GetButton/icon
-
+@onready var title_label = $title
 # 游戏中可交易的资源种类
 var tradeable_res = ["wood", "stone", "food"]
 var current_give = "wood"
@@ -79,13 +79,42 @@ func _on_popup_item_selected(id: int):
 
 # 刷新两边的图标和中间的汇率
 func _update_trade_ui():
+	# ==========================================
+	# 🚨【事件钩子】：海上风暴拦截
+	# ==========================================
+	if GameResourceManager.get("is_trade_disabled"):
+		arrow_btn.disabled = true
+		
+		# 【核心逻辑】：去大本营的避难所里，揪出那个封锁交易的元凶，逼问它还剩几回合！
+		var turns_left = 0
+		for effect in GameResourceManager.active_event_effects:
+			# 使用 .get() 是极其安全的做法，如果别的事件没有这个变量，会直接返回 null 而不是报错
+			if effect.get("effect_type") == "trade_block": 
+				turns_left = effect.remaining_turns
+				break # 找到了就不用再找了
+				
+		if title_label:
+			# 1. 狂风肆虐的警告语
+			var block_text = tr("trade_menu_blocked_text")
+			# 2. 剩余回合数 (❗️请把 "turns_left_text" 替换为你真正在CSV里加的那个【键名 Key】❗️)
+			var turn_text = str(turns_left)
+			
+			# 用 \n 换行，把两段文字都包进疯狂抖动的红色波浪特效里！
+			title_label.text = "[center][color=red][wave amp=30.0 freq=10.0 connected=1]" + block_text + turn_text + "[/wave][/color][/center]"
+		return
+			
+	else:
+		# 恢复正常状态的氛围描述
+		if title_label:
+			title_label.text = "[center]" + tr("trade_menu_text") + "[/center]"
+		
 	give_button_icon.texture = res_icons[current_give]
 	get_button_icon.texture = res_icons[current_get]
 	
 	# 如果左右两边选了同一个资源，禁止交易
 	if current_give == current_get:
-		give_button_label.text = "无效"
-		get_button_label.text = "无效"
+		give_button_label.text = tr("unable")
+		get_button_label.text = tr("unable")
 		arrow_btn.disabled = true
 		return
 		

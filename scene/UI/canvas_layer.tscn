@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://vxpkit4d3fr8" path="res://assets/UI parts/trade button hover.png" id="35_bu3gg"]
 [ext_resource type="PackedScene" uid="uid://caqsigq8vcd8e" path="res://scene/UI/trade_menu.tscn" id="35_oeakf"]
 [ext_resource type="Texture2D" uid="uid://dfukvt6q7wqds" path="res://assets/UI parts/trade button pressed.png" id="35_uheck"]
+[ext_resource type="PackedScene" uid="uid://bg8d5krbxnk1h" path="res://scene/UI/card container.tscn" id="36_5wjhq"]
 [ext_resource type="Texture2D" uid="uid://dc5kkl7bhsecr" path="res://assets/UI parts/scout button normal.png" id="37_uheck"]
 [ext_resource type="Texture2D" uid="uid://bkgi3jh0b8mpw" path="res://assets/UI parts/scout button pressed.png" id="38_iyy75"]
 [ext_resource type="PackedScene" uid="uid://bkgytgl7uycxg" path="res://scene/UI/event_details.tscn" id="38_ooc70"]
@@ -46,7 +47,7 @@ texture = ExtResource("28_8vufc")
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
 script = ExtResource("1_woeyn")
-metadata/_edit_vertical_guides_ = [12.0, 1779.0, 720.0]
+metadata/_edit_vertical_guides_ = [12.0, 1779.0, 720.0, 181.0]
 metadata/_edit_horizontal_guides_ = [150.0]
 
 [node name="Control" type="Control" parent="." unique_id=289617592]
@@ -100,7 +101,7 @@ layout_mode = 0
 offset_left = 1304.0
 offset_top = 134.0
 offset_right = 1597.0
-offset_bottom = 244.0
+offset_bottom = 271.0
 texture = ExtResource("5_5alqd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="outline/turn counter" unique_id=835744283]
@@ -134,7 +135,7 @@ offset_bottom = 142.0
 grow_horizontal = 2
 texture = ExtResource("19_trrlq")
 
-[node name="resource_ui" type="MarginContainer" parent="outline/top UI" unique_id=243486951]
+[node name="resource_ui" type="MarginContainer" parent="outline/top UI" unique_id=243486951 groups=["resource_ui"]]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -316,6 +317,16 @@ zoom = Vector2(0.2, 0.2)
 layout_mode = 2
 texture = ExtResource("30_joqae")
 
+[node name="EventList" type="VBoxContainer" parent="outline/top UI" unique_id=2146789447 groups=["Event_list"]]
+z_index = -1
+layout_mode = 0
+offset_left = 41.0
+offset_top = 85.535
+offset_right = 281.0
+offset_bottom = 186.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
 [node name="bottom UI" type="TextureRect" parent="outline" unique_id=256508497]
 layout_mode = 1
 anchors_preset = 7
@@ -377,15 +388,28 @@ texture_pressed = ExtResource("43_ug7lc")
 texture_hover = ExtResource("44_nw0ko")
 script = ExtResource("9_53r50")
 
+[node name="HBoxContainer" parent="outline" unique_id=1467896844 instance=ExtResource("36_5wjhq")]
+z_index = -1
+layout_mode = 1
+offset_left = 87.0
+offset_top = 918.0
+offset_right = 87.0
+offset_bottom = 918.16003
+
 [node name="DraftPanel" parent="." unique_id=198612456 instance=ExtResource("46_ug7lc")]
+visible = false
 
 [node name="Build_Menu" parent="." unique_id=1002417904 instance=ExtResource("47_nw0ko")]
+visible = false
 
 [node name="TradeMenu" parent="." unique_id=735364414 instance=ExtResource("35_oeakf")]
+visible = false
 
 [node name="EventCoiceMenu" parent="." unique_id=1271814061 instance=ExtResource("34_wnmig")]
+visible = false
 
 [node name="EventDetail" parent="." unique_id=1606457514 instance=ExtResource("38_ooc70")]
+visible = false
 
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/craft" to="Build_Menu" method="open_menu"]
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/trade" to="TradeMenu" method="open_menu"]

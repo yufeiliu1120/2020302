@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://bw5pjgsqqx1yk" path="res://assets/events/borad.png" id="1_ry2h1"]
 [ext_resource type="Texture2D" uid="uid://taxsqpjwxvu5" path="res://assets/events/railling.png" id="2_iw25d"]
 [ext_resource type="Script" uid="uid://tkdj15opnn57" path="res://data/resources/EventResourceData.gd" id="2_r1ciw"]
-[ext_resource type="Resource" uid="uid://cayye2gciv3kr" path="res://scene/events/blight/blight.tres" id="3_18ij5"]
+[ext_resource type="Resource" uid="uid://cayye2gciv3kr" path="res://scene/events/blight/blight.tres" id="3_ausqd"]
 [ext_resource type="PackedScene" uid="uid://c0kxhvnfw4ajd" path="res://scene/UI/event_choice_slot.tscn" id="3_b0f3a"]
 [ext_resource type="Resource" uid="uid://bls1alts68dss" path="res://scene/events/sea storm/sea storm.tres" id="4_18ij5"]
 [ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="4_iw25d"]
-[ext_resource type="Resource" uid="uid://cejmqr2l4b1jp" path="res://scene/events/bandits/bandits.tres" id="4_plfrc"]
-[ext_resource type="Resource" uid="uid://che0jvaceaw4t" path="res://scene/events/famine/famine.tres" id="6_ausqd"]
-[ext_resource type="Resource" uid="uid://bpal183sbt87k" path="res://scene/events/forest awakening/forest awakening.tres" id="7_qja57"]
-[ext_resource type="Resource" uid="uid://cohso8d0oum0a" path="res://scene/events/mine explosion/mine_explosion.tres" id="8_dkeq5"]
+[ext_resource type="Resource" uid="uid://bpal183sbt87k" path="res://scene/events/forest awakening/forest awakening.tres" id="4_qja57"]
+[ext_resource type="Resource" uid="uid://che0jvaceaw4t" path="res://scene/events/famine/famine.tres" id="5_dkeq5"]
+[ext_resource type="Resource" uid="uid://cejmqr2l4b1jp" path="res://scene/events/bandits/bandits.tres" id="5_plfrc"]
+[ext_resource type="Resource" uid="uid://cohso8d0oum0a" path="res://scene/events/mine explosion/mine_explosion.tres" id="6_pyrao"]
 [ext_resource type="Resource" uid="uid://0amyxf46hk21" path="res://scene/events/royal tax/royal_tax.tres" id="9_pyrao"]
 
 [node name="Control" type="Control" unique_id=1548095986 groups=["event_choice_menu"]]
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b0f3a")
 event_interval = 2
-all_events = Array[ExtResource("2_r1ciw")]([ExtResource("3_18ij5"), ExtResource("4_plfrc"), ExtResource("4_18ij5"), ExtResource("6_ausqd"), ExtResource("7_qja57"), ExtResource("8_dkeq5"), ExtResource("9_pyrao")])
+all_events = Array[ExtResource("2_r1ciw")]([ExtResource("3_ausqd"), ExtResource("4_qja57"), ExtResource("5_dkeq5"), ExtResource("6_pyrao"), ExtResource("5_plfrc"), ExtResource("9_pyrao"), ExtResource("4_18ij5")])
 
 [node name="Panel" type="Panel" parent="." unique_id=2014672267]
 layout_mode = 1
