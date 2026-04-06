@@ -1,21 +1,7 @@
 [gd_scene format=3 uid="uid://bg8d5krbxnk1h"]
 
-[ext_resource type="PackedScene" uid="uid://bixjdttj52gqh" path="res://scene/UI/knight_card.tscn" id="1_72s8k"]
-
 [node name="HBoxContainer" type="HBoxContainer" unique_id=1467896844]
 anchors_preset = -1
 anchor_right = 0.275
 anchor_bottom = 0.148
 offset_bottom = 0.16000366
-
-[node name="TextureRect" parent="." unique_id=668784696 instance=ExtResource("1_72s8k")]
-layout_mode = 2
-
-[node name="TextureRect2" parent="." unique_id=1075912211 instance=ExtResource("1_72s8k")]
-layout_mode = 2
-
-[node name="TextureRect3" parent="." unique_id=780924770 instance=ExtResource("1_72s8k")]
-layout_mode = 2
-
-[node name="TextureRect4" parent="." unique_id=525661647 instance=ExtResource("1_72s8k")]
-layout_mode = 2

@@ -48,7 +48,7 @@ func _suppress_neighbors():
 # ==========================================
 # ⚔️ 预留接口：骑士驱逐怪物
 # ==========================================
-func banish_monster():
+func banish():
 	print("【骑士出击】怪物被驱逐，巢穴恢复为森林！")
 	
 	_release_neighbors()

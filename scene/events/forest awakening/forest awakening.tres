@@ -5,8 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cblnmf8srn4fc" path="res://assets/events/forest awakening preview.png" id="2_3dvf1"]
 
 [sub_resource type="GDScript" id="GDScript_n6tp8"]
-script/source = "
-extends RefCounted
+script/source = "extends RefCounted
 
 var effect_type: String = \"forest_awakening\"
 
@@ -58,8 +57,15 @@ func execution_event():
 	_update_ui()
 	
 	GameResourceManager.active_event_effects.append(self)
+	
+	# 🔌 绑定回合开始信号
 	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
 		GameResourceManager.turn_started.connect(_on_turn_started)
+		
+	# 🔌 【核心新增】：绑定骑士发出的捷报信号！
+	if SignalBusAutoload.has_signal(\"enemy_banished\"):
+		if not SignalBusAutoload.enemy_banished.is_connected(_check_state):
+			SignalBusAutoload.enemy_banished.connect(_check_state)
 
 # ==========================================
 # 🐲 核心动作：生成一个巢穴并加入名单
@@ -94,9 +100,9 @@ func _spawn_nest() -> bool:
 	return false
 
 # ==========================================
-# 🔄 回合推进：验证死活
+# 🛠️ 【核心新增】：独立出来的自检功能
 # ==========================================
-func _on_turn_started(_current_turn: int):
+func _check_state():
 	# 过滤清理失效的数据 (万一玩家用骑士把巢穴端了，或者手滑拆了)
 	var valid_nests: Array[Node] = []
 	for nest in active_nests:
@@ -113,6 +119,12 @@ func _on_turn_started(_current_turn: int):
 		_end_event()
 	else:
 		_update_ui()
+
+# ==========================================
+# 🔄 回合推进：现在只需要调一下自检函数
+# ==========================================
+func _on_turn_started(_current_turn: int):
+	_check_state()
 
 # ==========================================
 # 📊 UI 更新
@@ -132,6 +144,11 @@ func _end_event():
 		
 	if GameResourceManager.turn_started.is_connected(_on_turn_started):
 		GameResourceManager.turn_started.disconnect(_on_turn_started)
+		
+	# 🔌 【核心新增】：事件结束时，记得把骑士捷报的监听断开
+	if SignalBusAutoload.has_signal(\"enemy_banished\"):
+		if SignalBusAutoload.enemy_banished.is_connected(_check_state):
+			SignalBusAutoload.enemy_banished.disconnect(_check_state)
 		
 	GameResourceManager.active_event_effects.erase(self)
 "

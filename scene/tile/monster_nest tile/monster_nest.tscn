@@ -262,5 +262,5 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_617pd")
 
-[node name="Function" type="Node" parent="." unique_id=330820107]
+[node name="Knight Interface" type="Node" parent="." unique_id=330820107 groups=["Knight Interface"]]
 script = ExtResource("19_q5hur")

@@ -388,7 +388,7 @@ texture_pressed = ExtResource("43_ug7lc")
 texture_hover = ExtResource("44_nw0ko")
 script = ExtResource("9_53r50")
 
-[node name="HBoxContainer" parent="outline" unique_id=1467896844 instance=ExtResource("36_5wjhq")]
+[node name="card_container" parent="outline" unique_id=1467896844 groups=["card container"] instance=ExtResource("36_5wjhq")]
 z_index = -1
 layout_mode = 1
 offset_left = 87.0

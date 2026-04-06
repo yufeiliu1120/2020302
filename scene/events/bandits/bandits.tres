@@ -63,8 +63,24 @@ func execution_event():
 	_update_ui()
 
 	GameResourceManager.active_event_effects.append(self)
+	
+	# 🔌 绑定回合开始信号
 	if not GameResourceManager.turn_started.is_connected(_on_turn_started):
 		GameResourceManager.turn_started.connect(_on_turn_started)
+		
+	# 🔌 【核心新增】：绑定骑士发出的捷报信号！
+	if SignalBusAutoload.has_signal(\"enemy_banished\"):
+		if not SignalBusAutoload.enemy_banished.is_connected(_check_state):
+			SignalBusAutoload.enemy_banished.connect(_check_state)
+
+# ==========================================
+# 🛠️ 【核心新增】：独立出来的自检功能
+# ==========================================
+func _check_state():
+	if not _is_bandit_alive():
+		print(\"【强盗入侵】强盗已被消灭！危机解除！\")
+		_end_event()
+
 # ==========================================
 # 🔄 回合推进：强盗移动与结算
 # ==========================================
@@ -72,9 +88,11 @@ func _on_turn_started(_current_turn: int):
 	# ----------------------------------------------------
 	# 1. 验证生死：玩家是否派骑士端掉了这个地块？
 	# ----------------------------------------------------
-	if not _is_bandit_alive():
-		print(\"【强盗入侵】强盗已被消灭！危机解除！\")
-		_end_event()
+	_check_state()
+	
+	# 🛡️ 安全锁：如果在 _check_state 里强盗发现自己死了（_end_event 把自己从列表删除了），
+	# 就直接 return，不要继续往下走寻路代码了！
+	if not GameResourceManager.active_event_effects.has(self):
 		return
 
 	# ----------------------------------------------------
@@ -123,6 +141,7 @@ func _is_bandit_alive() -> bool:
 	if GridAutoload.active_tiles.has(current_bandit_pos):
 		var tile = GridAutoload.active_tiles[current_bandit_pos]
 		# 只有地块存在，并且拥有我们刚刚打的标签，才说明强盗还在
+		# 注意：当你用骑士 banish 把他换成路的时候，新的路是没有这个 meta 的！
 		if is_instance_valid(tile) and tile.has_meta(\"is_bandit\"):
 			return true
 	return false
@@ -140,7 +159,6 @@ func _find_next_step() -> Vector2i:
 			
 			var t_name = n_tile.data.get(\"tile_name\")
 			if t_name == \"TILE_NAME_ROAD\" or t_name == \"HQ\":
-				# 【核心修复】：判断如果不是 null，再去比大小
 				var dist = n_tile.get(\"distance_to_source\")
 				if dist != null and dist < min_dist:
 					min_dist = dist
@@ -167,7 +185,6 @@ func _calculate_steps_to_hq() -> int:
 		var target = GridAutoload.active_tiles[next_pos]
 		if target.data.get(\"tile_name\") == \"HQ\": return 1
 		
-		# 【核心修复】：如果是路，安全获取距离
 		var dist = target.get(\"distance_to_source\")
 		if dist != null:
 			return dist + 1
@@ -178,8 +195,15 @@ func _calculate_steps_to_hq() -> int:
 func _end_event():
 	if is_instance_valid(ui_instance):
 		ui_instance.queue_free()
+		
 	if GameResourceManager.turn_started.is_connected(_on_turn_started):
 		GameResourceManager.turn_started.disconnect(_on_turn_started)
+		
+	# 🔌 【核心新增】：事件结束时，记得把骑士捷报的监听断开
+	if SignalBusAutoload.has_signal(\"enemy_banished\"):
+		if SignalBusAutoload.enemy_banished.is_connected(_check_state):
+			SignalBusAutoload.enemy_banished.disconnect(_check_state)
+			
 	GameResourceManager.active_event_effects.erase(self)
 "
 

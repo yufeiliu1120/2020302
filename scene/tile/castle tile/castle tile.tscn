@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="7_13ss1"]
 [ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="8_20nku"]
 [ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="9_y74jn"]
+[ext_resource type="Script" uid="uid://ebdleia5rk71" path="res://scene/tile/castle tile/card_generator.gd" id="11_srwjf"]
+[ext_resource type="PackedScene" uid="uid://bixjdttj52gqh" path="res://scene/UI/knight_card.tscn" id="12_6jdfc"]
 
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_lp55s")
@@ -97,3 +99,7 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="card_generator" type="Node" parent="." unique_id=1280994789]
+script = ExtResource("11_srwjf")
+card_scene = ExtResource("12_6jdfc")

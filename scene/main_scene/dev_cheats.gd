@@ -28,13 +28,13 @@ func _input(event):
 			
 		# 按 F8：加 5 交易点数 (测试市场和交易系统必备)
 		elif event.keycode == KEY_F4:
-			GameResourceManager.add_resources({"trade_point": 5})
-			print("【作弊开启】已发放 5 交易点数！")
+			GameResourceManager.add_resources({"metal": 50})
+			print("【作弊开启】添加50金属")
 			
 		# 按 F9：跳过当前回合 (如果你想快速刷回合数)
 		elif event.keycode == KEY_F5:
-			GameResourceManager.end_turn()
-			print("【作弊开启】已强制跳过回合！")
+			GameResourceManager.add_resources({"trade_point": 5})
+			print("【作弊开启】添加贸易点数")
 			
 		elif event.keycode == KEY_F6:
 			GameResourceManager.add_resources({"explorer": 5})

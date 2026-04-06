@@ -17,3 +17,5 @@ signal game_won(message: String)
 signal game_start()
 
 signal game_over()
+
+signal enemy_banished

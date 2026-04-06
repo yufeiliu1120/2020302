@@ -12,7 +12,7 @@ signal purchase_failed(cost: Dictionary)
 # ==========================================
 var current_turn: int = 1
 var max_trade_points: int = 1 
-
+var max_card_count:int = 4
 var stocks = {
 	"food": 5,
 	"wood": 10,

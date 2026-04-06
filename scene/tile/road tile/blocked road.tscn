@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://data/classes/tile_base/tile_state_idle.gd" id="6_1gqyd"]
 [ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://data/classes/tile_base/tile_state_dragging.gd" id="7_fqjta"]
 [ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/vfx/dust.png" id="8_bsrfw"]
+[ext_resource type="Script" uid="uid://c12tv46beu1pd" path="res://scene/tile/road tile/blocked_Knight_Interface.gd" id="9_ncvpc"]
 
 [sub_resource type="Resource" id="Resource_r3dg2"]
 script = ExtResource("3_vebl7")
@@ -83,3 +84,6 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="Knight Interface" type="Node" parent="." unique_id=1835791614 groups=["Knight Interface"]]
+script = ExtResource("9_ncvpc")
