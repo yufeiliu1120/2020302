@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://b0pxhaifkkl2x"]
+
+[ext_resource type="Texture2D" uid="uid://dvmh3k2id1rjw" path="res://assets/UI parts/craft_menu_borad.png" id="1_mruy5"]
+[ext_resource type="Theme" uid="uid://ccr2i3uq7rgua" path="res://scene/UI/menu_button.tres" id="2_87vrd"]
+[ext_resource type="Script" uid="uid://bb3idorcuvr1h" path="res://scene/UI/pause_menu.gd" id="2_j3m8a"]
+[ext_resource type="Texture2D" uid="uid://clj6akbikaa4m" path="res://assets/UI parts/main_menu_button_hover.png" id="3_j3m8a"]
+[ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="5_k56gy"]
+[ext_resource type="Script" uid="uid://d0rdu5tgxvm64" path="res://scene/UI/pause_menu_settings.gd" id="6_k56gy"]
+
+[node name="TextureRect" type="TextureRect" unique_id=880174066]
+process_mode = 3
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.51337
+offset_top = -306.0
+offset_right = 514.5134
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mruy5")
+script = ExtResource("2_j3m8a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1476816027]
+layout_mode = 0
+offset_left = 65.51337
+offset_top = 92.0
+offset_right = 346.51337
+offset_bottom = 523.0
+
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1845679926]
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_87vrd")
+theme_override_font_sizes/font_size = 24
+text = "RESUME"
+
+[node name="shadow" type="Sprite2D" parent="VBoxContainer/Resume" unique_id=844734568]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+z_index = -1
+position = Vector2(144.5, 44.50001)
+scale = Vector2(2.0785713, 2.0217392)
+texture = ExtResource("3_j3m8a")
+
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=513825437]
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_87vrd")
+theme_override_font_sizes/font_size = 24
+text = "RESTART"
+
+[node name="shadow" type="Sprite2D" parent="VBoxContainer/Restart" unique_id=204285985]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+z_index = -1
+position = Vector2(144.5, 44.50001)
+scale = Vector2(2.0785713, 2.0217392)
+texture = ExtResource("3_j3m8a")
+
+[node name="Return to main menu" type="Button" parent="VBoxContainer" unique_id=786427258]
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_87vrd")
+theme_override_font_sizes/font_size = 20
+text = "EXIT_TO_MAIN_MENU"
+
+[node name="shadow" type="Sprite2D" parent="VBoxContainer/Return to main menu" unique_id=1823698530]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+z_index = -1
+position = Vector2(144.5, 44.50001)
+scale = Vector2(2.0785713, 2.0217392)
+texture = ExtResource("3_j3m8a")
+
+[node name="Exit game" type="Button" parent="VBoxContainer" unique_id=1391153535]
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_87vrd")
+theme_override_font_sizes/font_size = 24
+text = "EXIT_GAME"
+
+[node name="shadow" type="Sprite2D" parent="VBoxContainer/Exit game" unique_id=1249291251]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+z_index = -1
+position = Vector2(144.5, 44.50001)
+scale = Vector2(2.0785713, 2.0217392)
+texture = ExtResource("3_j3m8a")
+
+[node name="PanelAnimator" type="Node" parent="." unique_id=1068101615]
+script = ExtResource("5_k56gy")
+metadata/_custom_type_script = "uid://b240qpgrii8jc"
+
+[node name="Panel" type="Panel" parent="." unique_id=335856232]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -443.48663
+offset_top = -239.0
+offset_right = 453.48657
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="settings" type="VBoxContainer" parent="." unique_id=1721743809]
+layout_mode = 0
+offset_left = 394.51337
+offset_top = 102.0
+offset_right = 957.51337
+offset_bottom = 535.0
+script = ExtResource("6_k56gy")
+
+[node name="AudioSettings" type="Label" parent="settings" unique_id=277640038]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "AUDIO_SETTING"
+horizontal_alignment = 1
+
+[node name="Master" type="HBoxContainer" parent="settings" unique_id=1152962446]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="Label" type="Label" parent="settings/Master" unique_id=2107203130]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MASTER"
+
+[node name="HSlider" type="HSlider" parent="settings/Master" unique_id=1730174432]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+min_value = 0.01
+max_value = 1.0
+step = 0.1
+value = 0.01
+
+[node name="BGM" type="HBoxContainer" parent="settings" unique_id=828089693]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="Label" type="Label" parent="settings/BGM" unique_id=1886139862]
+custom_minimum_size = Vector2(8.185, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BGM"
+
+[node name="HSlider" type="HSlider" parent="settings/BGM" unique_id=753178108]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+min_value = 0.01
+max_value = 1.0
+step = 0.1
+value = 0.01
+
+[node name="SFX" type="HBoxContainer" parent="settings" unique_id=1979592367]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="Label" type="Label" parent="settings/SFX" unique_id=204767976]
+custom_minimum_size = Vector2(8.185, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="settings/SFX" unique_id=655076403]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+min_value = 0.01
+max_value = 1.0
+step = 0.1
+value = 0.01
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Return to main menu" to="." method="_on_return_to_main_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit game" to="." method="_on_exit_game_pressed"]

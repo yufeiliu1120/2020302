@@ -16,9 +16,9 @@ production = {
 "explorer": 0,
 "iron": 0,
 "stone": 0,
-"wood": 1
+"wood": 4
 }
-food_production = 1
+food_production = 4
 requires_road = false
 requires_adjacency = false
 can_be_demolished = false

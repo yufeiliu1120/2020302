@@ -35,7 +35,7 @@ func _on_preview_hovered():
 	# Color(1.2, 1.2, 1.2) 会让图片的 RGB 值超出 1，产生一种极佳的高光/发光感。
 	var tween = create_tween()
 	tween.tween_property(preview, "modulate", Color(1.2, 1.2, 1.2, 1), 0.1)
-
+	AudioManager.play_sfx("button_hover")
 # 鼠标移出：图片恢复原状
 func _on_preview_unhovered():
 	var tween = create_tween()
@@ -50,6 +50,6 @@ func _on_preview_gui_input(event: InputEvent):
 		var tween = create_tween()
 		tween.tween_property(preview, "modulate", Color(0.6,0.6,0.6,1), 0.05)
 		tween.tween_property(preview, "modulate", Color(1, 1, 1, 1), 0.1)
-		
+		AudioManager.play_sfx("button_pressed")
 		# 向上级菜单发射数据！
 		event_selected.emit(event_data)

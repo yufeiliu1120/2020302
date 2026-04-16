@@ -7,7 +7,7 @@
 [sub_resource type="GDScript" id="GDScript_iyrbk"]
 script/source = "extends BaseDurationEvent
 
-var food_cost: int = 50 
+var food_cost: int = 30
 
 # 预加载饥荒的侧边栏 UI
 var ui_scene = preload(\"res://scene/events/famine/famine.tscn\") 

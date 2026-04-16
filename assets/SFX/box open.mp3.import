@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csya7u3owocht"
+path="res://.godot/imported/box open.mp3-95d9e7a16c3358b986e526a3b95acee8.mp3str"
+
+[deps]
+
+source_file="res://assets/SFX/box open.mp3"
+dest_files=["res://.godot/imported/box open.mp3-95d9e7a16c3358b986e526a3b95acee8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

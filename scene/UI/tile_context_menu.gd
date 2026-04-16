@@ -7,14 +7,19 @@ var current_tile: Node2D = null
 # 【新增】获取我们刚刚创建的信息展示板
 @onready var info_label = $VBoxContainer/InfoLabel
 
+@onready var tooltip_panel = $TooltipPanel
+@onready var tooltip_label = $TooltipPanel/RichTextLabel
+
 func _ready():
 	hide()
 	SignalBusAutoload.show_tile_menu.connect(_on_show_menu)
 	SignalBusAutoload.hide_tile_menu.connect(hide)
-	
+	tooltip_panel.hide()
 	btn_upgrade.pressed.connect(_on_upgrade_pressed)
 	btn_demolish.pressed.connect(_on_demolish_pressed)
-
+	btn_upgrade.mouse_entered.connect(func(): _show_tooltip(btn_upgrade))
+	btn_upgrade.mouse_exited.connect(_hide_tooltip)
+	
 func _on_show_menu(tile: Node2D, screen_pos: Vector2):
 	current_tile = tile
 	global_position = screen_pos
@@ -88,7 +93,7 @@ func _update_info_panel():
 	if d.get("resource_maintenance"):
 		for res in d.resource_maintenance.keys():
 			if d.resource_maintenance[res] > 0:
-				text += "[color=orange] -" + str(d.resource_maintenance[res]) + " " + tr(res) + "/回合[/color]\n"
+				text += "[color=orange] -" + str(d.resource_maintenance[res]) + " " + tr(res) + "/" + tr("turn") + "[/color]\n"
 					
 	# 改造花费提示 (如果这个建筑可以升级的话，把它需要花多少钱列出来)
 	if d.can_be_upgraded and d.get("upgrade_scene") != null:
@@ -162,3 +167,38 @@ func _play_upgrade_effect(tile: Node2D):
 	if dust:
 		dust.restart()
 		dust.emitting = true
+		
+func _show_tooltip(btn: Button):
+	var target_tile = current_tile.data.get("upgrade_scene")
+	if target_tile == null:
+		return
+	var target_data = target_tile.instantiate().data
+	if target_data == null: 
+		return
+		
+	# 1. 召唤我们伟大的 TextManager！直接获取完美的动态文本
+	var desc_text = TextManager.format_tile_desc(target_data.description, target_data)
+	tooltip_label.text = desc_text
+	
+	# 如果你想做得更丰满，甚至可以把目标建筑的名字也加上
+	# tooltip_label.text = "[color=yellow]" + tr(target_data.tile_name) + "[/color]\n" + desc_text
+	
+	# 2. 计算位置：让提示框出现在按钮的右侧（或上方），并加上一点偏移量
+	# 因为开启了 Top Level，这里必须使用 global_position
+	var offset = Vector2(btn.size.x + 10, -20) 
+	tooltip_panel.global_position = btn.global_position + offset
+	
+	# 3. 显示，并加一点丝滑的淡入效果（Juiciness）
+	tooltip_panel.show()
+	tooltip_panel.modulate.a = 0.0
+	var tween = create_tween()
+	tween.tween_property(tooltip_panel, "modulate:a", 1.0, 0.15).set_ease(Tween.EASE_OUT)
+
+# ==========================================
+# 🙈 隐藏提示框
+# ==========================================
+func _hide_tooltip():
+	var tween = create_tween()
+	# 快速淡出
+	tween.tween_property(tooltip_panel, "modulate:a", 0.0, 0.1)
+	tween.tween_callback(tooltip_panel.hide)

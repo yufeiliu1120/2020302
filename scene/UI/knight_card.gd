@@ -35,6 +35,7 @@ func _on_mouse_entered():
 	if is_selected: return
 	z_index = 1 
 	var tween = create_tween().set_parallel(true)
+	AudioManager.play_sfx("button_hover")
 	tween.tween_property(self, "scale", hover_scale, 0.15).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(self, "position:y", base_position_y + hover_offset_y, 0.15).set_trans(Tween.TRANS_QUAD)
 
@@ -56,6 +57,7 @@ func _gui_input(event):
 			_cancel_selection()
 			return
 			
+		AudioManager.play_sfx("button_pressed")
 		print("【骑士卡牌】使用骑士！扫描全图组件...")
 		var targets = _scan_for_targets()
 		

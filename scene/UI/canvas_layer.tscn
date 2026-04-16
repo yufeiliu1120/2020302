@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://dbvunmccct6ul" path="res://assets/UI parts/menu button normal.png" id="39_ug7lc"]
 [ext_resource type="Texture2D" uid="uid://cu7ffn6naxupy" path="res://assets/UI parts/menu button pressed.png" id="40_nw0ko"]
 [ext_resource type="Texture2D" uid="uid://do2ux30120owu" path="res://assets/UI parts/menu button hover.png" id="41_c60pd"]
+[ext_resource type="PackedScene" uid="uid://b0pxhaifkkl2x" path="res://scene/UI/Pause Menu.tscn" id="42_ii3jf"]
 [ext_resource type="Texture2D" uid="uid://c7lxqau0kiruj" path="res://assets/UI parts/turn_button_normal.png" id="42_iyy75"]
 [ext_resource type="Texture2D" uid="uid://bq46bg8umqhd8" path="res://assets/UI parts/turn_button_pressed.png" id="43_ug7lc"]
 [ext_resource type="Texture2D" uid="uid://wrle4xe500wd" path="res://assets/UI parts/turn_button_hover.png" id="44_nw0ko"]
@@ -81,6 +82,16 @@ text = "改造"
 [node name="BtnDemolish" type="Button" parent="Control/TileContextMenu/VBoxContainer/HBoxContainer" unique_id=2111771806]
 layout_mode = 2
 text = "拆除"
+
+[node name="TooltipPanel" type="PanelContainer" parent="Control/TileContextMenu" unique_id=934332954]
+top_level = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/TileContextMenu/TooltipPanel" unique_id=1709233027]
+layout_mode = 2
+fit_content = true
 
 [node name="CostPreviewLabel" type="Label" parent="." unique_id=1555869641]
 offset_right = 40.0
@@ -411,6 +422,10 @@ visible = false
 [node name="EventDetail" parent="." unique_id=1606457514 instance=ExtResource("38_ooc70")]
 visible = false
 
+[node name="PauseMenu" parent="." unique_id=880174066 instance=ExtResource("42_ii3jf")]
+visible = false
+
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/craft" to="Build_Menu" method="open_menu"]
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/trade" to="TradeMenu" method="open_menu"]
 [connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/scout" to="DraftPanel" method="open_draft"]
+[connection signal="pressed" from="outline/bottom UI/MarginContainer/buttons/menu" to="PauseMenu" method="open_menu"]

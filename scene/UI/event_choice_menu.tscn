@@ -91,3 +91,5 @@ texture = ExtResource("2_iw25d")
 
 [node name="PanelAnimator" type="Node" parent="." unique_id=2062034176]
 script = ExtResource("4_iw25d")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=310269817]

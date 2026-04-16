@@ -19,12 +19,13 @@
 
 [sub_resource type="Resource" id="Resource_doujx"]
 script = ExtResource("2_fkd5q")
-tile_name = "LoggingCamp"
+tile_name = "TILE_NAME_LOGGINGCAMP"
+description = "TILE_DESC_LOGGINGCAMP"
 production = {
 "explorer": 0,
 "iron": 0,
 "stone": 0,
-"wood": 3
+"wood": 0
 }
 food_maintenance = 1
 requires_hq_adjacency = true
@@ -33,7 +34,7 @@ adjacency_bonus_amount = {
 "explorer": 0,
 "food": 0,
 "stone": 0,
-"wood": 1
+"wood": 2
 }
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 

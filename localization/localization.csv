@@ -4,40 +4,51 @@ UI_COST_ADD,+ %d 石头,+ %d Stone
 UI_WARNING_NO_FUNDS,补给运费不足,Insufficient Funds
 UI_WARNING_INVALID_POS,无法放置,Cannot Place
 TILE_NAME_FOREST,森林,Forest
-TILE_DESC_FOREST,茂密的树木，能使周围的伐木场获得木头收入，可改造为伐木场,Dense trees can increase the wood income of surrounding logging camps, and can be converted into logging camps.
+TILE_DESC_FOREST,"茂密的树木，可改造为伐木场,伐木场会根据周围的森林地块数量生产木头资源。","Dense woods. Can be transformed into a Logging Camp, which produces Wood based on the number of adjacent Forest tiles."
 TILE_NAME_GRASS,草地,Grassland
-TILE_DESC_GRASS,广袤的平原,A vast plains.
+TILE_DESC_GRASS,"广袤的平原，可以改造成麦田地块，可以使相邻的磨坊地块生产食物资源。","Vast plains. Can be cultivated into a Wheat Field to boost the Food production of adjacent Mills."
 
 TILE_NAME_MOUTAIN,山脉,Mountain.
-TILE_DESC_MOUTAIN,一片山脉,A mountain range.
+TILE_DESC_MOUTAIN,"一片山脉,可以被改造成采石场，采石场需要与道路相邻以产生石头资源。","Rugged mountains. Can be excavated into a Quarry. The Quarry must be adjacent to a Road to produce Stone."
 
 TILE_NAME_MILL,磨坊,Mill
-TILE_DESC_MILL,周围每有一个麦田地块，食物产量+{adj_food},Grants +{adj_food} Food for each adjacent Wheat.
+TILE_DESC_MILL,"周围每有一个麦田地块，食物产量+{adj_food}",Grants +{adj_food} Food for each adjacent Wheat.
 
 TILE_NAME_ROAD,道路,Road
-TILE_DESC_ROAD,道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关,Road.
+TILE_DESC_ROAD,"道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关。","The backbone of your logistics network. Production buildings must be adjacent to a Road to function. Building Roads costs extra Stone based on the distance from your Headquarters."
 
 TILE_NAME_OUTPOST,探险家前哨站,Explorers outpost
 TILE_DESC_OUTPOST,每回合自动产生探险家，可用于抽取自然地块,Explorers are automatically generated each round and can be used to extract natural tiles.
 
 TILE_NAME_COAST,海岸,Coast
-TILE_DESC_COAST,一片海岸,A coast range.
+TILE_DESC_COAST,一片海岸,"A Market. Increases your Max Trade Points by +1 for each adjacent Coast tile."
 
 TILE_NAME_MARKET,市场,Market
-TILE_DESC_MARKET,一座市场，会根据周围海岸地块的数量增加交易点数,A market will increase the number of trading points based on the number of surrounding coast tile.
+TILE_DESC_MARKET,"一座市场，相邻每有一个海岸地块，贸易点数上限+1。",A market will increase the number of trading points based on the number of surrounding coast tile.
 
 TILE_NAME_FURNACE,熔炉,Furnace
-TILE_DESC_FURNACE,一座精炼炉，通过消耗石头和木头生产金属,Metal is produced by consuming stone and wood.
+TILE_DESC_FURNACE,"一座精炼炉，每回合消耗{wood_maintance}木头和{stone_maintance}石头生产{metal_production}金属。","A Furnace. Consumes {wood_maintance} Wood and {stone_maintance} Stone to produce {metal_production} Metal per turn."
 
 TILE_NAME_WHEAT_FIELD,麦田,Wheat Field
+TILE_DESC_WHEAT_FIELD,"每一座麦田地块可以使相邻的磨坊食物产量+2","A Wheat Field. Grants +2 Food production to all adjacent Mills."
 
 TILE_NAME_STONE_PIT,采石场,quarry
+TILE_DESC_STONE_PIT,"采石场每回合会产生{stone_production}石头","A Quarry. Produces {stone_production} Stone per turn."
 
 TILE_NAME_RUINED_STONE_PIT,采石场废墟,Ruined Quarry
+TILE_DESC_RUINED_STION_PIT,"化为废墟的采石场，会使周围的道路无法工作，可以通过改造复原。","A Ruined Quarry. Disables adjacent Roads. Can be restored through the upgrade menu."
 
 TILE_NAME_FAKE_ROAD,道路,Road
+TILE_DESC_FAKE_ROAD,道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关,"The backbone of your logistics network. Production buildings must be adjacent to a Road to function. Building Roads costs extra Stone based on the distance from your Headquarters."
 
 TILE_NAME_BLOCKED_ROAD,道路,Road
+TILE_DESC_BLOCKED_ROAD,道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关,"The backbone of your logistics network. Production buildings must be adjacent to a Road to function. Building Roads costs extra Stone based on the distance from your Headquarters."
+
+TILE_NAME_CASTLE,城堡,Castle
+TILE_DESC_CASTLE,"城堡每3回合生成1张骑士卡，骑士卡牌可以驱逐强盗和怪物地块。","A Castle. Generates 1 Knight Card every 3 turns. Knights can be used to clear Bandit and Monster tiles."
+
+TILE_NAME_LOGGINGCAMP,伐木营地,Loggingcamp
+TILE_DESC_LOGGINGCAMP,"伐木营地每相邻一个森林地块，每回合木头产量+{adj_wood}","A Logging Camp. Wood production +{adj_wood} for each adjacent Forest tile."
 
 EVENT_NAME_BANDITS,强盗,Bandits
 EVENT_NAME_BLIGHT,枯萎病,Blight
@@ -52,7 +63,7 @@ EVENT_DESC_BLIGHT,"最初只是一棵麦子开始变黑，但接下来整片麦�
 EVENT_DESC_FAMINE,"饥饿的灾民开始聚集在附近了，大人。我无意责怪你，我们无法控制粮食的收成，但我们必须拿出储备粮食，否则饥荒会摧毁我们所有的生产","Starving refugees are gathering nearby, My Lord. I mean no disrespect,we cannot control the harvests,but we must dip into our reserves, or the famine will bring all our production to a halt."
 EVENT_DESC_FOREST_AWAKENING,"伐木工报告说林中的怪声越来越频繁了，最近开始有人失踪了，听说还有人发现了被撕碎的尸体。我们需要勇士去一探究竟","The woodcutters report that the strange noises in the woods are growing more frequent. People have gone missing recently, and rumor has it that mangled bodies were found. We need warriors to investigate."
 EVENT_DESC_MINE_EXPLOSION,"我收到报告，采石场爆炸了，我尊敬的领主大人。被抛向空中的巨石砸毁了附近的道路，我们必须做些什么","I have received reports that the quarry has exploded, my honorable Lord. Massive boulders hurled into the air have crushed the nearby roads. We must take action."
-EVENT_DESC__ROYAL_TAX,"王都那些人还以为我们挖到了金山。特使来了，大人，他带来了一份税务清单，我们必须按时上缴，否则国王可能会剥夺你的头衔","Those in the capital seem to think we've struck a mountain of gold. The royal envoy is here, My Lord, and he brings a tax manifest. We must pay it on time, or the King may strip you of your title."
+EVENT_DESC_ROYAL_TAX,"王都那些人还以为我们挖到了金山。特使来了，大人，他带来了一份税务清单，我们必须按时上缴，否则国王可能会剥夺你的头衔","Those in the capital seem to think we've struck a mountain of gold. The royal envoy is here, My Lord, and he brings a tax manifest. We must pay it on time, or the King may strip you of your title."
 EVENT_DESC_SEA_STORM,"领主大人，我明白你对海上的风暴并不陌生，但我依然要提醒你，现在的风暴将把这里变成一座孤岛，这段时间将不会有航船靠近我们的海岸了","My Lord, I know you are no stranger to storms at sea, but I must remind you of the consequences. This raging tempest will turn us into an isolated island,no ships will be able to approach our shores for the time being."
 
 wood,木材,Wood
@@ -90,3 +101,27 @@ event_menu_blight,[center]%s\n当前感染麦田: [color=red]%d[/color] 块\n[fo
 event_menu_forest_awakening,[center]%s\n当前怪物巢穴: [color=red]%d[/color] 个\n[font_size=12](需派遣骑士驱逐)[/font_size][/center],[center]%s\nCurrent monster nests: [color=red]%d[/color] \n[font_size=12](need knights)[/font_size][/center]
 event_menu_bandits_lost,"[center]%s\n[color=yellow]强盗失去方向[/color][/center]" % title,"[center]%s\n[color=yellow]Bandits lost their way[/color][/center]" % title
 event_menu_bandits,"[center]%s\n距大本营: [color=red]%d[/color] 步\n[font_size=12](需派遣骑士拦截)[/font_size][/center]","[center]%s\ndistance to HQ: [color=red]%d[/color] step\n[font_size=12](need knights)[/font_size][/center]"
+
+MAIN_MENU_DESC_EXPLOROR,"[center]探险家协会\n从零开始扩张与建设。\n\n游戏目标：使用道路连接所有灯塔，重新点亮岛屿。","[center]Explorer's Guild\nExpand and build from the ground up.\n\nObjective: Connect all Lighthouses using Roads to relight the island."
+MAIN_MENU_DESC_BARON,"[center]男爵\n守住摇摇欲坠的领地","[center]Baron\nDefend the crumbling domain."
+MAIN_MENU_DESC_DRUID,"[center]德鲁伊结社\n找回属于自己的遗产。","[center]Druid Circle\nReclaim your ancient legacy."
+
+PRESS_FLAG_TO_START,"\n\n[color=yellow]再次点击旗帜开始游戏[/color][/center]","\n\n[color=yellow]Press the flag again to start[/color][/center]"
+STILL_IN_DEVELOPMENT,"\n\n[color=gray]该阵营仍在开发中[/color][/center]","\n\n[color=gray]This faction is still under development.[/color][/center]"
+
+
+START,开始游戏,START
+SETTINGS,设置,SETTINGS
+CREDITS,关于,CREDITS
+EXIT,退出游戏,EXIT
+
+AUDIO_SETTING,"音量设置","Audio setting"
+MASTER,主音量,Master
+SFX,音效,SFX
+BGM,音乐,BGM
+BACK_TO_MAIN_MENU,关闭菜单,Close menu
+
+RESUME,返回游戏,Resume
+RESTART,重新开始游戏,Restart
+EXIT_TO_MAIN_MENU,返回主菜单,Exit to main menu
+EXIT_GAME,退出游戏,Exit game

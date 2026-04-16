@@ -44,25 +44,22 @@ texture = ExtResource("1_imwbf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/background" unique_id=381049051]
 layout_mode = 0
-offset_left = 162.0
+offset_left = 116.0
 offset_top = 95.0
-offset_right = 1156.0
-offset_bottom = 283.0
+offset_right = 1206.0
+offset_bottom = 359.0
 
 [node name="card1" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=580084923 instance=ExtResource("6_07mf5")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 stretch_mode = 5
 
 [node name="card2" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=879276245 instance=ExtResource("6_07mf5")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 stretch_mode = 5
 
 [node name="card3" parent="PanelContainer/MarginContainer/background/HBoxContainer" unique_id=1295842998 instance=ExtResource("6_07mf5")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 stretch_mode = 5

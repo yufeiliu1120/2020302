@@ -16,10 +16,10 @@ func format_tile_desc(text_key: String, data: TileResourceData) -> String:
 		"adj_food": data.adjacency_bonus_amount.get("food", 0),
 		"adj_wood": data.adjacency_bonus_amount.get("wood", 0),
 		"adj_stone": data.adjacency_bonus_amount.get("stone", 0),
-		
-		# 基础产量 (假设你以后有 base_production 这个字典)
-		#"base_wood": data.base_production.get("wood", 0),
-		
+		"wood_maintance":data.resource_maintenance.get("wood",0),
+		"stone_maintance":data.resource_maintenance.get("stone",0),
+		"metal_production":data.production.get("metal",0),
+		"stone_production":data.production.get("stone",0),
 		# 其他地块通用属性
 		"cost_wood": data.base_cost.get("wood", 0),
 		"cost_stone": data.base_cost.get("stone", 0)

@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://3uetjhyl5c52" path="res://scene/UI/trade_menu.gd" id="1_j1mu7"]
 [ext_resource type="Script" uid="uid://b240qpgrii8jc" path="res://scene/UI/panel_animator.gd" id="1_ldjoc"]
+[ext_resource type="Texture2D" uid="uid://coegobth6xsbu" path="res://assets/UI parts/resource icon wood.png" id="2_61euy"]
+[ext_resource type="Texture2D" uid="uid://eptv0p3qe6a5" path="res://assets/UI parts/resource icon stone.png" id="3_gayhn"]
 [ext_resource type="Texture2D" uid="uid://beudngewkftvg" path="res://assets/UI parts/trading_menu_board.png" id="3_j1mu7"]
+[ext_resource type="Texture2D" uid="uid://6mdppdmnea6w" path="res://assets/UI parts/resource icon food.png" id="4_0vw3s"]
 [ext_resource type="Texture2D" uid="uid://djmvjy70q73r4" path="res://assets/UI parts/trading_label.png" id="4_vgllh"]
+[ext_resource type="Texture2D" uid="uid://1lw3bokc4ib" path="res://assets/UI parts/resource icon metal.png" id="5_e2ndh"]
 [ext_resource type="Texture2D" uid="uid://ia6qcn026ijd" path="res://assets/UI parts/Trading arrow icon.png" id="5_l1y82"]
 
 [node name="TradeMenu" type="Control" unique_id=735364414 groups=["trade_menu"]]
@@ -14,6 +18,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j1mu7")
+res_icons = {
+"food": ExtResource("4_0vw3s"),
+"metal": ExtResource("5_e2ndh"),
+"stone": ExtResource("3_gayhn"),
+"wood": ExtResource("2_61euy")
+}
 metadata/_edit_vertical_guides_ = [484.0]
 
 [node name="Panel" type="Panel" parent="." unique_id=274925034]
@@ -132,7 +142,6 @@ mouse_filter = 2
 
 [node name="PopupMenu" type="PopupMenu" parent="." unique_id=609688750]
 oversampling_override = 1.0
-visible = true
 
 [node name="title" type="RichTextLabel" parent="." unique_id=566363674]
 layout_mode = 0

@@ -11,7 +11,7 @@ func open_panel():
 	
 	target.modulate = Color(1, 1, 1, 0)
 	target.scale = Vector2(0.8, 0.8)
-	
+	AudioManager.play_sfx("UI_OPEN")
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(target, "modulate", Color(1, 1, 1, 1), 0.2).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(target, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -23,7 +23,10 @@ func open_panel():
 # Callable 是一个非常强大的类型，代表“一个函数”。
 # 这样我们可以告诉动画：“关完之后，顺便帮我执行这个操作。”
 func close_panel(on_finished: Callable = Callable()):
+	if not get_parent().visible:
+		return
 	var tween = create_tween().set_parallel(true)
+	AudioManager.play_sfx("UI_OPEN")
 	tween.tween_property(target, "modulate", Color(1, 1, 1, 0), 0.15).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(target, "scale", Vector2(0.9, 0.9), 0.15).set_trans(Tween.TRANS_SINE)
 	

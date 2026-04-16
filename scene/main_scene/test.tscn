@@ -28,13 +28,13 @@ size = Vector2(1071, 865)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ivktd"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_npe5v"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lbyok"]
 noise = SubResource("FastNoiseLite_ivktd")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_npe5v"]
 shader = ExtResource("12_l0c0i")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_npe5v")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_lbyok")
 shader_parameter/cloud_color = Color(0.9019608, 0.8509804, 0.8, 0.3529412)
 shader_parameter/scroll_speed = Vector2(0.02, 0.015)
 shader_parameter/cloud_density = 0.5

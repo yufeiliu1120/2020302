@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wngav4u1fsdh"
+path="res://.godot/imported/sea storm.mp3-f6461820586e4679d7f623ccce8d2524.mp3str"
+
+[deps]
+
+source_file="res://assets/SFX/sea storm.mp3"
+dest_files=["res://.godot/imported/sea storm.mp3-f6461820586e4679d7f623ccce8d2524.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

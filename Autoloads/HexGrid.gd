@@ -9,6 +9,18 @@ const OFFSET_Y = 48.0
 # 用于存储地图数据： { Vector2i(q, r): 地块实例 }
 var active_tiles: Dictionary = {}
 
+# ==========================================
+# 🧹 生命周期与重置逻辑
+# ==========================================
+func _ready():
+	# 将自己加入可重置组，等待加载界面的统一召唤
+	add_to_group("Resettable")
+
+func reset_data():
+	# 核心：清空记录地块的字典
+	active_tiles.clear()
+	print("【系统】HexGrid 单例数据已成功重置！")
+	
 # 获取某个坐标周围的 6 个坐标，用来处理地块之间的关系
 func get_neighbors(grid_pos: Vector2i) -> Array[Vector2i]:
 	var neighbors: Array[Vector2i] = []

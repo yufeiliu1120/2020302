@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4v1xsi1ghvrv"
+path="res://.godot/imported/tile drop.mp3-d5f9ced92d5130c7cab4539ee043d3d9.mp3str"
+
+[deps]
+
+source_file="res://assets/SFX/tile drop.mp3"
+dest_files=["res://.godot/imported/tile drop.mp3-d5f9ced92d5130c7cab4539ee043d3d9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

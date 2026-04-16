@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="20260302"
-run/main_scene="uid://o1ohkgwopq4m"
+run/main_scene="uid://bpsx6oqeqvy2l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
@@ -21,6 +21,8 @@ ConnectivityManager="*uid://epp2ummgim67"
 GameResourceManager="*uid://bjm2t7gmmprvq"
 SignalBusAutoload="*uid://bg2ir70futmya"
 TextManager="*uid://b6axieardeeuk"
+AudioManager="*uid://bnkqmoo50ys8i"
+SceneManager="*uid://cw5lmr0h48erb"
 
 [display]
 
@@ -85,7 +87,7 @@ ESC={
 [internationalization]
 
 locale/translations=PackedStringArray("res://localization/localization.en.translation", "res://localization/localization.zh.translation")
-locale/test="en"
+locale/test="zh"
 locale/locale_filter_mode=0
 
 [physics]

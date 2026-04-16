@@ -16,7 +16,7 @@ func _ready():
 
 func show_event_details(event_data: EventResourceData):
 	current_event_data = event_data
-	
+	AudioManager.play_sfx(event_data.event_name)
 	if event_data.full_image:
 		full_image.texture = event_data.full_image
 	desc_label.text = tr(event_data.event_description)

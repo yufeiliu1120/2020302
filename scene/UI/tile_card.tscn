@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://t6ob6wari70k" path="res://scene/UI/Tile_card.gd" id="2_wayab"]
 
 [node name="TextureButton" type="TextureButton" unique_id=580084923]
-offset_right = 36.0
-offset_bottom = 48.0
+offset_right = 216.0
+offset_bottom = 292.0
+scale = Vector2(1.185, 1.185)
 texture_normal = ExtResource("1_cegps")
 texture_pressed = ExtResource("1_cegps")
 texture_hover = ExtResource("1_cegps")
@@ -34,22 +35,20 @@ anchor_top = 0.39900002
 anchor_right = 0.731
 anchor_bottom = 0.92
 offset_left = 0.03199768
-offset_top = 20.087997
+offset_top = -4.9120026
 offset_right = 0.104003906
-offset_bottom = -15.959991
+offset_bottom = -4.9599915
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TileName" type="Label" parent="VBoxContainer" unique_id=991938079]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Tile"
 horizontal_alignment = 1
 
-[node name="TileDescription" type="Label" parent="VBoxContainer" unique_id=457265500]
+[node name="TileDescription" type="RichTextLabel" parent="VBoxContainer" unique_id=1828812173]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 14
-text = "this is a test card"
-horizontal_alignment = 1
-autowrap_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 14

@@ -49,7 +49,6 @@ func exit() -> void:
 	
 	# 发送空状态来隐藏 UI
 	SignalBusAutoload.update_cost_preview.emit(0, {}, false)
-	
 	await get_tree().create_timer(0.5).timeout
 	get_tree().get_first_node_in_group("ControlNode").set_mouse_is_dragging(false)
 

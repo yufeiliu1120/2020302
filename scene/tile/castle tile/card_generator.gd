@@ -28,6 +28,7 @@ func _on_turn_started(_current_turn: int):
 		var success = _try_spawn_card()
 		
 		if success:
+			AudioManager.play_sfx("get_card")
 			current_turns = 0 # 发牌成功，重新开始计步
 		else:
 			current_turns = turns_to_generate # 发牌失败（手牌满了），保持在即将发牌的状态，等下回合重试

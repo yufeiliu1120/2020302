@@ -1,0 +1,371 @@
+[gd_scene format=3 uid="uid://bpsx6oqeqvy2l"]
+
+[ext_resource type="Script" uid="uid://dwjgk4kyvnmiu" path="res://scene/main_menu/main_menu.gd" id="1_5p7xk"]
+[ext_resource type="Texture2D" uid="uid://bb3tsysle1uvt" path="res://assets/main_scene/floor.png" id="1_8j7og"]
+[ext_resource type="Texture2D" uid="uid://bybv754qu01b3" path="res://assets/main_scene/table.png" id="2_dw11l"]
+[ext_resource type="Texture2D" uid="uid://d0c1tujfgopvl" path="res://assets/title/box.png" id="4_qjo2x"]
+[ext_resource type="Texture2D" uid="uid://dw6yi7vve3mqs" path="res://assets/title/exploror.png" id="5_pwc7l"]
+[ext_resource type="Texture2D" uid="uid://b2gblxt68k50n" path="res://assets/title/baron.png" id="6_5p7xk"]
+[ext_resource type="Texture2D" uid="uid://dqbx0lc5mx48d" path="res://assets/UI parts/main_menu_panel.png" id="6_ynsyp"]
+[ext_resource type="Texture2D" uid="uid://clj6akbikaa4m" path="res://assets/UI parts/main_menu_button_hover.png" id="7_d8lg5"]
+[ext_resource type="Texture2D" uid="uid://pn5x2cvhqr1i" path="res://assets/title/cover.png" id="7_iwsfb"]
+[ext_resource type="Script" uid="uid://bth7q83smwfab" path="res://scene/main_menu/choosing_button.gd" id="7_j0lw8"]
+[ext_resource type="Texture2D" uid="uid://cdfhc8707r3ey" path="res://assets/title/title.png" id="7_kbkx0"]
+[ext_resource type="Texture2D" uid="uid://baeda6gahk80x" path="res://assets/title/drui.png" id="7_xpm8d"]
+[ext_resource type="Theme" uid="uid://ccr2i3uq7rgua" path="res://scene/UI/menu_button.tres" id="13_6qnvj"]
+[ext_resource type="Script" uid="uid://cgrnri6r23r1o" path="res://scene/main_menu/options.gd" id="15_j0lw8"]
+[ext_resource type="Shader" uid="uid://cb4ohot7hvnfq" path="res://shader/cloud_shader.gdshader" id="16_6qnvj"]
+[ext_resource type="AudioStream" uid="uid://djaparmu7eww0" path="res://assets/bgm/__Goblet Thunder__.wav" id="17_6uixh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6uixh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_npe5v"]
+noise = SubResource("FastNoiseLite_6uixh")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7bl5k"]
+shader = ExtResource("16_6qnvj")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_npe5v")
+shader_parameter/cloud_color = Color(0.9019608, 0.8509804, 0.8, 0.3529412)
+shader_parameter/scroll_speed = Vector2(0.02, 0.015)
+shader_parameter/cloud_density = 0.5
+
+[node name="main_menu" type="Node2D" unique_id=1694115158]
+auto_translate_mode = 1
+script = ExtResource("1_5p7xk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=861495127]
+position = Vector2(-0.02, 145)
+zoom = Vector2(0.66, 0.66)
+
+[node name="background" type="Node2D" parent="." unique_id=707275298]
+
+[node name="background" type="Sprite2D" parent="background" unique_id=1437946953]
+z_index = -12
+position = Vector2(523.4999, 364.00003)
+scale = Vector2(21.865002, 15)
+texture = ExtResource("1_8j7og")
+
+[node name="table" type="Sprite2D" parent="background" unique_id=2081730763]
+z_index = -10
+position = Vector2(-7.6293945e-06, 463)
+scale = Vector2(15, 15)
+texture = ExtResource("2_dw11l")
+
+[node name="box" type="Node2D" parent="." unique_id=1778251816]
+position = Vector2(658.095, 13.71)
+scale = Vector2(1.925, 1.925)
+
+[node name="shadow" type="Sprite2D" parent="box" unique_id=1322213767]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.62352943)
+position = Vector2(-133.49092, 67.163635)
+scale = Vector2(1.8550981, 1.9016047)
+texture = ExtResource("7_iwsfb")
+
+[node name="box" type="Sprite2D" parent="box" unique_id=687978453]
+position = Vector2(-145.43896, 42.748055)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_qjo2x")
+
+[node name="banners" type="Node2D" parent="box" unique_id=252292592]
+
+[node name="exploror" type="TextureRect" parent="box/banners" unique_id=1958852834]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.127
+offset_top = -100.0
+offset_right = 31.119751
+offset_bottom = -47.012993
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_pwc7l")
+script = ExtResource("7_j0lw8")
+
+[node name="baron" type="TextureRect" parent="box/banners" unique_id=1179693467]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.127
+offset_right = 31.119751
+offset_bottom = 52.987007
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5p7xk")
+script = ExtResource("7_j0lw8")
+
+[node name="druid" type="TextureRect" parent="box/banners" unique_id=553207080]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.127
+offset_top = 100.00001
+offset_right = 31.119751
+offset_bottom = 152.987
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_xpm8d")
+script = ExtResource("7_j0lw8")
+
+[node name="cover" type="Sprite2D" parent="box" unique_id=853850103]
+position = Vector2(-145.43898, 43.787018)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("7_iwsfb")
+
+[node name="title" type="Sprite2D" parent="box/cover" unique_id=21656149]
+position = Vector2(25.97403, -86.78381)
+scale = Vector2(1.2631632, 1.2631632)
+texture = ExtResource("7_kbkx0")
+
+[node name="text label" type="PanelContainer" parent="box" unique_id=723975119]
+visible = false
+offset_left = -300.82855
+offset_top = -14.914286
+offset_right = 11.898743
+offset_bottom = 244.30647
+
+[node name="MarginContainer" type="MarginContainer" parent="box/text label" unique_id=1284646671]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="box/text label/MarginContainer" unique_id=2064921503]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+
+[node name="borad" type="Node2D" parent="." unique_id=43445767]
+
+[node name="shadow" type="Sprite2D" parent="borad" unique_id=1590386993]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+position = Vector2(-511.5, 120.86943)
+scale = Vector2(3.815, 3.817092)
+texture = ExtResource("6_ynsyp")
+
+[node name="panel" type="Sprite2D" parent="borad" unique_id=579191937]
+position = Vector2(-528, 98)
+scale = Vector2(3.6725, 3.6724994)
+texture = ExtResource("6_ynsyp")
+
+[node name="new game button" type="Node2D" parent="." unique_id=1156148468]
+
+[node name="shadow" type="Sprite2D" parent="new game button" unique_id=1772298835]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+position = Vector2(-515.5, -259)
+scale = Vector2(3.7214286, 3.909091)
+texture = ExtResource("7_d8lg5")
+
+[node name="Button" type="Button" parent="new game button" unique_id=107701313]
+offset_left = -775.0
+offset_top = -347.0
+offset_right = -268.0
+offset_bottom = -179.0
+theme = ExtResource("13_6qnvj")
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="options button" type="Node2D" parent="." unique_id=1391982927]
+position = Vector2(0, 200)
+
+[node name="shadow" type="Sprite2D" parent="options button" unique_id=2091208410]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+position = Vector2(-515.5, -259)
+scale = Vector2(3.7214286, 3.909091)
+texture = ExtResource("7_d8lg5")
+
+[node name="Button" type="Button" parent="options button" unique_id=1250003697]
+auto_translate_mode = 1
+offset_left = -775.0
+offset_top = -347.0
+offset_right = -268.0
+offset_bottom = -179.0
+theme = ExtResource("13_6qnvj")
+theme_override_font_sizes/font_size = 40
+text = "SETTINGS"
+
+[node name="credits button" type="Node2D" parent="." unique_id=178166600]
+position = Vector2(0, 400)
+
+[node name="shadow" type="Sprite2D" parent="credits button" unique_id=937219472]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+position = Vector2(-515.5, -259)
+scale = Vector2(3.7214286, 3.909091)
+texture = ExtResource("7_d8lg5")
+
+[node name="Button" type="Button" parent="credits button" unique_id=2004846705]
+offset_left = -775.0
+offset_top = -347.0
+offset_right = -268.0
+offset_bottom = -179.0
+theme = ExtResource("13_6qnvj")
+theme_override_font_sizes/font_size = 40
+text = "CREDITS"
+
+[node name="exit button" type="Node2D" parent="." unique_id=1271073997]
+position = Vector2(0, 600)
+
+[node name="shadow" type="Sprite2D" parent="exit button" unique_id=764183843]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.49019608)
+position = Vector2(-515.5, -259)
+scale = Vector2(3.7214286, 3.909091)
+texture = ExtResource("7_d8lg5")
+
+[node name="Button" type="Button" parent="exit button" unique_id=829472763]
+offset_left = -775.0
+offset_top = -347.0
+offset_right = -268.0
+offset_bottom = -179.0
+theme = ExtResource("13_6qnvj")
+theme_override_font_sizes/font_size = 40
+text = "EXIT"
+
+[node name="options" type="CanvasLayer" parent="." unique_id=1874118327]
+auto_translate_mode = 1
+visible = false
+script = ExtResource("15_j0lw8")
+
+[node name="PanelContainer" type="PanelContainer" parent="options" unique_id=754056798]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="options/PanelContainer" unique_id=1808946685]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="VBoxContainer" type="VBoxContainer" parent="options/PanelContainer/MarginContainer" unique_id=682466169]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer" unique_id=1318172402]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Audiosetting" type="VBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1014580231]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting" unique_id=73124070]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "AUDIO_SETTING"
+horizontal_alignment = 1
+
+[node name="Master" type="HBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting" unique_id=1455023131]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="Label" type="Label" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/Master" unique_id=135561667]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 56
+text = "MASTER"
+
+[node name="HSlider" type="HSlider" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/Master" unique_id=671928264]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.01
+value = 0.001
+
+[node name="SFX" type="HBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting" unique_id=675850114]
+layout_mode = 2
+theme_override_constants/separation = 171
+
+[node name="Label" type="Label" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/SFX" unique_id=1478310687]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 56
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/SFX" unique_id=698701716]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.1
+value = 0.001
+
+[node name="BGM" type="HBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting" unique_id=615399657]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/BGM" unique_id=808419120]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 56
+text = "BGM"
+
+[node name="HSlider" type="HSlider" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Audiosetting/BGM" unique_id=203371574]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.01
+value = 0.011
+
+[node name="VBoxContainer" type="VBoxContainer" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1813226584]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2026840853]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "Language"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="options/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=634810959]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "中文（简体）"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
+
+[node name="Control" type="Control" parent="options/PanelContainer/MarginContainer/VBoxContainer" unique_id=1779154260]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="options/PanelContainer/MarginContainer/VBoxContainer" unique_id=402071406]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "BACK_TO_MAIN_MENU"
+
+[node name="cloud" type="ColorRect" parent="." unique_id=1716481921]
+material = SubResource("ShaderMaterial_7bl5k")
+offset_left = -1658.0
+offset_top = -1131.0
+offset_right = 2695.0
+offset_bottom = 1854.0
+mouse_filter = 2
+
+[node name="GobletThunder" type="AudioStreamPlayer" parent="." unique_id=205102214]
+stream = ExtResource("17_6uixh")
+volume_db = -20.0
+autoplay = true
+bus = &"BGM"
+
+[connection signal="pressed" from="options button/Button" to="options" method="open"]

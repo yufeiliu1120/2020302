@@ -143,7 +143,7 @@ texture = SubResource("CompressedTexture2D_c5b5o")
 
 [node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_k0qc7")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Dragging")
 
 [node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
 script = ExtResource("6_h7lsa")

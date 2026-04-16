@@ -6,7 +6,7 @@ var state_name = "Idle"
 func enter():
 	actor.z_index = 0
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
+	AudioManager.play_sfx("tile_drop")
 func do(_delta):
 	# 【核心修复】防穿透：如果鼠标悬停在 UI 上（如按钮、面板），直接跳过地块的输入处理！
 	if _is_mouse_over_ui():

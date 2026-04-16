@@ -14,9 +14,9 @@ var current_turn: int = 1
 var max_trade_points: int = 1 
 var max_card_count:int = 4
 var stocks = {
-	"food": 5,
+	"food": 10,
 	"wood": 10,
-	"stone": 4, 
+	"stone": 9, 
 	"explorer": 0,
 	"metal": 0,
 	"trade_point": 1
@@ -34,7 +34,41 @@ var current_demolish_points: int = 2     # 当前剩余拆除次数
 # 用来保持 RefCounted 事件脚本存活的“避难所”
 var active_event_effects: Array = []
 
+# ==========================================
+# 🧹 生命周期与重置逻辑
+# ==========================================
+func _ready():
+	# 加入可重置组，听从加载界面的召唤
+	add_to_group("Resettable")
 
+func reset_data():
+	# 1. 重置基础状态和库存到初始值
+	current_turn = 1
+	max_trade_points = 1 
+	max_card_count = 4
+	stocks = {
+		"food": 10,
+		"wood": 10,
+		"stone": 9, 
+		"explorer": 0,
+		"metal": 0,
+		"trade_point": 1
+	}
+	
+	# 2. 清除所有灾难事件的负面效果
+	is_trade_disabled = false      
+	is_production_frozen = false   
+	
+	max_demolish_points = 2         
+	current_demolish_points = 2     
+	
+	# 3. 清空事件脚本避难所
+	active_event_effects.clear()
+	
+	# 4. 🚀 关键：发射信号，告诉所有仍在监听的 UI 更新为初始库存
+	resources_changed.emit(stocks)
+	
+	print("【系统】GameResourceManager 资源与状态已成功重置！")
 # ==========================================
 # 回合结算核心系统 (合并了旧的 end_turn 和 process_turn)
 # ==========================================

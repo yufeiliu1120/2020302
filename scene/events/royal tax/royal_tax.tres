@@ -11,10 +11,10 @@ script/source = "extends BaseDurationEvent
 # 🎲 随机税收配置池 (键 = 资源名, 值 = 需要的数量)
 # ==========================================
 var possible_taxes: Dictionary = {
-	\"food\": 100,
-	\"wood\": 150,
-	\"stone\": 80,
-	\"metal\": 50
+	\"food\": 35,
+	\"wood\": 35,
+	\"stone\": 30,
+	\"metal\": 10
 }
 # 实例的当前税收目标 (不再写死，而是由下面随机生成)
 var tax_cost: int = 0
@@ -27,7 +27,7 @@ var tax_ui_scene = preload(\"res://scene/events/royal tax/tax menu.tscn\")
 var ui_instance: Control = null
 
 func _init():
-	remaining_turns = 3 # 限时 3 回合
+	remaining_turns = 5 # 限时 5 回合
 	effect_type = \"royal_tax\"
 	# ==========================================
 	# 🎯 在脚本刚被实例化时，立刻抽签决定这次要收什么税！
