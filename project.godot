@@ -45,6 +45,12 @@ resource_ui=""
 Event_list=""
 "Knight Interface"=""
 "card container"=""
+"Explorer's Guild main_scene"=""
+light_house_victory=""
+
+[gui]
+
+theme/custom="uid://c1mxepw211aba"
 
 [input]
 

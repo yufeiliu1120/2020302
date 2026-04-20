@@ -36,6 +36,7 @@ theme_override_font_sizes/font_size = 20
 [node name="Desclabel" type="Label" parent="InfoBox" unique_id=1089094425]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 autowrap_mode = 2
 
 [node name="Costslabel" type="RichTextLabel" parent="." unique_id=1096724560]

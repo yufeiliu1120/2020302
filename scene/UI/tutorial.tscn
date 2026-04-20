@@ -1,0 +1,299 @@
+[gd_scene format=3 uid="uid://bi2edi377q1d3"]
+
+[ext_resource type="Script" uid="uid://b0yb38rbr306e" path="res://scene/UI/tutorial.gd" id="1_b6lh5"]
+[ext_resource type="Theme" uid="uid://diuhbmi0m86i" path="res://assets/UI parts/tutorial_theme.tres" id="1_uk2a7"]
+[ext_resource type="Theme" uid="uid://c1mxepw211aba" path="res://assets/UI parts/global_theme.tres" id="2_b6lh5"]
+[ext_resource type="Texture2D" uid="uid://bjg3fk0d8s2vc" path="res://assets/UI parts/craft button normal.png" id="3_86kw8"]
+[ext_resource type="Texture2D" uid="uid://bv20nysr1y1lx" path="res://assets/UI parts/trade button nomal.png" id="4_oi8cf"]
+[ext_resource type="Texture2D" uid="uid://dc5kkl7bhsecr" path="res://assets/UI parts/scout button normal.png" id="5_4pwnd"]
+[ext_resource type="Texture2D" uid="uid://dbvunmccct6ul" path="res://assets/UI parts/menu button normal.png" id="6_djit7"]
+[ext_resource type="Texture2D" uid="uid://c7lxqau0kiruj" path="res://assets/UI parts/turn_button_normal.png" id="7_1ij0a"]
+
+[node name="ColorRect" type="ColorRect" unique_id=1375490104]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5254902)
+script = ExtResource("1_b6lh5")
+
+[node name="step1" type="Control" parent="." unique_id=231796380]
+visible = false
+anchors_preset = 0
+offset_top = 14.0
+offset_right = 40.0
+offset_bottom = 54.0
+
+[node name="resource_explain" type="VBoxContainer" parent="step1" unique_id=1684705462]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.044000003
+anchor_right = 0.569
+anchor_bottom = 0.24900001
+offset_left = 83.24
+offset_top = 51.0
+offset_right = 1061.24
+offset_bottom = 179.04
+
+[node name="Panel" type="Panel" parent="step1/resource_explain" unique_id=2055628614]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="PanelContainer" type="PanelContainer" parent="step1/resource_explain" unique_id=1612031779]
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="Label" type="Label" parent="step1/resource_explain/PanelContainer" unique_id=1349241177]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TUT_BASIC_RES"
+autowrap_mode = 2
+
+[node name="resource_explain2" type="VBoxContainer" parent="step1" unique_id=1333210606]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 1093.0
+offset_top = 53.0
+offset_right = 1339.0
+offset_bottom = 302.0
+
+[node name="Panel" type="Panel" parent="step1/resource_explain2" unique_id=1751319502]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="PanelContainer" type="PanelContainer" parent="step1/resource_explain2" unique_id=1732003388]
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="Label" type="Label" parent="step1/resource_explain2/PanelContainer" unique_id=691773193]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TUT_EXPLORER"
+autowrap_mode = 2
+
+[node name="card_container" type="VBoxContainer" parent="step1" unique_id=1795287480]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 843.0
+offset_right = 618.0
+offset_bottom = 1030.0
+theme = ExtResource("1_uk2a7")
+
+[node name="PanelContainer" type="PanelContainer" parent="step1/card_container" unique_id=303185769]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="step1/card_container/PanelContainer" unique_id=298137570]
+layout_mode = 2
+theme = ExtResource("2_b6lh5")
+text = "TUT_CARD_CONTAINER"
+
+[node name="Panel2" type="Panel" parent="step1/card_container" unique_id=236451324]
+custom_minimum_size = Vector2(50, 120)
+layout_mode = 2
+
+[node name="step2" type="Control" parent="." unique_id=662711298]
+visible = false
+anchors_preset = 0
+offset_left = 635.0
+offset_top = 665.0
+offset_right = 1264.0
+offset_bottom = 1066.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="step2" unique_id=434481346]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -274.0
+offset_right = 620.0
+offset_bottom = 257.0
+
+[node name="PanelContainer" type="PanelContainer" parent="step2/VBoxContainer" unique_id=472379153]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="step2/VBoxContainer/PanelContainer" unique_id=668606776]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="step2/VBoxContainer/PanelContainer/HBoxContainer" unique_id=268161924]
+layout_mode = 2
+texture = ExtResource("3_86kw8")
+
+[node name="Label" type="Label" parent="step2/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1535396245]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "TUT_BUILD"
+autowrap_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="step2/VBoxContainer" unique_id=51509877]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="step2/VBoxContainer/PanelContainer2" unique_id=1278317636]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="step2/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=807872082]
+layout_mode = 2
+texture = ExtResource("4_oi8cf")
+
+[node name="Label" type="Label" parent="step2/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1234476012]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "TUT_TRADE"
+autowrap_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="step2/VBoxContainer" unique_id=971573203]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="step2/VBoxContainer/PanelContainer3" unique_id=1461144697]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="step2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=199620784]
+layout_mode = 2
+texture = ExtResource("5_4pwnd")
+
+[node name="Label" type="Label" parent="step2/VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1956198396]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "TUT_EXPLORE"
+autowrap_mode = 2
+
+[node name="PanelContainer4" type="PanelContainer" parent="step2/VBoxContainer" unique_id=1670710669]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="step2/VBoxContainer/PanelContainer4" unique_id=1444886506]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="step2/VBoxContainer/PanelContainer4/HBoxContainer" unique_id=133450817]
+layout_mode = 2
+texture = ExtResource("6_djit7")
+
+[node name="Label" type="Label" parent="step2/VBoxContainer/PanelContainer4/HBoxContainer" unique_id=1518532944]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "TUT_PAUSE"
+autowrap_mode = 2
+
+[node name="PanelContainer5" type="PanelContainer" parent="step2/VBoxContainer" unique_id=2144405222]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="step2/VBoxContainer/PanelContainer5" unique_id=1318371459]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="step2/VBoxContainer/PanelContainer5/HBoxContainer" unique_id=1106581607]
+layout_mode = 2
+texture = ExtResource("7_1ij0a")
+
+[node name="Label" type="Label" parent="step2/VBoxContainer/PanelContainer5/HBoxContainer" unique_id=1492274283]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "TUT_END_TURN"
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="step2" unique_id=1145970252]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 262.0
+offset_right = 660.0
+offset_bottom = 406.0
+theme = ExtResource("1_uk2a7")
+
+[node name="step3" type="Control" parent="." unique_id=312261447]
+visible = false
+layout_mode = 1
+anchor_left = 0.025
+anchor_top = 0.096
+anchor_right = 0.84800005
+anchor_bottom = 0.72300005
+offset_top = 20.32
+offset_right = -0.16015625
+offset_bottom = 20.159973
+
+[node name="Panel" type="Panel" parent="step3" unique_id=820528036]
+layout_mode = 0
+offset_left = 1248.0
+offset_top = 16.0
+offset_right = 1540.0
+offset_bottom = 166.0
+theme = ExtResource("1_uk2a7")
+
+[node name="PanelContainer" type="PanelContainer" parent="step3" unique_id=1241248205]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 61.0
+offset_right = 1214.0
+offset_bottom = 109.0
+theme = ExtResource("1_uk2a7")
+
+[node name="Label" type="Label" parent="step3/PanelContainer" unique_id=1950588185]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "TUT_EVENT"
+autowrap_mode = 2
+
+[node name="step4" type="Control" parent="." unique_id=1895094316]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -109.0
+offset_right = 99.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="step4" unique_id=2086453820]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -67.0
+offset_right = 72.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="PanelContainer" type="PanelContainer" parent="step4" unique_id=2110798737]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5910001
+anchor_top = 0.95400006
+anchor_right = 2.591
+anchor_bottom = 1.394
+offset_left = 0.018005371
+offset_top = 0.02798462
+offset_right = -0.018005371
+offset_bottom = 0.10800171
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uk2a7")
+
+[node name="Label" type="Label" parent="step4/PanelContainer" unique_id=258379235]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "TUT_TILE"
+autowrap_mode = 3

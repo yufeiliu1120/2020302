@@ -96,6 +96,7 @@ script = ExtResource("1_wn1ri")
 event_id = "mine_explosion"
 event_name = "EVENT_NAME_MINE_EXPLOSION"
 event_description = "EVENT_DESC_MINE_EXPLOSION"
+event_mechanism_description = "EVENT_MEC_MINE_EXPLOSION"
 preview_image = ExtResource("2_vqreo")
 full_image = ExtResource("1_84t6u")
 effect_script = SubResource("GDScript_6ybpj")

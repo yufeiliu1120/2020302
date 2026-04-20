@@ -88,6 +88,7 @@ script = ExtResource("1_4uxmp")
 event_id = "famine"
 event_name = "EVENT_NAME_FAMINE"
 event_description = "EVENT_DESC_FAMINE"
+event_mechanism_description = "EVENT_MEC_FAMINE"
 preview_image = ExtResource("2_3wequ")
 full_image = ExtResource("1_iyrbk")
 effect_script = SubResource("GDScript_iyrbk")

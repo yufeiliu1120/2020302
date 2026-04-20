@@ -1,0 +1,21 @@
+[gd_resource type="Theme" format=3 uid="uid://diuhbmi0m86i"]
+
+[ext_resource type="Texture2D" uid="uid://hi3pndnath4i" path="res://assets/UI parts/tutorial_panel.png" id="1_scx1h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8vj74"]
+texture = ExtResource("1_scx1h")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c4am4"]
+texture = ExtResource("1_scx1h")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_8vj74")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_c4am4")

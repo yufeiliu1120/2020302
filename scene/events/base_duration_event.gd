@@ -4,6 +4,8 @@ class_name BaseDurationEvent # 【核心】：注册为一个全局类，方便�
 var remaining_turns: int = 0 
 var effect_type: String = "base_event"
 
+func get_remaing_turns():
+	return remaining_turns
 # ==========================================
 # ⚙️ 核心运转逻辑 (不需要再在子类里写了)
 # ==========================================

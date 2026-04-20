@@ -158,6 +158,7 @@ script = ExtResource("1_qpn3f")
 event_id = "forest_awakening"
 event_name = "EVENT_NAME_FOREST_AWAKENING"
 event_description = "EVENT_DESC_FOREST_AWAKENING"
+event_mechanism_description = "EVENT_MEC_FOREST_AWAKENING"
 preview_image = ExtResource("2_3dvf1")
 full_image = ExtResource("1_k32pg")
 effect_script = SubResource("GDScript_n6tp8")

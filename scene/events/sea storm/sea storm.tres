@@ -60,6 +60,7 @@ func _update_ui():
 script = ExtResource("2_xlcv0")
 event_name = "EVENT_NAME_SEA_STORM"
 event_description = "EVENT_DESC_SEA_STORM"
+event_mechanism_description = "EVENT_MEC_SEA_STORM"
 preview_image = ExtResource("1_pevet")
 full_image = ExtResource("1_j5fja")
 effect_script = SubResource("GDScript_et5b1")

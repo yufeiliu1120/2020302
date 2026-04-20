@@ -3,7 +3,7 @@ extends TextureRect # 如果你的根节点不是 TextureRect，请改回你的 
 # ==========================================
 # 🎨 动画配置参数
 # ==========================================
-var hover_scale: Vector2 = Vector2(1.1, 1.1)
+var hover_scale: Vector2 = Vector2(2, 2)
 var normal_scale: Vector2 = Vector2(1.0, 1.0)
 var hover_offset_y: float = -20.0
 

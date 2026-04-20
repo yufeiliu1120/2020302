@@ -2,7 +2,7 @@ extends Node
 
 # ⚠️ 统一配置加载界面的路径，以后改路径只需改这里
 const LOADING_SCREEN_PATH = "res://scene/UI/loading_screen.tscn"
-
+var current_scene
 ## 重新开始当前关卡
 func restart_scene():
 	var current_scene = get_tree().current_scene
@@ -46,5 +46,5 @@ func goto_scene(target_path: String):
 	# 5. 销毁旧场景
 	if old_scene:
 		old_scene.queue_free()
-	
+	current_scene = target_path
 	print("【场景管理】正在通过加载界面前往：" + target_path)

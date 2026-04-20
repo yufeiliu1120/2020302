@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://c1mxepw211aba"]
+
+[resource]
+Button/constants/outline_size = 2
+Label/constants/outline_size = 2
+RichTextLabel/constants/outline_size = 2

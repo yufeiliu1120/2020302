@@ -4,18 +4,18 @@ UI_COST_ADD,+ %d 石头,+ %d Stone
 UI_WARNING_NO_FUNDS,补给运费不足,Insufficient Funds
 UI_WARNING_INVALID_POS,无法放置,Cannot Place
 TILE_NAME_FOREST,森林,Forest
-TILE_DESC_FOREST,"茂密的树木，可改造为伐木场,伐木场会根据周围的森林地块数量生产木头资源。","Dense woods. Can be transformed into a Logging Camp, which produces Wood based on the number of adjacent Forest tiles."
+TILE_DESC_FOREST,"茂密的树木，可改造为伐木场,伐木场会根据周围的森林地块数量生产木头资源。","Dense woods. Can be UPGRADE to a Logging Camp, which produces Wood based on the number of adjacent Forest tiles."
 TILE_NAME_GRASS,草地,Grassland
-TILE_DESC_GRASS,"广袤的平原，可以改造成麦田地块，可以使相邻的磨坊地块生产食物资源。","Vast plains. Can be cultivated into a Wheat Field to boost the Food production of adjacent Mills."
+TILE_DESC_GRASS,"广袤的平原，可以改造成麦田地块，可以使相邻的磨坊地块生产食物资源。","Vast plains. Can be UPGRADE into a Wheat Field to boost the Food production of adjacent Mills."
 
 TILE_NAME_MOUTAIN,山脉,Mountain.
-TILE_DESC_MOUTAIN,"一片山脉,可以被改造成采石场，采石场需要与道路相邻以产生石头资源。","Rugged mountains. Can be excavated into a Quarry. The Quarry must be adjacent to a Road to produce Stone."
+TILE_DESC_MOUTAIN,"一片山脉,可以被改造成采石场，采石场需要与道路相邻以产生石头资源。","Rugged mountains. Can be GPGRADE to a Quarry. The Quarry must be adjacent to a Road to produce Stone."
 
 TILE_NAME_MILL,磨坊,Mill
 TILE_DESC_MILL,"周围每有一个麦田地块，食物产量+{adj_food}",Grants +{adj_food} Food for each adjacent Wheat.
 
 TILE_NAME_ROAD,道路,Road
-TILE_DESC_ROAD,"道路用来连接整个物流系统，生产建筑必须与道路向邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关。","The backbone of your logistics network. Production buildings must be adjacent to a Road to function. Building Roads costs extra Stone based on the distance from your Headquarters."
+TILE_DESC_ROAD,"道路用来连接整个物流系统，生产建筑必须与道路相邻才能工作，道路放置时需要花费额外石头，花费量与距离总部的距离有关。","The backbone of your logistics network. Production buildings must be adjacent to a Road to function. Building Roads costs extra Stone based on the distance from your Headquarters."
 
 TILE_NAME_OUTPOST,探险家前哨站,Explorers outpost
 TILE_DESC_OUTPOST,每回合自动产生探险家，可用于抽取自然地块,Explorers are automatically generated each round and can be used to extract natural tiles.
@@ -50,6 +50,8 @@ TILE_DESC_CASTLE,"城堡每3回合生成1张骑士卡，骑士卡牌可以驱逐
 TILE_NAME_LOGGINGCAMP,伐木营地,Loggingcamp
 TILE_DESC_LOGGINGCAMP,"伐木营地每相邻一个森林地块，每回合木头产量+{adj_wood}","A Logging Camp. Wood production +{adj_wood} for each adjacent Forest tile."
 
+HQ,"总部","HQ"
+
 EVENT_NAME_BANDITS,强盗,Bandits
 EVENT_NAME_BLIGHT,枯萎病,Blight
 EVENT_NAME_FAMINE,饥荒,Famine
@@ -65,6 +67,14 @@ EVENT_DESC_FOREST_AWAKENING,"伐木工报告说林中的怪声越来越频繁了
 EVENT_DESC_MINE_EXPLOSION,"我收到报告，采石场爆炸了，我尊敬的领主大人。被抛向空中的巨石砸毁了附近的道路，我们必须做些什么","I have received reports that the quarry has exploded, my honorable Lord. Massive boulders hurled into the air have crushed the nearby roads. We must take action."
 EVENT_DESC_ROYAL_TAX,"王都那些人还以为我们挖到了金山。特使来了，大人，他带来了一份税务清单，我们必须按时上缴，否则国王可能会剥夺你的头衔","Those in the capital seem to think we've struck a mountain of gold. The royal envoy is here, My Lord, and he brings a tax manifest. We must pay it on time, or the King may strip you of your title."
 EVENT_DESC_SEA_STORM,"领主大人，我明白你对海上的风暴并不陌生，但我依然要提醒你，现在的风暴将把这里变成一座孤岛，这段时间将不会有航船靠近我们的海岸了","My Lord, I know you are no stranger to storms at sea, but I must remind you of the consequences. This raging tempest will turn us into an isolated island,no ships will be able to approach our shores for the time being."
+
+EVENT_MEC_BANDITS,"随机一个道路地块被强盗占据，被占据的地块将阻断道路连接，且该地块每回合向总部移动一格，当地块到达总部，游戏失败。该地块可以使用骑士卡恢复。","A random Road is occupied. It breaks road connectivity and moves 1 tile toward the HQ every turn. Reaching the HQ triggers Game Over. Use a Knight Card to restore."
+EVENT_MEC_BLIGHT,"随机一个麦田地块被感染，被感染的地块无法工作，且每回合会感染周围的所有麦田地块，被感染的地块可以被拆除。","A random Wheat Field is infected. Production is halted and it infects adjacent Wheat Fields every turn. Infected tiles can be DEMOLISHED."
+EVENT_MEC_FAMINE,"交付食物阻止饥荒的发生，或是承受饥荒，承受饥荒意味着接下来的2回合内，所有生产建筑无法工作，但依然需要消耗食物。","Deliver Food to prevent or suffer the famine. Suffer Famine: All production is halted for 2 turns, but Food maintenance is still required."
+EVENT_MEC_FOREST_AWAKENING,"随机一个森林地块变为怪物巢穴，该地块会使周围所有生产建筑无法工作，可以使用骑士卡恢复。","A random Forest becomes a Monster Nest. Production of adjacent tiles is halted. Use a Knight Card to restore."
+EVENT_MEC_MINE_EXPLOSION,"一座采石场变为废墟，废墟无法生产资源，且会让周围的道路被阻塞。废墟可以通过改造地块恢复原状。","A Quarry collapses into Ruins. Production is halted and adjacent Roads are blocked. UPGRADE this tile to restore."
+EVENT_MEC_ROYAL_TAX,"国王的使者需要在5回合内收取资源，当资源足够时，可以通过左上角的按钮交付，如果未能按时交付，则游戏失败。","Deliver required resources within 5 turns via the top-left menu. Failure triggers Game Over."
+EVENT_MEC_SEA_STORM,"在3回合内无法通过交易界面换取资源。","Trade is disabled for 3 turns."
 
 wood,木材,Wood
 stone,石头,Stone
@@ -125,3 +135,20 @@ RESUME,返回游戏,Resume
 RESTART,重新开始游戏,Restart
 EXIT_TO_MAIN_MENU,返回主菜单,Exit to main menu
 EXIT_GAME,退出游戏,Exit game
+
+KNIGHT_CARD,骑士卡,Knight Card
+KNIGHT_CARD_DESC,"骑士卡可用来驱逐怪物和强盗地块","Knights can be used to banish monsters and bandits"
+
+
+TUT_BASIC_RES,"这里是基础资源，用于建造建筑地块和生产其他资源，大部分建筑地块每回合需要消耗食物进行维护。","Basic Resources. Used to construct buildings and produce other resources. Most buildings require Food maintenance every turn."
+TUT_EXPLORER,"探险家资源可用于在下方的探索按钮抽取自然地块。","Explorers. Spend them in the Explore menu below to draw natural tiles."
+TUT_CARD_CONTAINER,"这里是玩家拥有的卡牌，可主动使用。","Your Cards. Click to use them during your turn."
+TUT_BUILD,"建造按钮，可以消耗资源购买建筑地块，取消建造可返还资源。","Build. Spend resources to purchase building tiles. Canceling refunds the cost."
+TUT_TRADE,"交易按钮，每回合可消耗交易点数以物换物。交易点数每回合刷新。","Trade. Spend Trade Points to exchange resources. Trade Points refresh every turn."
+TUT_EXPLORE,"探索按钮，消耗1探险家资源，随机抽取自然地块，不选择地块不会返还探险家资源。","Explore. Spend 1 Explorer to draw natural tiles. Explorers are NOT refunded if you cancel or discard."
+TUT_PAUSE,"暂停菜单按钮。也可以查看游戏目标","Pause Menu,you can also view game objectives here."
+TUT_END_TURN,"结束回合按钮。","End Turn."
+TUT_EVENT,"这个界面会显示当前回合和距离下个随机事件的回合数。当随机事件出现时，玩家必须选择一个事件。正在进行的事件会出现在画面左上角。","Event Tracker. Shows the current Turn and turns remaining until the next Event. When an Event occurs, you must choose one. Active Events are displayed in the top-left."
+TUT_TILE,"右键点击一个地块，会显示其详细信息，以及改造和拆除选项。大部分自然地块都可以改造成资源生产地块。玩家每回合只能拆除2个地块。","Right-click a Tile to view details and Upgrade and Demolish options. Most natural tiles can be upgraded into production buildings. Max 2 Demolishes per Turn."
+
+EXPLORER'S_OBJECTIVE,"使用道路连接所有灯塔，重新点亮岛屿","Connect all Lighthouses using Roads to relight the island."

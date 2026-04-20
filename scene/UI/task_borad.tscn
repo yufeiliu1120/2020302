@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dgwrrsc3qqgml"]
+
+[ext_resource type="Texture2D" uid="uid://dvmh3k2id1rjw" path="res://assets/UI parts/craft_menu_borad.png" id="1_upmhb"]
+
+[node name="TextureRect" type="TextureRect" unique_id=1547271109]
+offset_right = 427.0
+offset_bottom = 323.0
+texture = ExtResource("1_upmhb")

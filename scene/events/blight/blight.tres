@@ -170,6 +170,7 @@ func _end_event():
 script = ExtResource("3_bld3c")
 event_name = "EVENT_NAME_BLIGHT"
 event_description = "EVENT_DESC_BLIGHT"
+event_mechanism_description = "EVENT_MEC_BLIGHT"
 preview_image = ExtResource("2_nl6h3")
 full_image = ExtResource("1_g61mb")
 effect_script = SubResource("GDScript_6bi88")

@@ -5,10 +5,12 @@ extends TextureRect
 @onready var main_menu_button = $"VBoxContainer/Return to main menu"
 @onready var exit_button = $"VBoxContainer/Exit game"
 @onready var panelanimator = $PanelAnimator
+@onready var objective_panel = $PanelContainer  #用来挂载当前目标显示的节点。
 
-#func _ready() -> void:
-	#hide()
-
+func _ready() -> void:
+	hide()
+	get_objective()
+	
 func open_menu():
 	panelanimator.open_panel()
 	get_tree().paused = true
@@ -16,6 +18,11 @@ func open_menu():
 func close_menu():
 	panelanimator.close_panel()
 	get_tree().paused = false
+
+func get_objective():
+	if SceneManager.current_scene == "res://scene/main_scene/test.tscn":
+		var objective_scene = load("res://scene/UI/explororer's_objective.tscn").instantiate()
+		objective_panel.add_child(objective_scene)
 
 func _on_resume_pressed() -> void:
 	close_menu()

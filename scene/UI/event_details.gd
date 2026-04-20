@@ -4,7 +4,8 @@ extends Control
 
 @onready var full_image = $content/image
 @onready var desc_label = $"content/Interactive menu/VBoxContainer/ScrollContainer/description"
-@onready var buttons_container = $"content/Interactive menu/VBoxContainer/buttons" 
+@onready var mec_desc_label = $content/mechanism/ScrollContainer/description
+@onready var buttons_container = $content/buttons
 @onready var animator = get_node_or_null("PanelAnimator")
 
 var current_event_data: EventResourceData
@@ -20,7 +21,7 @@ func show_event_details(event_data: EventResourceData):
 	if event_data.full_image:
 		full_image.texture = event_data.full_image
 	desc_label.text = tr(event_data.event_description)
-	
+	mec_desc_label.text = tr(event_data.event_mechanism_description)
 	for child in buttons_container.get_children():
 		child.queue_free()
 		

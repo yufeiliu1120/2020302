@@ -17,7 +17,8 @@ var sfx_dict: Dictionary = {
 "EVENT_NAME_FAMINE":preload("res://assets/SFX/famine.mp3"),
 "EVENT_NAME_BANDITS":preload("res://assets/SFX/bandits.mp3"),
 "get_card":preload("res://assets/SFX/get_card.mp3"),
-"box_slide":preload("res://assets/SFX/box open.mp3")
+"box_slide":preload("res://assets/SFX/box open.mp3"),
+"page":preload("res://assets/SFX/page.mp3")
 }
 
 # ==========================================

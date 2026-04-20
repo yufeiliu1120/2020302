@@ -212,6 +212,7 @@ script = ExtResource("3_wx0bl")
 event_id = "bandits"
 event_name = "EVENT_NAME_BANDITS"
 event_description = "EVENT_DESC_BANDITS"
+event_mechanism_description = "EVENT_MEC_BANDITS"
 preview_image = ExtResource("2_o1gro")
 full_image = ExtResource("1_xt1xo")
 effect_script = SubResource("GDScript_5jtp6")

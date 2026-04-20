@@ -24,9 +24,17 @@ offset_bottom = -9.0
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=151567390]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
 text = "KNIGHT_CARD"
 horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer" unique_id=2005885281]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "KNIGHT_CARD_DESC"

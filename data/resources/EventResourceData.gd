@@ -12,6 +12,8 @@ class_name EventResourceData
 @export var event_name: String = "EVENT_NAME_KEY" 
 ## 事件描述的翻译键（例如 "event_sea_storm_desc"）
 @export_multiline var event_description: String = "EVENT_DESC_KEY" 
+## 事件机制描述的翻译键（例如 "event_sea_storm_mec_desc"）
+@export_multiline var event_mechanism_description: String = "EVENT_MEC_KEY"
 
 # ==========================================
 # 美术资产 (Visuals)

@@ -118,11 +118,12 @@ layout_mode = 0
 offset_left = 394.51337
 offset_top = 102.0
 offset_right = 957.51337
-offset_bottom = 535.0
+offset_bottom = 234.0
 script = ExtResource("6_k56gy")
 
 [node name="AudioSettings" type="Label" parent="settings" unique_id=277640038]
 layout_mode = 2
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "AUDIO_SETTING"
 horizontal_alignment = 1
@@ -134,6 +135,9 @@ theme_override_constants/separation = 35
 [node name="Label" type="Label" parent="settings/Master" unique_id=2107203130]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.99116415, 0.99116427, 0.99116415, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 text = "MASTER"
 
 [node name="HSlider" type="HSlider" parent="settings/Master" unique_id=1730174432]
@@ -152,6 +156,7 @@ theme_override_constants/separation = 35
 custom_minimum_size = Vector2(8.185, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/outline_size = 2
 text = "BGM"
 
 [node name="HSlider" type="HSlider" parent="settings/BGM" unique_id=753178108]
@@ -170,6 +175,7 @@ theme_override_constants/separation = 35
 custom_minimum_size = Vector2(8.185, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/outline_size = 2
 text = "SFX"
 
 [node name="HSlider" type="HSlider" parent="settings/SFX" unique_id=655076403]
@@ -179,6 +185,13 @@ min_value = 0.01
 max_value = 1.0
 step = 0.1
 value = 0.01
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=157694122]
+layout_mode = 0
+offset_left = 396.51337
+offset_top = 261.0
+offset_right = 964.51337
+offset_bottom = 500.0
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]

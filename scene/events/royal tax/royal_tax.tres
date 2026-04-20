@@ -148,6 +148,7 @@ script = ExtResource("1_11wur")
 event_id = "royal_tax"
 event_name = "EVENT_NAME_ROYAL_TAX"
 event_description = "EVENT_DESC_ROYAL_TAX"
+event_mechanism_description = "EVENT_MEC_ROYAL_TAX"
 preview_image = ExtResource("2_jat3m")
 full_image = ExtResource("1_f5jkp")
 effect_script = SubResource("GDScript_jki38")

@@ -21,3 +21,7 @@ func _on_game_start():
 		main_ui.modulate = Color(1, 1, 1, 0) # 先变透明
 		var tween = create_tween()
 		tween.tween_property(main_ui, "modulate", Color(1, 1, 1, 1), 0.5).set_ease(Tween.EASE_OUT)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		$"outline/bottom UI/MarginContainer/buttons/menu".pressed.emit()
